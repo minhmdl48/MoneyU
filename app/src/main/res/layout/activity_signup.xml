@@ -7,43 +7,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@android:color/background_light"
         android:gravity="center_horizontal"
-        android:padding="16dp"
-        android:background="android:color/background_light">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <!-- Logo Placeholder -->
         <ImageView
             android:id="@+id/imageViewLogo"
             android:layout_width="150dp"
             android:layout_height="120dp"
-            android:src="@drawable/ic_launcher_background"
-            android:scaleType="centerCrop"
+            android:layout_marginTop="42dp"
             android:adjustViewBounds="true"
-            android:layout_marginTop="42dp"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
 
         <!-- Welcome Message -->
         <TextView
             android:id="@+id/textViewWelcomeMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="New Here? "
             android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:textColor="?attr/colorOnSurface"
-            android:layout_marginTop="16dp"/>
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <!-- Sign-up Prompt -->
         <TextView
             android:id="@+id/textViewLoginToContinue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Please sign up to start using MoneyWise:"
-            android:textSize="17sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_gravity="start"
             android:layout_marginTop="10dp"
-            android:layout_gravity="start"/>
+            android:text="Please sign up to start using MoneyWise:"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="17sp" />
 
         <!-- Name TextInputLayout -->
         <com.google.android.material.textfield.TextInputLayout
@@ -52,14 +52,15 @@
             android:layout_height="wrap_content"
             android:hint="Name"
             android:textColorHint="?attr/colorOnSurfaceVariant"
-            app:startIconDrawable="@drawable/ic_person"
-            app:startIconContentDescription="Name">
+            app:startIconContentDescription="Name"
+            app:startIconDrawable="@drawable/ic_person">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:textColor="?attr/colorOnSurface"/>
+                android:textColor="?attr/colorOnSurface" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Email TextInputLayout -->
@@ -67,17 +68,18 @@
             android:id="@+id/textInputLayoutEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:hint="Email"
             android:textColorHint="?attr/colorOnSurfaceVariant"
-            app:startIconDrawable="@drawable/ic_mail"
             app:startIconContentDescription="Email"
-            android:layout_marginTop="5dp">
+            app:startIconDrawable="@drawable/ic_mail">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textColor="?attr/colorOnSurface"/>
+                android:textColor="?attr/colorOnSurface" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Password TextInputLayout -->
@@ -85,19 +87,20 @@
             android:id="@+id/textInputLayoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:hint="Password"
-            app:passwordToggleEnabled="true"
             android:textColorHint="?attr/colorOnSurfaceVariant"
-            app:startIconDrawable="@drawable/ic_lock"
+            app:passwordToggleEnabled="true"
             app:startIconContentDescription="Password"
 
-            android:layout_marginTop="5dp">
+            app:startIconDrawable="@drawable/ic_lock">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textColor="?attr/colorOnSurface"/>
+                android:textColor="?attr/colorOnSurface" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Confirm Password TextInputLayout -->
@@ -105,18 +108,19 @@
             android:id="@+id/textInputLayoutConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:hint="Confirm Password"
-            app:passwordToggleEnabled="true"
             android:textColorHint="?attr/colorOnSurfaceVariant"
-            app:startIconDrawable="@drawable/ic_lock"
+            app:passwordToggleEnabled="true"
             app:startIconContentDescription="Confirm Password"
-            android:layout_marginTop="5dp">
+            app:startIconDrawable="@drawable/ic_lock">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textColor="?attr/colorOnSurface"/>
+                android:textColor="?attr/colorOnSurface" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Register Button -->
@@ -124,12 +128,12 @@
             android:id="@+id/buttonRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="?attr/colorPrimary"
             android:text="Register"
             android:textAllCaps="true"
-            android:textStyle="bold"
             android:textSize="16sp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:layout_marginTop="24dp"/>
+            android:textStyle="bold" />
 
 
         <!-- Log in TextView -->
@@ -137,12 +141,12 @@
             android:id="@+id/textViewLogIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You already have an account? Log in!"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:textSize="16sp"
             android:layout_marginTop="16dp"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:text="You already have an account? Log in!"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>
