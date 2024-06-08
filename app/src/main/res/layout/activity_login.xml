@@ -86,13 +86,13 @@
             android:id="@+id/textViewForgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:focusable="true"
             android:text="Forgot your password?"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="end"
-            android:clickable="true"
-            android:focusable="true"/>
+            android:textSize="16sp" />
 
         <!-- Login Button -->
         <com.google.android.material.button.MaterialButton
