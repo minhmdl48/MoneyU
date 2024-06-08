@@ -13,8 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.moneyu.Helpers.SnackbarHelper;
-import com.example.moneyu.HomeActivity;
+import com.example.moneyu.Activity.Helpers.SnackbarHelper;
+//import com.example.moneyu.HomeActivity;
 import com.example.moneyu.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Login successful, navigate to the main activity
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 // Show a message for successful login
                                 Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                                 finish();
