@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1021185940826",
+    "project_id": "moneyu-6ca55",
+    "storage_bucket": "moneyu-6ca55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021185940826:android:0cd66542455089f8dc6763",
+        "android_client_info": {
+          "package_name": "com.example.moneyu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbB4PD3Rq38a1shSBww_jPdg3RQRC8sYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
