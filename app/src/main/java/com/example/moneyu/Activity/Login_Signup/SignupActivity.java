@@ -39,24 +39,21 @@ public class SignupActivity extends AppCompatActivity {
         buttonRegister = findViewById(R.id.buttonRegister);
         textViewLogIn = findViewById(R.id.textViewLogIn);
 
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = editTextEmail.getText().toString().trim();
-                String password = editTextPassword.getText().toString().trim();
-                String confirmPassword = editTextConfirmPassword.getText().toString().trim();
+        buttonRegister.setOnClickListener(v -> {
+            String email = editTextEmail.getText().toString().trim();
+            String password = editTextPassword.getText().toString().trim();
+            String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-                    SnackbarHelper.showSnackbar(v, "Please fill in all fields");
-                } else if (!isValidEmail(email)) {
-                    SnackbarHelper.showSnackbar(v, "Please enter a valid email address");
-                } else if (password.length() < 6) {
-                    SnackbarHelper.showSnackbar(v, "Password should be at least 6 characters long");
-                } else if (!password.equals(confirmPassword)) {
-                    SnackbarHelper.showSnackbar(v, "Passwords do not match");
-                } else {
-                    registerUser(email, password);
-                }
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
+                SnackbarHelper.showSnackbar(v, "Please fill in all fields");
+            } else if (!isValidEmail(email)) {
+                SnackbarHelper.showSnackbar(v, "Please enter a valid email address");
+            } else if (password.length() < 6) {
+                SnackbarHelper.showSnackbar(v, "Password should be at least 6 characters long");
+            } else if (!password.equals(confirmPassword)) {
+                SnackbarHelper.showSnackbar(v, "Passwords do not match");
+            } else {
+                registerUser(email, password);
             }
         });
 
