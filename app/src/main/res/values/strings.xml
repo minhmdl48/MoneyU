@@ -4,4 +4,7 @@
     <string name="select_category">Chọn nhóm </string>
     <string name="add_note">Thêm ghi chú</string>
     <string name="save">Lưu</string>
+    <string name="home">Tổng quan</string>
+    <string name="operations">Sổ giao dịch</string>
+    <string name="reports">Báo cáo</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.moneyu.Activity.Transactions;
+package com.example.moneyu.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,6 @@ import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.moneyu.Activity.Login_Signup.LoginActivity;
 import com.example.moneyu.R;
