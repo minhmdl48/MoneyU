@@ -1,0 +1,60 @@
+<!-- custom_dialog_layout.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/gray">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="Dialog Title"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/md_theme_onBackground"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/dialog_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input"
+        android:textSize="18dp"
+        android:textColorHint="@color/md_theme_onBackground"
+        android:textColor="@color/md_theme_onBackground"
+        android:maxLines="1"
+        android:singleLine="true"/>
+
+    <!-- Grid for buttons -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        <android.widget.Button
+            android:id="@+id/dialog_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Cancel"
+            android:background="@color/gray"
+            android:textColor="@color/md_theme_onBackground"
+            android:textSize="18dp"/>
+        <android.widget.Button
+            android:id="@+id/dialog_ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="OK"
+            android:background="@color/gray"
+            android:textColor="@color/md_theme_onBackground"
+            android:textSize="18dp"/>
+    </GridLayout>
+
+</LinearLayout>

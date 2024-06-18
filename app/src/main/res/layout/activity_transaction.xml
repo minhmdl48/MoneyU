@@ -130,7 +130,7 @@
                     android:layout_marginEnd="8dp"/>
 
                 <TextView
-                    android:id="@+id/transaction_title_text_view"
+                    android:id="@+id/notes_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -169,7 +169,7 @@
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:textColorHint="?attr/colorOnSurfaceVariant"
                     android:textSize="18dp"
-                    android:hint="Select date"
+                    android:hint="Chọn ngày"
                     android:gravity="start"/>
             </LinearLayout>
 
@@ -183,19 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <!-- SwitchMaterial for Recurring payment -->
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:id="@+id/recurring_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:checked="false"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:textColorHint="?attr/colorOnSurfaceVariant"
-                    android:textSize="18dp"
-                    android:text="Recurring Payment"/>
-            </LinearLayout>
+                android:gravity="center_vertical"/>
 
             <!-- Add space -->
             <Space

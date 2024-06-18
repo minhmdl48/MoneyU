@@ -52,4 +52,7 @@
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">4dp</item>
     </style>
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/gray</item>
+    </style>
 </resources>

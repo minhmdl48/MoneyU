@@ -156,4 +156,5 @@
     <color name="maroon">#800000</color> <!-- Bureaucracy: Maroon -->
     <color name="deep_gold">#FFCC33</color> <!-- Gifts: Deep Gold -->
     <color name="black"></color>
+    <color name="gray">#A3A09F</color>
 </resources>

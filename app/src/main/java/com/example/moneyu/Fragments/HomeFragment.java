@@ -1,5 +1,7 @@
 package com.example.moneyu.Fragments;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.moneyu.Adapter.CategoryAdapter;
 import com.example.moneyu.R;
 import com.example.moneyu.model.Transaction;
 import com.google.firebase.Firebase;
@@ -17,8 +20,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
@@ -71,14 +79,14 @@ public class HomeFragment extends Fragment {
                                         return 0;
                                     }
                                 });
-                                // Update the adapter with the sorted transactions
-                                categoryAdapter.updateTransactions(transactionList);
+//                                // Update the adapter with the sorted transactions
+//                                CategoryAdapter.updateTransactions(transactionList);
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());
                             }
                         }
                 );
-                )
+
     }
 
 }
