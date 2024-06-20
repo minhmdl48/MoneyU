@@ -1,6 +1,7 @@
 package com.example.moneyu.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private TextView txtRecentTransaction, txtViewSeeAll;
     private HomeAdapter adapter;
-    private List<Transaction> transactionList;
+    private List<Transaction> transactionList = new ArrayList<>();
     public HomeFragment() {}
 
     @Override
@@ -46,6 +47,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         txtRecentTransaction = rootView.findViewById(R.id.textViewRecentTransactions);
         txtViewSeeAll = rootView.findViewById(R.id.textViewSeeAll);
+
         adapter = new HomeAdapter(getContext(), transactionList);
         recyclerView.setAdapter(adapter);
 
@@ -53,11 +55,11 @@ public class HomeFragment extends Fragment {
         String userId = user != null ? user.getUid() : null;
 
         if (userId != null) {
-
             String currentMonth = "06";
             String currentYear = "2024";
 
             retrieveTransactions(currentMonth, currentYear, userId);
+            Log.d("HomeFragment", "");
         } else {
             Toast.makeText(getContext(), "User not found", Toast.LENGTH_SHORT).show();
         }
@@ -92,24 +94,31 @@ public class HomeFragment extends Fragment {
                         transactionList = new ArrayList<>();
                         for (DocumentSnapshot document : task.getResult()) {
                             Transaction transaction = document.toObject(Transaction.class);
+                            Long amount = document.getLong("amount");
+                            if (amount != null) {
+                                assert transaction != null;
+                                transaction.setAmount(amount.intValue());
+                            }
                             assert transaction != null;
                             String transactionDate = transaction.getDate();
+                            Log.d("HomeFragment", "Transaction Date: " + transactionDate);
 
                             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                             try {
                                 Date date = dateFormat.parse(transactionDate);
 
-                                if (!date.after(todayDate)) { // Don't add transactions after today
-                                    // Get the month and year of the transaction
-                                    Calendar cal = Calendar.getInstance();
-                                    cal.setTime(date);
-                                    String transactionMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1); // Adding 1 because Calendar.MONTH is zero-based
-                                    String transactionYear = String.valueOf(cal.get(Calendar.YEAR));
-
-                                    if (transactionMonth.equals(currentMonth) && transactionYear.equals(currentYear)) {
-                                        transactionList.add(transaction);
-                                    }
-                                }
+//                                if (!date.after(todayDate)) { // Don't add transactions after today
+//                                    // Get the month and year of the transaction
+//                                    Calendar cal = Calendar.getInstance();
+//                                    cal.setTime(date);
+//                                    String transactionMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1); // Adding 1 because Calendar.MONTH is zero-based
+//                                    String transactionYear = String.valueOf(cal.get(Calendar.YEAR));
+//
+//                                    if (transactionMonth.equals(currentMonth) && transactionYear.equals(currentYear)) {
+//                                        transactionList.add(transaction);
+//                                    }
+//                                }
+                                transactionList.add(transaction);
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
@@ -128,10 +137,11 @@ public class HomeFragment extends Fragment {
                                 return 0;
                             }
                         });
+                        Log.d("HomeFragment", "sizee: " + String.valueOf(transactionList.size()));
 
                         adapter.setTransactions(transactionList);
                     } else {
-                        Toast.makeText(getContext(), "Error getting documents: " + task.getException(), Toast.LENGTH_SHORT).show();
+                        Log.d("HomeFragment", "Error getting documents: ", task.getException());
                     }
                 });
     }

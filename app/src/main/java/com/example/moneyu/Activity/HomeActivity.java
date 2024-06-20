@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     // Other
-    private float totalAmount = 0.0f; // Variable to store total amount
+    private long totalAmount = 0; // Variable to store total amount
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -271,11 +271,7 @@ public class HomeActivity extends AppCompatActivity {
         } else if (itemId == R.id.logout_item) {
             showLogoutPrompt();
         }
-//        else if (itemId == R.id.deleteAccount_item) {
-//            showDeleteAccountPrompt();
-//        } else if (itemId == R.id.clearDatabase_item) {
-//            showDeleteDatabasePrompt();
-//        }
+
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -295,27 +291,6 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
-    // Show delete account prompt
-    private void showDeleteAccountPrompt() {
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("Deletion of Account")
-                .setMessage("Continuing will result in the PERMANENT DELETION of the user and all of its data. Are you absolutely certain you want to continue?")
-                .setPositiveButton("Delete", (dialog, which) -> deleteUserAccount())
-                .setNegativeButton("Cancel", null)
-                .show();
-    }
-
-    // Show delete database prompt
-    private void showDeleteDatabasePrompt() {
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("Deletion of User Data")
-                .setMessage("Continuing will result in the PERMANENT DELETION of all the user data. Are you absolutely certain you want to continue?")
-                .setPositiveButton("Clear", (dialog, which) -> deleteUserData())
-                .setNegativeButton("Cancel", null)
-                .show();
-    }
-
-
 
     private void calculateTotalAmount() {
         // Get today's date
@@ -328,26 +303,23 @@ public class HomeActivity extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        float totalExpense = 0.0f;
-                        float totalIncome = 0.0f;
+                        long totalExpense = 0;
+                        long totalIncome = 0;
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             try {
-                                String amountStr = document.getString("amount"); // Assuming "amount" field is a string
+
                                 String type = document.getString("type"); // Assuming "type" field indicates Expense or Income
                                 String dateString = document.getString("date"); // Assuming "date" field stores the transaction date
 
                                 // Parse the transaction date
                                 Date transactionDate = dateFormat.parse(dateString);
 
-                                if (amountStr != null && type != null && dateString != null && transactionDate != null) {
-                                    // Compare the transaction date with today's date
-                                    if (transactionDate.before(today) || dateString.equals(todayString)) {
-                                        float amount = Float.parseFloat(amountStr);
-                                        if (type.equals("Expense")) {
-                                            totalExpense -= amount;
-                                        } else if (type.equals("Income")) {
-                                            totalIncome += amount;
-                                        }
+                                Long amount1 = document.getLong("amount");
+                                if (amount1 != null) {
+                                    if (type.equals("Expense")) {
+                                        totalExpense -= amount1;
+                                    } else if (type.equals("Income")) {
+                                        totalIncome += amount1;
                                     }
                                 }
                             } catch (NumberFormatException | ParseException e) {
@@ -358,75 +330,13 @@ public class HomeActivity extends AppCompatActivity {
                         totalAmount = totalIncome + totalExpense;
 
                         // Format the total amount string to display only three numbers after the decimal point
-                        String totalAmountText = String.format(Locale.getDefault(), "Số dư: %.2fđ", totalAmount);
+                        String totalAmountText = String.format(Locale.getDefault(), "Số dư: %dđ", totalAmount);
                         leftPlaceholderText.setText(totalAmountText);
                     } else {
                         Toast.makeText(HomeActivity.this, "Failed to retrieve transactions", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
-//    private void calculateFutureTransactionsAmount() {
-//        // Get the current day
-//        Date currentDay = new Date();
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-//        String currentDayString = dateFormat.format(currentDay);
-//
-//        // Get the current month and year
-//        Calendar calendar = Calendar.getInstance();
-//        int currentMonth = calendar.get(Calendar.MONTH);
-//        int currentYear = calendar.get(Calendar.YEAR);
-//
-//        // Query the "transactions" collection in the database for transactions with the specified userId
-//        db.collection("transactions")
-//                .whereEqualTo("userId", userID)
-//                .get()
-//                .addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        float futureExpense = 0.0f;
-//                        float futureIncome = 0.0f;
-//                        for (QueryDocumentSnapshot document : task.getResult()) {
-//                            try {
-//                                String amountStr = document.getString("amount"); // Assuming "amount" field is a string
-//                                String type = document.getString("type"); // Assuming "type" field indicates Expense or Income
-//                                String dateString = document.getString("date"); // Assuming "date" field stores the transaction date
-//
-//                                // Parse the transaction date
-//                                Date transactionDate = dateFormat.parse(dateString);
-//
-//                                // Compare transaction date with the current day and check if it is in the current month and year
-//                                if (amountStr != null && type != null && dateString != null && transactionDate != null) {
-//                                    Calendar transactionCalendar = Calendar.getInstance();
-//                                    transactionCalendar.setTime(transactionDate);
-//
-//                                    int transactionMonth = transactionCalendar.get(Calendar.MONTH);
-//                                    int transactionYear = transactionCalendar.get(Calendar.YEAR);
-//
-//                                    if (transactionDate.after(currentDay) && transactionMonth == currentMonth && transactionYear == currentYear) {
-//                                        float amount = Float.parseFloat(amountStr);
-//                                        if (type.equals("Expense")) {
-//                                            futureExpense -= amount;
-//                                        } else if (type.equals("Income")) {
-//                                            futureIncome += amount;
-//                                        }
-//                                    }
-//                                }
-//                            } catch (ParseException e) {
-//                                e.printStackTrace();
-//                                Toast.makeText(HomeActivity.this, "Invalid future transaction data", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                        float futureAmount = futureIncome + futureExpense;
-//
-//                        // Format the total amount string to display only two numbers after the decimal point
-//                        String totalFutureText = String.format(Locale.getDefault(), "Total: %.2f€", futureAmount);
-//                        rightPlaceholderText.setText(totalFutureText);
-//                    } else {
-//                        // Handle errors
-//                        Toast.makeText(HomeActivity.this, "Failed to fetch transactions", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//    }
 
     @Override
     protected void onResume() {
@@ -462,128 +372,4 @@ public class HomeActivity extends AppCompatActivity {
 //        return datePlaceholderText.getText().toString(); // Assuming placeholderText is a TextView
 //    }
 
-    private void deleteUserAccount() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user == null) {
-            // User is not authenticated
-            new MaterialAlertDialogBuilder(HomeActivity.this)
-                    .setTitle("Reauthentication Required")
-                    .setMessage("Your session has expired. Please log in again to delete your account.")
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                        // Navigate to login screen
-                        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                        finish();
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-            return;
-        }
-
-        // Check if the user's authentication token is recent enough
-        if (user.getMetadata() != null && user.getMetadata().getLastSignInTimestamp() != 0) {
-            long lastSignInTimestamp = user.getMetadata().getLastSignInTimestamp();
-            long currentTime = System.currentTimeMillis();
-            long signInTimeDifference = currentTime - lastSignInTimestamp;
-            long signInTimeThreshold = TimeUnit.MINUTES.toMillis(5); // Adjusted to 5 minutes
-
-            // Ensure getLastSignInTimestamp() is not zero before performing the comparison
-            if (signInTimeDifference >= 0 && signInTimeDifference >= signInTimeThreshold) {
-                // User needs to reauthenticate because the authentication is not recent enough
-                new MaterialAlertDialogBuilder(HomeActivity.this)
-                        .setTitle("Reauthentication Required")
-                        .setMessage("For security reasons, please log in again to delete your account.")
-                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                            // Navigate to login screen
-                            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                            finish();
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-                return;
-            }
-        }
-
-        // Force token refresh
-        user.getIdToken(true)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Token refreshed successfully, proceed with account deletion
-                        user.delete()
-                                .addOnSuccessListener(aVoid -> {
-                                    // Account deleted successfully
-                                    Log.d(TAG, "User account deleted successfully");
-                                    Toast.makeText(HomeActivity.this, "User account deleted successfully", Toast.LENGTH_SHORT).show();
-
-                                    // Your Firestore cleanup code goes here
-                                    String userId = user.getUid();
-
-                                    // Delete user data from Firestore collections...
-                                    db.collection("recurrings")
-                                            .whereEqualTo("userId", userId)
-                                            .get()
-                                            .addOnCompleteListener(task1 -> {
-                                                if (task1.isSuccessful()) {
-                                                    for (QueryDocumentSnapshot document : task1.getResult()) {
-                                                        db.collection("recurrings").document(document.getId()).delete();
-                                                    }
-                                                } else {
-                                                    Log.e(TAG, "Error getting recurring payment documents: ", task1.getException());
-                                                    // Handle error
-                                                }
-                                            });
-
-                                    db.collection("transactions")
-                                            .whereEqualTo("userId", userId)
-                                            .get()
-                                            .addOnCompleteListener(task1 -> {
-                                                if (task1.isSuccessful()) {
-                                                    for (QueryDocumentSnapshot document : task1.getResult()) {
-                                                        db.collection("transactions").document(document.getId()).delete();
-                                                    }
-                                                } else {
-                                                    Log.e(TAG, "Error getting transaction documents: ", task1.getException());
-                                                    // Handle error
-                                                }
-                                            });
-
-                                    // Navigate to login screen after account deletion
-                                    finishAffinity();
-                                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                                })
-                                .addOnFailureListener(e -> {
-                                    // Failed to delete user account
-                                    Log.e(TAG, "Error deleting user account: " + e.getMessage(), e);
-                                    // Handle failure
-                                });
-                    } else {
-                        // Token refresh failed
-                        Exception exception = task.getException();
-                        assert exception != null;
-                        Log.e(TAG, "Token refresh failed: " + exception.getMessage(), exception);
-                        // Handle failure
-                    }
-                });
-    }
-
-    private void deleteUserData() {
-        // Delete user data from 'transactions' collection
-        db.collection("transactions")
-                .whereEqualTo("userId", userID)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            db.collection("transactions").document(document.getId()).delete()
-                                    .addOnSuccessListener(aVoid -> {
-                                        Log.d(TAG, "Transaction document deleted successfully");
-                                        replaceFragment(defaultFragment);
-                                    })
-                                    .addOnFailureListener(e -> Log.e(TAG, "Error deleting transaction document: " + e.getMessage(), e));
-                        }
-                    } else {
-                        Log.e(TAG, "Error getting transaction documents: ", task.getException());
-                    }
-                });
-    }
 }

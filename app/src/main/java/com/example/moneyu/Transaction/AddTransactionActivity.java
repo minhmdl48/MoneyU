@@ -108,9 +108,18 @@ public class AddTransactionActivity extends AppCompatActivity {
                         transaction.setDate(datePickerTextView.getText().toString());
                         transaction.setNote(notesTextView.getText().toString());
 
+                        Transaction transaction1 = new Transaction();
+                        transaction1.setUserId("Z8k1Fnfr2yPAlcxg80DMa8KhArc2");
+                        transaction1.setTransactionId("20");
+                        transaction1.setAmount(2000);
+                        transaction1.setCategory("Food");
+                        transaction1.setType("Expense");
+                        transaction1.setDate("20-10-2021");
+                        transaction1.setNote("Lunch");
+
                         // Add transaction to Firestore database
                         db.collection("transactions")
-                                .add(transaction)
+                                .add(transaction1)
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
