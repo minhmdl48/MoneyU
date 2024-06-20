@@ -27,8 +27,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     public HomeAdapter(Context context, List<Transaction> transactionList) {
         this.context = context;
-        this.transactionList = new ArrayList<>(); // Initialize an empty list
-        initializeCategoryColorMap(); // Initialize the category-color mapping
+        this.transactionList = new ArrayList<>();
+        initializeCategoryColorMap();
     }
 
     // Method to set the transaction list
@@ -87,7 +87,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTextView = itemView.findViewById(R.id.categoryTextView);
-            titleTextView = itemView.findViewById(R.id.titleTextView);
             amountTextView = itemView.findViewById(R.id.amountTextView);
             dateTextView = itemView.findViewById(R.id.dateTextView);
             itemColorTextView = itemView.findViewById(R.id.itemColorTextView);
@@ -115,13 +114,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         }
 
         public void bind(Transaction transaction) {
-//            String subCategory = transaction.getSubcategory();
-//            if (subCategory == null || subCategory.isEmpty()) {
-//                subCategory = transaction.getCategory();
-//            }
-//            categoryTextView.setText(subCategory);
-            titleTextView.setText(transaction.getTitle());
-
             // Set the first letter of the category to itemColorTextView
             String category = transaction.getCategory();
             if (!category.isEmpty()) {
@@ -136,7 +128,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             itemColorCircle.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, colorResId)));
 
             // Set the amount text
-            String amount = transaction.getAmount();
+            String amount = String.valueOf(transaction.getAmount());
             if (transaction.getType().equals("Expense")) {
                 amountTextView.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
                 amount = "-" + amount; // Prefix "-" for expenses
@@ -144,7 +136,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 amountTextView.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
                 amount = "+" + amount; // Prefix "+" for income
             }
-            amountTextView.setText(amount + "€"); // Append € symbol after amount
+            amountTextView.setText(amount + "đ"); // Append € symbol after amount
 
             dateTextView.setText(transaction.getDate());
         }

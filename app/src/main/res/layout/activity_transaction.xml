@@ -62,7 +62,7 @@
                     android:layout_marginEnd="8dp"/>
 
                 <!-- EditText for amount -->
-                <TextView
+                <EditText
                     android:id="@+id/amount"
                     android:layout_width="0dp"
                     android:layout_weight="1"

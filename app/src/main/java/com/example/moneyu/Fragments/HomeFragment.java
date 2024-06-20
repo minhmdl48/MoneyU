@@ -1,29 +1,26 @@
 package com.example.moneyu.Fragments;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.moneyu.Adapter.CategoryAdapter;
+import com.example.moneyu.Activity.HomeActivity;
+import com.example.moneyu.Adapter.HomeAdapter;
 import com.example.moneyu.R;
 import com.example.moneyu.model.Transaction;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -31,62 +28,111 @@ import java.util.Locale;
 public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
     private RecyclerView recyclerView;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private TextView txtRecentTransaction, txtViewSeeAll;
+    private HomeAdapter adapter;
+    private List<Transaction> transactionList;
+    public HomeFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
         db = FirebaseFirestore.getInstance();
+
+//        String currentDate = getCurrentDate();
+
         recyclerView = rootView.findViewById(R.id.parentRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        txtRecentTransaction = rootView.findViewById(R.id.textViewRecentTransactions);
+        txtViewSeeAll = rootView.findViewById(R.id.textViewSeeAll);
+        adapter = new HomeAdapter(getContext(), transactionList);
+        recyclerView.setAdapter(adapter);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user != null ? user.getUid() : null;
-        return null;
+
+        if (userId != null) {
+
+            String currentMonth = "06";
+            String currentYear = "2024";
+
+            retrieveTransactions(currentMonth, currentYear, userId);
+        } else {
+            Toast.makeText(getContext(), "User not found", Toast.LENGTH_SHORT).show();
+        }
+
+        return rootView;
     }
 
-    private void retrieveTransactions(String userId) {
-        // Retrieve transactions
+//    private String getCurrentDate() {
+//        if (getActivity() instanceof HomeActivity) {
+//            return ((HomeActivity) getActivity()).getCurrentDate();
+//        } else {
+//            return ""; // Return default value or handle error
+//        }
+//    }
+
+    // Retrieve Transactions
+    private void retrieveTransactions(String currentMonth, String currentYear, String userId) {
+
+        Calendar todayCal = Calendar.getInstance();
+        todayCal.set(Calendar.HOUR_OF_DAY, 0);
+        todayCal.set(Calendar.MINUTE, 0);
+        todayCal.set(Calendar.SECOND, 0);
+        todayCal.set(Calendar.MILLISECOND, 0);
+        Date todayDate = todayCal.getTime();
+
+        // Query the "transactions" collection in the database for transactions with the specified userId
         db.collection("transactions")
                 .whereEqualTo("userId", userId)
                 .get()
-                .addOnCompleteListener(
-                        task -> {
-                            if (task.isSuccessful()) {
-                                // Retrieve transactions
-                                List<Transaction> transactionList = task.getResult().toObjects(Transaction.class);
-                                // Sort transactions by date
-                                Collections.sort(transactionList, new Comparator<Transaction>() {
-                                    @Override
-                                    public int compare(Transaction o1, Transaction o2) {
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                                        try {
-                                            Date date1 = sdf.parse(o1.getDate());
-                                            Date date2 = sdf.parse(o2.getDate());
-                                            return date2.compareTo(date1);
-                                        } catch (ParseException e) {
-                                            e.printStackTrace();
-                                        }
-                                        return 0;
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        transactionList = new ArrayList<>();
+                        for (DocumentSnapshot document : task.getResult()) {
+                            Transaction transaction = document.toObject(Transaction.class);
+                            assert transaction != null;
+                            String transactionDate = transaction.getDate();
+
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                            try {
+                                Date date = dateFormat.parse(transactionDate);
+
+                                if (!date.after(todayDate)) { // Don't add transactions after today
+                                    // Get the month and year of the transaction
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(date);
+                                    String transactionMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1); // Adding 1 because Calendar.MONTH is zero-based
+                                    String transactionYear = String.valueOf(cal.get(Calendar.YEAR));
+
+                                    if (transactionMonth.equals(currentMonth) && transactionYear.equals(currentYear)) {
+                                        transactionList.add(transaction);
                                     }
-                                });
-//                                // Update the adapter with the sorted transactions
-//                                CategoryAdapter.updateTransactions(transactionList);
-                            } else {
-                                Log.d(TAG, "Error getting documents: ", task.getException());
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
                             }
                         }
-                );
+                        // Sort the transactionList by date in reverse order
+                        transactionList.sort((t1, t2) -> {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                            try {
+                                Date date1 = dateFormat.parse(t1.getDate());
+                                Date date2 = dateFormat.parse(t2.getDate());
 
+                                assert date2 != null;
+                                return date2.compareTo(date1);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                return 0;
+                            }
+                        });
+
+                        adapter.setTransactions(transactionList);
+                    } else {
+                        Toast.makeText(getContext(), "Error getting documents: " + task.getException(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
-
 }

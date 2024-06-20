@@ -57,15 +57,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"/>
         <!-- Title TextView -->
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/amountTextView"
-            android:layout_alignParentEnd="true"
-            android:text="Title Text"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"/>
 
         <!-- Date TextView -->
 

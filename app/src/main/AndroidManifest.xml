@@ -33,6 +33,14 @@
         <activity
             android:name=".Activity.HomeActivity"
             android:exported="true"/>
+        <activity
+            android:name=".Transaction.AddTransactionActivity"
+            android:exported="true"
+            />
+        <activity android:name=".Transaction.SelectCategoryActivity"
+            android:exported="true"
+            />
+
     </application>
 
 </manifest>

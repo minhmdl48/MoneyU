@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
+
+    <!-- LinearLayout for TextViews -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp">
+
+        <!-- TextView for "Giao dịch gần đây" -->
+        <TextView
+            android:id="@+id/textViewRecentTransactions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Giao dịch gần đây"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="16dp" />
+
+        <!-- TextView for "Xem tất cả" -->
+        <TextView
+            android:id="@+id/textViewSeeAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xem tất cả"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="16dp" />
+    </LinearLayout>
 
     <!-- RecyclerView for Summary -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/parentRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp" />
 
-</FrameLayout>
+</LinearLayout>
