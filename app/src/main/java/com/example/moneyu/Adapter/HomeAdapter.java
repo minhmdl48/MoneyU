@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.moneyu.Transaction.DetailTransactionActivity;
 import com.example.moneyu.model.Transaction;
 import com.example.moneyu.R;
 import java.util.ArrayList;
@@ -93,6 +94,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             dateTextView = itemView.findViewById(R.id.dateTextView);
             itemColorTextView = itemView.findViewById(R.id.itemColorTextView);
             itemColorCircle = itemView.findViewById(R.id.itemColorCircle);
+
+            itemView.setOnClickListener(v->{
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Transaction clickedTransaction = transactionList.get(position);
+                    Intent intent = new Intent(context, DetailTransactionActivity.class);
+                    intent.putExtra("transactionId", clickedTransaction.getTransactionId());
+                    context.startActivity(intent);
+                }
+            });
 
         }
 

@@ -40,6 +40,9 @@
         <activity android:name=".Transaction.SelectCategoryActivity"
             android:exported="true"
             />
+        <activity android:name=".Transaction.DetailTransactionActivity"
+            android:exported="true"
+            />
 
     </application>
 
