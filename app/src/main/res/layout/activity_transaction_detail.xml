@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <!-- Toolbar -->
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -12,24 +13,24 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <ImageView
-            android:id="@+id/back_icon"
+            android:id="@+id/close_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back"
+            android:layout_gravity="center_vertical"
+            android:onClick="onBackIconClick"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:onClick="onBackIconClick"
-            android:layout_gravity="center_vertical"/>
-
-        <!-- Title Text -->
-        <TextView
-            android:id="@+id/toolbar_title"
+            android:src="@drawable/ic_close" />
+        <ImageView
+            android:id="@+id/delete_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_transaction"
-            android:textSize="20sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:layout_gravity="center_vertical|start"/>
+            android:layout_gravity="end|center_vertical"
+
+            android:onClick="onModifyIconClick"
+            android:paddingStart="10dp"
+            android:paddingEnd="30dp"
+            android:src="@drawable/ic_delete" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -259,7 +260,7 @@
 
     <!-- Save Button -->
     <Button
-        android:id="@+id/ok_transacion_button"
+        android:id="@+id/save_button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/scroll_view"

@@ -10,11 +10,9 @@
     <item
         android:id="@+id/add_transaction"
         android:title=""
-        android:icon="@drawable/ic_add"
-        />
+        android:icon="@drawable/ic_add" />
     <item
         android:id="@+id/report"
         android:title="@string/reports"
         android:icon="@drawable/ic_pie_chart" />
-
 </menu>

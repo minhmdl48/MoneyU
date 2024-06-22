@@ -155,6 +155,6 @@
     <color name="cyan">#00FFFF</color> <!-- Education: Cyan -->
     <color name="maroon">#800000</color> <!-- Bureaucracy: Maroon -->
     <color name="deep_gold">#FFCC33</color> <!-- Gifts: Deep Gold -->
-    <color name="black"></color>
+    <color name="black">#000000</color>
     <color name="gray">#A3A09F</color>
 </resources>

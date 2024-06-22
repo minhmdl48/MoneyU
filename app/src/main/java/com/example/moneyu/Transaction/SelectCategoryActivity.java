@@ -3,6 +3,7 @@ package com.example.moneyu.Transaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -60,17 +61,18 @@ public class SelectCategoryActivity extends AppCompatActivity {
         });
         //Set OnItemClickListener for tabLayout
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                                               @Override
-                                               public void onTabSelected(TabLayout.Tab tab) {
-                                                   int position = tab.getPosition();
-                                                   if (position == 0) {
-                                                       // Load Income data
-                                                       loadIncomeData();
-                                                   } else if (position == 1) {
-                                                       // Load Expense data
-                                                       loadExpenseData();
-                                                   }
-                                               }
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 0) {
+                    // Load Income data
+                    loadIncomeData();
+                } else if (position == 1) {
+                    // Load Expense data
+                    loadExpenseData();
+                }
+            }
+
             public void onTabUnselected(TabLayout.Tab tab) {
                 // Handle tab unselected if necessary
             }

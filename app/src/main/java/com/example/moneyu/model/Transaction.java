@@ -6,7 +6,6 @@ public class Transaction {
     private int amount;
     private String category;
     private String type;
-    private String title;
     private String date;
     private String note;
 
@@ -53,13 +52,6 @@ public class Transaction {
         this.type = type;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getDate() {
         return date;

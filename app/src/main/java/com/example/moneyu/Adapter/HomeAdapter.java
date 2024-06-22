@@ -3,6 +3,7 @@ package com.example.moneyu.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.moneyu.Transaction.DetailTransactionActivity;
 import com.example.moneyu.model.Transaction;
 import com.example.moneyu.R;
 import java.util.ArrayList;
@@ -27,14 +29,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     public HomeAdapter(Context context, List<Transaction> transactionList) {
         this.context = context;
-        this.transactionList = new ArrayList<>(); // Initialize an empty list
-        initializeCategoryColorMap(); // Initialize the category-color mapping
+        this.transactionList = transactionList;
+        initializeCategoryColorMap();
     }
 
     // Method to set the transaction list
     public void setTransactions(List<Transaction> transactions) {
+        int initialSize = this.transactionList.size();
         this.transactionList = transactions;
-        notifyDataSetChanged(); // Notify RecyclerView that the data set has changed
+        for (int i = initialSize; i < transactions.size(); i++) {
+            notifyItemInserted(i);
+        }
     }
 
     // Initialize the category-color mapping
@@ -74,11 +79,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     public int getItemCount() {
         return transactionList.size();
     }
-
     public class HomeViewHolder extends RecyclerView.ViewHolder {
 
         private TextView categoryTextView;
-        private TextView titleTextView;
         private TextView amountTextView;
         private TextView dateTextView;
         private TextView itemColorTextView;
@@ -87,43 +90,28 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTextView = itemView.findViewById(R.id.categoryTextView);
-            titleTextView = itemView.findViewById(R.id.titleTextView);
             amountTextView = itemView.findViewById(R.id.amountTextView);
             dateTextView = itemView.findViewById(R.id.dateTextView);
             itemColorTextView = itemView.findViewById(R.id.itemColorTextView);
             itemColorCircle = itemView.findViewById(R.id.itemColorCircle);
 
-            // Set long press listener
-//            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//                    // Retrieve transaction
-//                    Transaction transaction = transactionList.get(getAdapterPosition());
-//
-//                    // Show toast with transaction ID
-//                    //Toast.makeText(context, "Transaction ID: " + transaction.getTransactionId(), Toast.LENGTH_SHORT).show();
-//
-//                    // Start ModifyTransactionActivity with transaction ID
-//                    Intent intent = new Intent(context, ModifyTransactionActivity.class);
-//                    intent.putExtra("transactionId", transaction.getTransactionId());
-//                    intent.putExtra("transactionDate", transaction.getDate());
-//                    context.startActivity(intent);
-//
-//                    return true; // Consume the long click event
-//                }
-//            });
+            itemView.setOnClickListener(v->{
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Transaction clickedTransaction = transactionList.get(position);
+                    Intent intent = new Intent(context, DetailTransactionActivity.class);
+                    intent.putExtra("transactionId", clickedTransaction.getTransactionId());
+                    context.startActivity(intent);
+                }
+            });
+
         }
 
         public void bind(Transaction transaction) {
-//            String subCategory = transaction.getSubcategory();
-//            if (subCategory == null || subCategory.isEmpty()) {
-//                subCategory = transaction.getCategory();
-//            }
-//            categoryTextView.setText(subCategory);
-            titleTextView.setText(transaction.getTitle());
-
             // Set the first letter of the category to itemColorTextView
             String category = transaction.getCategory();
+            categoryTextView.setText(transaction.getCategory());
+            dateTextView.setText(transaction.getDate());
             if (!category.isEmpty()) {
                 char firstLetter = category.charAt(0);
                 itemColorTextView.setText(String.valueOf(firstLetter).toUpperCase()); // Convert to uppercase if needed
@@ -137,6 +125,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
             // Set the amount text
             String amount = String.valueOf(transaction.getAmount());
+
+            Log.d("HomeAdapter", "Amount: " + amount);
+
             if (transaction.getType().equals("Expense")) {
                 amountTextView.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
                 amount = "-" + amount; // Prefix "-" for expenses
@@ -144,7 +135,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 amountTextView.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
                 amount = "+" + amount; // Prefix "+" for income
             }
-            amountTextView.setText(amount + "€"); // Append € symbol after amount
+            amountTextView.setText(amount + "đ"); // Append € symbol after amount
 
             dateTextView.setText(transaction.getDate());
         }
