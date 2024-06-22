@@ -65,11 +65,12 @@ public class AddTransactionActivity extends AppCompatActivity {
         categoryTextView.setOnClickListener(v -> {
             // Start the new activity to select category
             Intent intent = new Intent(AddTransactionActivity.this, SelectCategoryActivity.class);
-            startActivity(intent);
+//            startActivity(intent);
+            startActivityForResult(intent, CATEGORY_REQUEST_CODE);
         });
-        String selectedCategory = getIntent().getStringExtra("selected_category");
-        Log.d("AddTransactionActivity", "Selected category: " + selectedCategory);
-        categoryTextView.setText(selectedCategory);
+//        String selectedCategory = getIntent().getStringExtra("selected_category");
+//        Log.d("AddTransactionActivity", "Selected category: " + selectedCategory);
+//        categoryTextView.setText(selectedCategory);
 
         amountText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         amountText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -154,9 +155,10 @@ public class AddTransactionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CATEGORY_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
+        if (requestCode == CATEGORY_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
                 String selectedCategory = data.getStringExtra("selected_category");
+                categoryTextView.setText(selectedCategory);
                 // Do something with the selected category
             }
         }
