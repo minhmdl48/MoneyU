@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -46,7 +48,8 @@ public class AddTransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
-        String userId = getIntent().getStringExtra("USER_ID");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = user != null ? user.getUid() : null;
 
         backIcon = findViewById(R.id.back_icon);
         amountText = findViewById(R.id.amount);
@@ -67,6 +70,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             Intent intent = new Intent(AddTransactionActivity.this, SelectCategoryActivity.class);
 //            startActivity(intent);
             startActivityForResult(intent, CATEGORY_REQUEST_CODE);
+
         });
 //        String selectedCategory = getIntent().getStringExtra("selected_category");
 //        Log.d("AddTransactionActivity", "Selected category: " + selectedCategory);
@@ -109,18 +113,10 @@ public class AddTransactionActivity extends AppCompatActivity {
                         transaction.setDate(datePickerTextView.getText().toString());
                         transaction.setNote(notesTextView.getText().toString());
 
-                        Transaction transaction1 = new Transaction();
-                        transaction1.setUserId("Z8k1Fnfr2yPAlcxg80DMa8KhArc2");
-                        transaction1.setTransactionId("20");
-                        transaction1.setAmount(2000);
-                        transaction1.setCategory("Food");
-                        transaction1.setType("Expense");
-                        transaction1.setDate("20-10-2021");
-                        transaction1.setNote("Lunch");
 
                         // Add transaction to Firestore database
                         db.collection("transactions")
-                                .add(transaction1)
+                                .add(transaction)
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
@@ -159,6 +155,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             if (data != null) {
                 String selectedCategory = data.getStringExtra("selected_category");
                 categoryTextView.setText(selectedCategory);
+                type = data.getStringExtra("selected_tab");
                 // Do something with the selected category
             }
         }

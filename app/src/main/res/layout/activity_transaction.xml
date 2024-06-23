@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/add_transaction"
             android:textSize="20sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textColor="?attr/colorOnPrimary"
             android:layout_gravity="center_vertical|start"/>
 
     </androidx.appcompat.widget.Toolbar>
