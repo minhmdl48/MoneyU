@@ -125,7 +125,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
             // Set the amount text
             String amount = String.valueOf(transaction.getAmount());
+
             Log.d("HomeAdapter", "Amount: " + amount);
+
             if (transaction.getType().equals("Expense")) {
                 amountTextView.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
                 amount = "-" + amount; // Prefix "-" for expenses
