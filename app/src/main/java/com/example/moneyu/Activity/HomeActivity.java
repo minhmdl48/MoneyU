@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.moneyu.Activity.Login_Signup.LoginActivity;
 import com.example.moneyu.Adapter.HomeAdapter;
 import com.example.moneyu.Fragments.HomeFragment;
+import com.example.moneyu.Fragments.RecordFragment;
 import com.example.moneyu.R;
 import com.example.moneyu.Transaction.AddTransactionActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -223,11 +224,11 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-//        else if (itemId == R.id.operations) {
-//            fragment = new ReviewFragment();
-//            setVisibility(View.VISIBLE, View.VISIBLE, View.VISIBLE, View.INVISIBLE);
-//            displayedFragment = "operations";
-//        } else if (itemId == R.id.add_transaction) {
+        else if (itemId == R.id.operations) {
+            fragment = new RecordFragment();
+            displayedFragment = "operations";
+        }
+//        else if (itemId == R.id.add_transaction) {
 //            fragment = new SummaryFragment();
 //            setVisibility(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
 //            displayedFragment = "summary";

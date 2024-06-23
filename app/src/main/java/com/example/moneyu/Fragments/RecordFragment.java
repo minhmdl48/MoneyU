@@ -1,5 +1,6 @@
 package com.example.moneyu.Fragments;
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.moneyu.Activity.HomeActivity;
 import com.example.moneyu.Adapter.HomeAdapter;
 import com.example.moneyu.R;
 import com.example.moneyu.model.Transaction;
@@ -26,28 +26,30 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class HomeFragment extends Fragment {
+public class RecordFragment extends Fragment {
     private FirebaseFirestore db;
     private RecyclerView recyclerView;
-    private TextView txtRecentTransaction, txtViewSeeAll;
+    private TextView txtDateLabel,txtDatePicker, txtIncome,txtIncomeDisplay,txtOutcome,txtOutcomeDisplay;
     private HomeAdapter adapter;
     private List<Transaction> transactionList = new ArrayList<>();
-    public HomeFragment() {}
+    public RecordFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_record, container, false);
 
         db = FirebaseFirestore.getInstance();
-
-//        String currentDate = getCurrentDate();
-
+        txtDateLabel = rootView.findViewById(R.id.txtDateLabel);
+        txtDatePicker = rootView.findViewById(R.id.txtDatePicker);
+        txtIncome = rootView.findViewById(R.id.txtIncome);
+        txtIncomeDisplay = rootView.findViewById(R.id.txtIncomeDisplay);
+        txtOutcome = rootView.findViewById(R.id.txtOutcome);
+        txtOutcomeDisplay = rootView.findViewById(R.id.txtOutcomeDisplay);
         recyclerView = rootView.findViewById(R.id.parentRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        txtRecentTransaction = rootView.findViewById(R.id.textViewRecentTransactions);
-        txtViewSeeAll = rootView.findViewById(R.id.textViewSeeAll);
 
+        txtIncomeDisplay.setText("0");
         adapter = new HomeAdapter(getContext(), transactionList);
         recyclerView.setAdapter(adapter);
 
@@ -96,12 +98,9 @@ public class HomeFragment extends Fragment {
                             Log.d("HomeFragment", "Transaction Date: " + transactionDate);
 
                             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-
-
-                                transactionList.add(transaction);
-
+                            transactionList.add(transaction);
                         }
-
+                        // Sort the transactionList by date in reverse order
                         transactionList.sort((t1, t2) -> {
                             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                             try {
@@ -124,3 +123,4 @@ public class HomeFragment extends Fragment {
                 });
     }
 }
+

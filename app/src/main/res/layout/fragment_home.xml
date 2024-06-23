@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:text="Xem tất cả"
             android:layout_marginEnd="16dp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:textColor="@color/green"/>
     </LinearLayout>
 
     <!-- RecyclerView for Summary -->
