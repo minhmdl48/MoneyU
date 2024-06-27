@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneyu.R;
-import com.example.moneyu.model.Category;
+import com.example.moneyu.Models.Category;
 
 import java.util.List;
 
