@@ -67,14 +67,6 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
-//    private String getCurrentDate() {
-//        if (getActivity() instanceof HomeActivity) {
-//            return ((HomeActivity) getActivity()).getCurrentDate();
-//        } else {
-//            return ""; // Return default value or handle error
-//        }
-//    }
-
     // Retrieve Transactions
     private void retrieveTransactions(String currentMonth, String currentYear, String userId) {
 
@@ -104,26 +96,12 @@ public class HomeFragment extends Fragment {
                             Log.d("HomeFragment", "Transaction Date: " + transactionDate);
 
                             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                            try {
-                                Date date = dateFormat.parse(transactionDate);
 
-//                                if (!date.after(todayDate)) { // Don't add transactions after today
-//                                    // Get the month and year of the transaction
-//                                    Calendar cal = Calendar.getInstance();
-//                                    cal.setTime(date);
-//                                    String transactionMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1); // Adding 1 because Calendar.MONTH is zero-based
-//                                    String transactionYear = String.valueOf(cal.get(Calendar.YEAR));
-//
-//                                    if (transactionMonth.equals(currentMonth) && transactionYear.equals(currentYear)) {
-//                                        transactionList.add(transaction);
-//                                    }
-//                                }
+
                                 transactionList.add(transaction);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+
                         }
-                        // Sort the transactionList by date in reverse order
+
                         transactionList.sort((t1, t2) -> {
                             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                             try {
