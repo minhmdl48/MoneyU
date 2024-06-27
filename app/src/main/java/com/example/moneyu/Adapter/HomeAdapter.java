@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,12 +26,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     private final Context context;
     private List<Transaction> transactionList;
-    private Map<String, Integer> categoryColorMap;
 
     public HomeAdapter(Context context, List<Transaction> transactionList) {
         this.context = context;
         this.transactionList = transactionList;
-        initializeCategoryColorMap();
     }
 
     // Method to set the transaction list
@@ -40,26 +39,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         for (int i = initialSize; i < transactions.size(); i++) {
             notifyItemInserted(i);
         }
-    }
-
-    // Initialize the category-color mapping
-    private void initializeCategoryColorMap() {
-        categoryColorMap = new HashMap<>();
-        categoryColorMap.put("Uncategorized", R.color.green);
-        categoryColorMap.put("Food", R.color.pink);
-        categoryColorMap.put("Entertainment", R.color.green);
-        categoryColorMap.put("Transportation", R.color.blue);
-        categoryColorMap.put("Home", R.color.brown);
-        categoryColorMap.put("Clothing", R.color.purple);
-        categoryColorMap.put("Car", R.color.navy);
-        categoryColorMap.put("Electronics", R.color.orange);
-        categoryColorMap.put("Health and Beauty", R.color.red);
-        categoryColorMap.put("Education", R.color.cyan);
-        categoryColorMap.put("Children", R.color.yellow);
-        categoryColorMap.put("Work", R.color.gray);
-        categoryColorMap.put("Bureaucracy", R.color.maroon);
-        categoryColorMap.put("Gifts", R.color.deep_gold);
-        categoryColorMap.put("Bank", R.color.black);
     }
 
     @NonNull
@@ -84,17 +63,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         private TextView categoryTextView;
         private TextView amountTextView;
         private TextView dateTextView;
-        private TextView itemColorTextView;
-        private View itemColorCircle;
+        private ImageView categoryIconImageView;
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTextView = itemView.findViewById(R.id.categoryTextView);
             amountTextView = itemView.findViewById(R.id.amountTextView);
             dateTextView = itemView.findViewById(R.id.dateTextView);
-            itemColorTextView = itemView.findViewById(R.id.itemColorTextView);
-            itemColorCircle = itemView.findViewById(R.id.itemColorCircle);
-
+            categoryIconImageView = itemView.findViewById(R.id.categoryIconImageView);
             itemView.setOnClickListener(v->{
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
@@ -112,16 +88,47 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             String category = transaction.getCategory();
             categoryTextView.setText(transaction.getCategory());
             dateTextView.setText(transaction.getDate());
-            if (!category.isEmpty()) {
-                char firstLetter = category.charAt(0);
-                itemColorTextView.setText(String.valueOf(firstLetter).toUpperCase()); // Convert to uppercase if needed
-            } else {
-                itemColorTextView.setText("U"); // Default to "U" if category is empty
+            switch (transaction.getCategory()) {
+                case "Lương":
+                    categoryIconImageView.setImageResource(R.drawable.ic_salary);
+                    break;
+                case "Bán đồ":
+                    categoryIconImageView.setImageResource(R.drawable.ic_sale);
+                    break;
+                case "Tiền lãi":
+                    categoryIconImageView.setImageResource(R.drawable.ic_interest);
+                    break;
+                case "Thu nhập khác":
+                    categoryIconImageView.setImageResource(R.drawable.ic_others);
+                    break;
+                case "Ăn uống":
+                    categoryIconImageView.setImageResource(R.drawable.ic_food);
+                    break;
+                case "Di chuyển":
+                    categoryIconImageView.setImageResource(R.drawable.ic_transportation);
+                    break;
+                case "Bảo hiểm":
+                    categoryIconImageView.setImageResource(R.drawable.ic_insurance);
+                    break;
+                case "Sức khỏe":
+                    categoryIconImageView.setImageResource(R.drawable.ic_healthcare);
+                    break;
+                case "Mua sắm":
+                    categoryIconImageView.setImageResource(R.drawable.ic_shopping);
+                    break;
+                case "Du lịch":
+                    categoryIconImageView.setImageResource(R.drawable.ic_travel);
+                    break;
+                case "Giáo dục":
+                    categoryIconImageView.setImageResource(R.drawable.ic_education);
+                    break;
+                case "Hóa đơn":
+                    categoryIconImageView.setImageResource(R.drawable.ic_bill);
+                    break;
+                default:
+                    categoryIconImageView.setImageResource(R.drawable.ic_others);
+                    break;
             }
-
-            // Set the background color of itemColorCircle based on the category
-            Integer colorResId = categoryColorMap.getOrDefault(category, R.color.black);
-            itemColorCircle.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, colorResId)));
 
             // Set the amount text
             String amount = String.valueOf(transaction.getAmount());

@@ -9,4 +9,8 @@
     <string name="reports">Báo cáo</string>
     <string name="open_nav_drawer">Open navigation drawer</string>
     <string name="close_nav_drawer">Close navigation drawer</string>
+    <string name="income">Tiền vào</string>
+    <string name="expense">Tiền ra</string>
+    <string name="recent_transactions">Giao dịch gần đây</string>
+    <string name="see_all">Xem tất cả</string>
 </resources>

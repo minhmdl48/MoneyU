@@ -1,11 +1,10 @@
 package com.example.moneyu.Adapter;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,14 +32,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     // ViewHolder class
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView categoryNameTextView;
-        TextView categoryColorTextView;
-        RelativeLayout categoryColorCircle; // Relative layout representing the circle
+        ImageView categoryIconImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             categoryNameTextView = itemView.findViewById(R.id.categoryNameTextView);
-            categoryColorTextView = itemView.findViewById(R.id.categoryColorTextView);
-            categoryColorCircle = itemView.findViewById(R.id.categoryColorCircle);
+            categoryIconImageView = itemView.findViewById(R.id.categoryIconImageView);
+
         }
     }
 
@@ -56,15 +54,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         Category category = categoryList.get(position);
         holder.categoryNameTextView.setText(category.getCategoryName());
 
-        // Set the text of categoryColorTextView to the first letter of categoryNameTextView
-        String categoryName = category.getCategoryName();
-        if (!categoryName.isEmpty()) {
-            holder.categoryColorTextView.setText(String.valueOf(categoryName.charAt(0)).toUpperCase()); // Set the first letter as uppercase
-        }
-
-        // Set the background color for categoryColorCircle
-        int colorIndex = position % circleColors.length; // Calculate color index based on position
-        holder.categoryColorCircle.setBackgroundTintList(ColorStateList.valueOf(circleColors[colorIndex]));
+        String iconName = category.getIcon();
+        int iconResId = context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
+        holder.categoryIconImageView.setImageResource(iconResId);
 
         // Set click listener for the parent item
         holder.itemView.setOnClickListener(new View.OnClickListener() {

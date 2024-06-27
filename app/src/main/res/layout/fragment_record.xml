@@ -30,9 +30,9 @@
             android:id="@+id/btnDatePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="date pick"
             android:src="@drawable/ic_edit"
             />
-
 
     </LinearLayout>
     <LinearLayout
@@ -46,7 +46,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:paddingBottom="16dp"
-            android:text="Tien vao"
+            android:text="@string/income"
             android:layout_gravity="center"/>
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_weight="1"
             android:paddingBottom="16dp"
             android:textColor="@color/green"
-            android:text="10000d"
+            android:text="0đ"
             android:textAlignment="viewEnd"
             android:layout_marginEnd="10dp"/>
 
@@ -74,7 +74,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:paddingBottom="16dp"
-            android:text="Tien ra" />
+            android:text="@string/expense" />
 
         <TextView
             android:id="@+id/txtOutcomeDisplay"
@@ -83,7 +83,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:paddingBottom="16dp"
-            android:text="200d"
+            android:text="0đ"
             android:textColor="@color/red"
             android:textAlignment="viewEnd"
             android:layout_marginEnd="10dp"

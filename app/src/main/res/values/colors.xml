@@ -157,4 +157,5 @@
     <color name="deep_gold">#FFCC33</color> <!-- Gifts: Deep Gold -->
     <color name="black">#000000</color>
     <color name="gray">#A3A09F</color>
+    <color name="logo_background">#e5eeff</color>
 </resources>

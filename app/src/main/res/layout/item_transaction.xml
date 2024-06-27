@@ -4,7 +4,6 @@
     android:padding="8dp"
     android:gravity="center_vertical">
 
-    <!-- Circle for Item Color with ? letter -->
     <RelativeLayout
         android:id="@+id/itemColorCircle"
         android:layout_width="40dp"
@@ -12,17 +11,15 @@
         android:layout_alignParentStart="true"
         >
 
-        <TextView
-            android:id="@+id/itemColorTextView"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/categoryIconImageView"
             android:layout_centerInParent="true"
-            android:text="\?"
-            android:textColor="@android:color/white"
-            android:textSize="22dp"
-            android:textStyle="bold" />
+            />
 
     </RelativeLayout>
+
 
     <!-- Container for Category, Title, Date, and Amount TextViews -->
     <RelativeLayout
