@@ -9,7 +9,7 @@
         android:icon="@drawable/ic_wallet" />
     <item
         android:id="@+id/add_transaction"
-        android:title=""
+        android:title="@string/add_transaction"
         android:icon="@drawable/ic_add" />
     <item
         android:id="@+id/report"

@@ -1,4 +1,4 @@
-package com.example.moneyu.model;
+package com.example.moneyu.Models;
 
 public class Summary {
     private String date;

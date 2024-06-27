@@ -1,10 +1,7 @@
 package com.example.moneyu.Activity;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,17 +18,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.moneyu.Activity.Login_Signup.LoginActivity;
-import com.example.moneyu.Adapter.HomeAdapter;
 import com.example.moneyu.Fragments.HomeFragment;
+
+import com.example.moneyu.Fragments.ReportsFragment;
+
 import com.example.moneyu.Fragments.RecordFragment;
+
 import com.example.moneyu.R;
 import com.example.moneyu.Transaction.AddTransactionActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -40,7 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -185,9 +182,9 @@ public class HomeActivity extends AppCompatActivity {
 //            case "summary":
 //                replaceFragment(new SummaryFragment());
 //                break;
-//            case "reports":
-//                replaceFragment(new ReportsFragment());
-//                break;
+            case "reports":
+                replaceFragment(new ReportsFragment());
+                break;
             default:
                 replaceFragment(new HomeFragment());
                 break;
@@ -232,11 +229,11 @@ public class HomeActivity extends AppCompatActivity {
 //            fragment = new SummaryFragment();
 //            setVisibility(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
 //            displayedFragment = "summary";
-//        } else if (itemId == R.id.menu_reports) {
-//            fragment = new ReportsFragment();
+         else if (itemId == R.id.report) {
+            fragment = new ReportsFragment();
 //            setVisibility(View.VISIBLE, View.VISIBLE, View.VISIBLE, View.INVISIBLE);
-//            displayedFragment = "reports";
-//        }
+            displayedFragment = "reports";
+        }
 
         if (fragment != null) {
             calendar = Calendar.getInstance();
@@ -369,8 +366,8 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
-//    public String getCurrentDate() {
-//        return datePlaceholderText.getText().toString(); // Assuming placeholderText is a TextView
-//    }
+    public String getCurrentDate() {
+        return datePlaceholderText.getText().toString(); // Assuming placeholderText is a TextView
+    }
 
 }

@@ -15,9 +15,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneyu.Transaction.DetailTransactionActivity;
-import com.example.moneyu.model.Transaction;
+import com.example.moneyu.Models.Transaction;
 import com.example.moneyu.R;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

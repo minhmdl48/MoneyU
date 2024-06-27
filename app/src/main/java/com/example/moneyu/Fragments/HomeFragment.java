@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneyu.Adapter.HomeAdapter;
 import com.example.moneyu.R;
-import com.example.moneyu.model.Transaction;
+import com.example.moneyu.Models.Transaction;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneyu.Adapter.CategoryAdapter;
-import com.example.moneyu.model.Category;
+import com.example.moneyu.Models.Category;
 import com.example.moneyu.R;
 import com.google.android.material.tabs.TabLayout;
 
