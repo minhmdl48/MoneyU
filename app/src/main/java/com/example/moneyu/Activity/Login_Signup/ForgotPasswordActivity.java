@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private EditText editTextEmail;
     private Button buttonRecover;
+
+    private ImageView backIcon;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -31,6 +34,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         editTextEmail = findViewById(R.id.editTextEmail);
         buttonRecover = findViewById(R.id.buttonRecover);
+        backIcon = findViewById(R.id.back_icon);
+
+        backIcon.setOnClickListener(v -> finish());
 
         buttonRecover.setOnClickListener(new View.OnClickListener() {
             @Override
