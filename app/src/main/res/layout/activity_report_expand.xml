@@ -54,13 +54,13 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_below="@id/top_app_bar_layout">
-            <TextView
-                android:id="@+id/report_expanded_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Loading..."
-                android:textSize="18dp"
-                android:textColor="@android:color/black"/>
+<!--            <TextView-->
+<!--                android:id="@+id/report_expanded_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Loading..."-->
+<!--                android:textSize="18dp"-->
+<!--                android:textColor="@android:color/black"/>-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/empty_view3"

@@ -43,6 +43,9 @@
         <activity android:name=".Transaction.DetailTransactionActivity"
             android:exported="true"
             />
+        <activity
+            android:name=".Report.ReportExpandData"
+            android:exported="true" />
 
 
     </application>

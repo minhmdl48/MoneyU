@@ -22,6 +22,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
     private RecyclerView parentRecyclerView;
     private List<Category> categories;
+    private int[] circleColors;
     private ImageView backIcon;
     private String selectedTab;
 
@@ -38,6 +39,10 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
         parentRecyclerView = findViewById(R.id.parentRecyclerView);
         parentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        circleColors = getResources().getIntArray(R.array.circle_colors);
+
 
         selectedTab = "Income";
         loadIncomeData(); // Load income data initially
@@ -80,25 +85,28 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
     private void loadIncomeData() {
         categories = new ArrayList<>();
-        categories.add(new Category("Lương", "ic_salary"));
-        categories.add(new Category("Bán đồ", "ic_sale"));
-        categories.add(new Category("Tiền lãi", "ic_interest"));
-        categories.add(new Category("Thu nhập khác", "ic_others"));
+        categories.add(new Category("Lương và Phụ cấp"));
+        categories.add(new Category("Kinh doanh"));
+        categories.add(new Category("Đầu tư"));
+        categories.add(new Category("Quà tặng"));
+        categories.add(new Category("Khác"));
+
         updateRecyclerView();
     }
 
 
     private void loadExpenseData() {
         categories = new ArrayList<>();
-        categories.add(new Category("Ăn uống", "ic_food"));
-        categories.add(new Category("Di chuyển", "ic_transportation"));
-        categories.add(new Category("Bảo hiểm", "ic_insurance"));
-        categories.add(new Category("Sức khỏe", "ic_healthcare"));
-        categories.add(new Category("Mua sắm", "ic_shopping"));
-        categories.add(new Category("Du lịch", "ic_travel"));
-        categories.add(new Category("Giáo dục", "ic_education"));
-        categories.add(new Category("Hóa đơn", "ic_bill"));
-        categories.add(new Category("Chi phí khác", "ic_others"));
+        categories.add(new Category("Đồ ăn"));
+        categories.add(new Category("Di chuyển"));
+        categories.add(new Category("Giải trí"));
+        categories.add(new Category("Sức khoẻ và làm đẹp"));
+        categories.add(new Category("Thuốc thang"));
+        categories.add(new Category("Bảo hiểm"));
+        categories.add(new Category("Mua sắm"));
+        categories.add(new Category("Du lịch"));
+        categories.add(new Category("Khác"));
+
         updateRecyclerView();
     }
 
@@ -107,15 +115,21 @@ public class SelectCategoryActivity extends AppCompatActivity {
         CategoryAdapter categoryAdapter = new CategoryAdapter(this, categories);
         parentRecyclerView.setAdapter(categoryAdapter);
 
-        categoryAdapter.setOnItemClickListener(position -> {
-            Category clickedCategory = categories.get(position);
 
-            String selectedCategory = clickedCategory.getCategoryName();
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("selected_category", selectedCategory);
-            resultIntent.putExtra("selected_tab", selectedTab);
-            setResult(Activity.RESULT_OK, resultIntent);
-            finish();
+        categoryAdapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                Category clickedCategory = categories.get(position);
+
+
+                String selectedCategory = clickedCategory.getCategoryName();
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("selected_category", selectedCategory);
+                resultIntent.putExtra("selected_tab", selectedTab);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
         });
     }
 }

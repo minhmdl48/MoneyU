@@ -366,8 +366,8 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
-    public String getCurrentDate() {
-        return datePlaceholderText.getText().toString(); // Assuming placeholderText is a TextView
-    }
+//    public String getCurrentDate() {
+//        return datePlaceholderText.getText().toString(); // Assuming placeholderText is a TextView
+//    }
 
 }

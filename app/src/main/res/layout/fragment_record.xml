@@ -14,25 +14,27 @@
             android:id="@+id/txtDateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tong hop chi tieu tu: "
+            android:text="Tổng hợp chi tiêu từ: "
             android:layout_marginStart="16dp"
+            android:textSize="15dp"
             android:paddingBottom="16dp" />
 
         <TextView
             android:id="@+id/txtDatePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chon khoang thoi gian"
+            android:text="Chọn khoảng thời gian"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:textSize="15dp"/>
         <ImageView
             android:id="@+id/btnDatePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="date pick"
             android:src="@drawable/ic_edit"
             />
+
 
     </LinearLayout>
     <LinearLayout
@@ -46,7 +48,8 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:paddingBottom="16dp"
-            android:text="@string/income"
+            android:textSize="15dp"
+            android:text="Thu nhập: "
             android:layout_gravity="center"/>
 
         <TextView
@@ -57,7 +60,8 @@
             android:layout_weight="1"
             android:paddingBottom="16dp"
             android:textColor="@color/green"
-            android:text="0đ"
+            android:textSize="15dp"
+            android:text="0.00 VNĐ"
             android:textAlignment="viewEnd"
             android:layout_marginEnd="10dp"/>
 
@@ -73,8 +77,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            android:textSize="15dp"
             android:paddingBottom="16dp"
-            android:text="@string/expense" />
+            android:text="Chi tiêu: " />
 
         <TextView
             android:id="@+id/txtOutcomeDisplay"
@@ -83,7 +88,8 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:paddingBottom="16dp"
-            android:text="0đ"
+            android:text="0.00 VNĐ"
+            android:textSize="15dp"
             android:textColor="@color/red"
             android:textAlignment="viewEnd"
             android:layout_marginEnd="10dp"
