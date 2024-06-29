@@ -2,6 +2,7 @@ package com.example.moneyu.Fragments;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +57,8 @@ import java.util.Map;
 public class ReportsFragment extends Fragment {
     private PieChart incomesPieChart,expensesPieChart;
     private BarChart incomesExpensiveBarChart;
-    private TextView expenseReport, incomesReport;
+    private ImageView btnDatePicker;
+    private TextView expenseReport, incomesReport,txtMonth, txtYear;
     private FirebaseFirestore db;
     private List<Transaction> transactionList ;
     private List<DailyTotals> dailyTotalsList = new ArrayList<>();
@@ -72,12 +77,25 @@ public class ReportsFragment extends Fragment {
 
 //        transactionsLineChart = view.findViewById(R.id.transactions_lineChart);
 //        balanceLineChart = view.findViewById(R.id.balance_lineChart);
+        txtMonth = view.findViewById(R.id.txtMonth);
+        txtYear = view.findViewById(R.id.txtYear);
+        btnDatePicker = view.findViewById(R.id.btnDatePicker);
         incomesPieChart = view.findViewById(R.id.incomesPieChart);
         expensesPieChart = view.findViewById(R.id.expensesPieChart);
         expenseReport = view.findViewById(R.id.expenseReport_textview);
         incomesReport = view.findViewById(R.id.incomesReport_textview);
         incomesExpensiveBarChart = view.findViewById(R.id.income_expense_barChart);
 
+
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle date picker button click
+                // Implement date picker functionality here
+                showDateDialog(txtMonth, txtYear);
+
+            }
+        });
         // Initialize context
         context = getContext();
 
@@ -87,7 +105,7 @@ public class ReportsFragment extends Fragment {
 //        // Retrieve current date from HomeActivity
 //        currentDate = getCurrentDate();
 //        Log.d("Debug", "Current Date: " + currentDate); // Debug line
-
+currentDate="06-2024";
 
         // Retrieve authenticated user ID
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -120,6 +138,34 @@ public class ReportsFragment extends Fragment {
 
 //        setupLineChartTransactions();
 //        setupLineChartBalance();
+    }
+
+    private void showDateDialog(final TextView txtMonth, final TextView txtYear) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_date_picker);
+
+        EditText dialogMonthInput = dialog.findViewById(R.id.dialog_month_input);
+        EditText dialogYearInput = dialog.findViewById(R.id.dialog_year_input);
+        TextView dialogOk = dialog.findViewById(R.id.dialog_ok);
+        TextView dialogCancel = dialog.findViewById(R.id.dialog_cancel);
+
+        dialogOk.setOnClickListener(v -> {
+            String inputText1 = dialogMonthInput.getText().toString().trim();
+            txtMonth.setText(inputText1);
+            String inputText2 = dialogYearInput.getText().toString().trim();
+            txtYear.setText(inputText2);
+            dialog.dismiss();
+        });
+
+        dialogCancel.setOnClickListener(v -> dialog.dismiss());
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+
+        dialog.show();
     }
 
 
@@ -181,19 +227,19 @@ public class ReportsFragment extends Fragment {
 
                 // Map categories to colors
                 Map<String, Integer> categoryColors = new HashMap<>();
-                categoryColors.put("Lương và Phụ cấp",Color.parseColor("#114232"));
-                categoryColors.put("Kinh doanh", Color.parseColor("#800000"));
-                categoryColors.put("Đầu tư", Color.parseColor("#9E9E9E"));
-                categoryColors.put("Quà tặng", Color.parseColor("#FFA500"));
-                categoryColors.put("Đồ ăn", Color.parseColor("#FF000050"));
+                categoryColors.put("Lương",Color.parseColor("#114232"));
+                categoryColors.put("Bán đồ", Color.parseColor("#800000"));
+                categoryColors.put("Tiền lãi", Color.parseColor("#9E9E9E"));
+                categoryColors.put("Đồ ăn", Color.parseColor("#FFC0CB"));
                 categoryColors.put("Di chuyển", Color.parseColor("#0000FF"));
-                categoryColors.put("Giải trí", Color.parseColor("#008000"));
-                categoryColors.put("Sức khoẻ và làm đẹp", Color.parseColor("#FFC0CB"));
-                categoryColors.put("Thuốc thang", Color.parseColor("#000080"));
+                categoryColors.put("Ăn uống", Color.parseColor("#008000"));
+                categoryColors.put("Sức khoẻ", Color.parseColor("#FF000000"));
                 categoryColors.put("Bảo hiểm", Color.parseColor("#A52A2A"));
+                categoryColors.put("Thu nhập khác", Color.parseColor("#000000"));
+                categoryColors.put("Hóa đơn", Color.parseColor("#FF4500"));
                 categoryColors.put("Mua sắm", Color.parseColor("#FFCC33"));
                 categoryColors.put("Du lịch", Color.parseColor("#FFFF00"));
-                categoryColors.put("Khác", Color.parseColor("#000000"));
+                categoryColors.put("Chi phí khác", Color.parseColor("#000000"));
 
                 // Separate transactions based on their type
                 for (Transaction transaction : transactions) {
@@ -203,29 +249,29 @@ public class ReportsFragment extends Fragment {
                         incomeTransactions.add(transaction);
                     }
                 }
-                //  two separate lists: expenseTransactions and incomeTransactions
+
 
                 // Calculate total amount for each expense category
-                Map<String, Double> categoryTotalExpensesMap = new HashMap<>();
+                Map<String, Integer> categoryTotalExpensesMap = new HashMap<>();
                 for (Transaction expenseTransaction : expenseTransactions) {
                     String category = expenseTransaction.getCategory();
                     int amount = expenseTransaction.getAmount();
                     // Add amount to the total for this category
-                    categoryTotalExpensesMap.put(category, categoryTotalExpensesMap.getOrDefault(category, 0.0) + amount);
+                    categoryTotalExpensesMap.put(category, categoryTotalExpensesMap.getOrDefault(category, 0) + amount);
                 }
                 // Calculate total amount for each income category
-                Map<String, Double> categoryTotalIncomeMap = new HashMap<>();
+                Map<String, Integer> categoryTotalIncomeMap = new HashMap<>();
                 for (Transaction incomeTransaction : incomeTransactions) {
                     String category = incomeTransaction.getCategory();
                     int amount = incomeTransaction.getAmount();
                     // Add amount to the total for this category
-                    categoryTotalIncomeMap.put(category, categoryTotalIncomeMap.getOrDefault(category, 0.0) + amount);
+                    categoryTotalIncomeMap.put(category, categoryTotalIncomeMap.getOrDefault(category, 0) + amount);
                 }
 
                 // categoryTotalExpensesMap contains the total amount for each expense category
                 ArrayList<PieEntry> entriesExpense = new ArrayList<>();
                 ArrayList<Integer> colorsExpense = new ArrayList<>();
-                for (Map.Entry<String, Double> entry : categoryTotalExpensesMap.entrySet()) {
+                for (Map.Entry<String, Integer> entry : categoryTotalExpensesMap.entrySet()) {
                     entriesExpense.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
                     Integer color = categoryColors.get(entry.getKey());
                     if (color != null) {
@@ -239,7 +285,7 @@ public class ReportsFragment extends Fragment {
                 // categoryTotalIncomeMap contains the total amount for each income category
                 ArrayList<PieEntry> entriesIncome = new ArrayList<>();
                 ArrayList<Integer> colorsIncome = new ArrayList<>();
-                for (Map.Entry<String, Double> entry : categoryTotalIncomeMap.entrySet()) {
+                for (Map.Entry<String, Integer> entry : categoryTotalIncomeMap.entrySet()) {
                     entriesIncome.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
                     Integer color = categoryColors.get(entry.getKey());
                     if (color != null) {
@@ -254,28 +300,22 @@ public class ReportsFragment extends Fragment {
                 setupPieChart(incomesPieChart, entriesIncome, colorsIncome);
 
                 // Set OnClickListener for expenseReport_textview
-                expenseReport.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Start new activity with categoryTotalExpensesMap for expenses
-                        startNewActivity(categoryTotalExpensesMap, currentDate);
-                    }
+                expenseReport.setOnClickListener(v -> {
+                    // Start new activity with categoryTotalExpensesMap for expenses
+                    startNewActivity(categoryTotalExpensesMap, currentDate);
                 });
 
                 // Set OnClickListener for incomesReport_textview
-                incomesReport.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Start new activity with categoryTotalIncomeMap for incomes
-                        startNewActivity(categoryTotalIncomeMap, currentDate);
-                    }
+                incomesReport.setOnClickListener(v -> {
+                    // Start new activity with categoryTotalIncomeMap for incomes
+                    startNewActivity(categoryTotalIncomeMap, currentDate);
                 });
             }
-            private void startNewActivity(Map<String, Double> categoryTotalMap, String currentDate) {
+            private void startNewActivity(Map<String, Integer> categoryTotalMap, String currentDate) {
                 // Check if the categoryTotalMap and currentDate are not null
                 if (categoryTotalMap != null && !categoryTotalMap.isEmpty() && currentDate != null && !currentDate.isEmpty()) {
                     // Log the contents of categoryTotalMap
-                    for (Map.Entry<String, Double> entry : categoryTotalMap.entrySet()) {
+                    for (Map.Entry<String, Integer> entry : categoryTotalMap.entrySet()) {
                         Log.d(TAG, "Category: " + entry.getKey() + ", Total: " + entry.getValue());
                     }
 
@@ -805,7 +845,6 @@ public class ReportsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_reports, container, false);
     }
 
@@ -814,7 +853,7 @@ public class ReportsFragment extends Fragment {
         private final DecimalFormat mFormat;
 
         public EuroValueFormatter() {
-            mFormat = new DecimalFormat("VNĐ");
+            mFormat = new DecimalFormat("VND");
         }
 
         @Override

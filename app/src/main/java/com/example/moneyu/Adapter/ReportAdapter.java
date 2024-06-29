@@ -17,9 +17,9 @@ import java.util.Map;
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Map.Entry<String, Double>> categoryList;
+    private ArrayList<Map.Entry<String, Integer>> categoryList;
 
-    public ReportAdapter(Context context, ArrayList<Map.Entry<String, Double>> categoryList) {
+    public ReportAdapter(Context context, ArrayList<Map.Entry<String, Integer>> categoryList) {
         this.context = context;
         this.categoryList = categoryList;
     }
@@ -33,7 +33,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Map.Entry<String, Double> categoryEntry = categoryList.get(position);
+        Map.Entry<String, Integer> categoryEntry = categoryList.get(position);
         holder.categoryTextView.setText(categoryEntry.getKey());
         holder.amountTextView.setText(String.format("%.2f€", categoryEntry.getValue()));
     }

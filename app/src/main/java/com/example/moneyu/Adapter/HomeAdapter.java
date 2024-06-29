@@ -142,7 +142,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 amountTextView.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
                 amount = "+" + amount; // Prefix "+" for income
             }
-            amountTextView.setText(amount + "đ"); // Append € symbol after amount
+            amountTextView.setText(amount + " VND"); // Append € symbol after amount
 
             dateTextView.setText(transaction.getDate());
         }

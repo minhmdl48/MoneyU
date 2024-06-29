@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="Chọn thời gian"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/md_theme_onBackground"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/select_month_textview"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:text="@string/select_month"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/dialog_month_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColorHint="@color/md_theme_onBackground"
+            android:textColor="@color/md_theme_onBackground"
+            android:maxLines="1"
+            android:singleLine="true"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/select_year_textview"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:text="@string/select_month"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/dialog_year_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColorHint="@color/md_theme_onBackground"
+            android:textColor="@color/md_theme_onBackground"
+            android:maxLines="1"
+            android:singleLine="true"/>
+
+    </LinearLayout>
+
+    <!-- Grid for buttons -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        <android.widget.Button
+            android:id="@+id/dialog_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Cancel"
+            android:background="@color/gray"
+            android:textColor="@color/md_theme_onBackground"
+            android:textSize="18sp"/>
+        <android.widget.Button
+            android:id="@+id/dialog_ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="OK"
+            android:background="@color/gray"
+            android:textColor="@color/md_theme_onBackground"
+            android:textSize="18sp"/>
+    </GridLayout>
+
+</LinearLayout>

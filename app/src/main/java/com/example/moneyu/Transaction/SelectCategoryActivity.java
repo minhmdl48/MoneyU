@@ -85,11 +85,10 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
     private void loadIncomeData() {
         categories = new ArrayList<>();
-        categories.add(new Category("Lương và Phụ cấp"));
-        categories.add(new Category("Kinh doanh"));
-        categories.add(new Category("Đầu tư"));
-        categories.add(new Category("Quà tặng"));
-        categories.add(new Category("Khác"));
+        categories.add(new Category("Lương", "ic_salary"));
+        categories.add(new Category("Bán đồ", "ic_sale"));
+        categories.add(new Category("Tiền lãi", "ic_interest"));
+        categories.add(new Category("Thu nhập khác", "ic_others"));
 
         updateRecyclerView();
     }
@@ -97,15 +96,15 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
     private void loadExpenseData() {
         categories = new ArrayList<>();
-        categories.add(new Category("Đồ ăn"));
-        categories.add(new Category("Di chuyển"));
-        categories.add(new Category("Giải trí"));
-        categories.add(new Category("Sức khoẻ và làm đẹp"));
-        categories.add(new Category("Thuốc thang"));
-        categories.add(new Category("Bảo hiểm"));
-        categories.add(new Category("Mua sắm"));
-        categories.add(new Category("Du lịch"));
-        categories.add(new Category("Khác"));
+        categories.add(new Category("Ăn uống", "ic_food"));
+        categories.add(new Category("Di chuyển", "ic_transportation"));
+        categories.add(new Category("Giáo dục", "ic_education"));
+        categories.add(new Category("Sức khoẻ", "ic_health"));
+        categories.add(new Category("Hóa đơn", "ic_bill"));
+        categories.add(new Category("Bảo hiểm", "ic_insurance"));
+        categories.add(new Category("Mua sắm", "ic_shopping"));
+        categories.add(new Category("Du lịch", "ic_travel"));
+        categories.add(new Category("Chi phí khác", "ic_others"));
 
         updateRecyclerView();
     }
