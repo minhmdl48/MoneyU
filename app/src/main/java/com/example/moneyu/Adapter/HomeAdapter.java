@@ -130,9 +130,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                     break;
             }
 
-            // Set the amount text
             String amount = String.valueOf(transaction.getAmount());
-
             Log.d("HomeAdapter", "Amount: " + amount);
 
             if (transaction.getType().equals("Expense")) {
@@ -142,8 +140,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 amountTextView.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
                 amount = "+" + amount; // Prefix "+" for income
             }
-            amountTextView.setText(amount + " VND"); // Append € symbol after amount
-
+            amountTextView.setText(amount + " VND");
             dateTextView.setText(transaction.getDate());
         }
     }

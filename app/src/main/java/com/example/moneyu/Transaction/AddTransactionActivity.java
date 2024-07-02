@@ -67,13 +67,9 @@ public class AddTransactionActivity extends AppCompatActivity {
         categoryTextView.setOnClickListener(v -> {
             // Start the new activity to select category
             Intent intent = new Intent(AddTransactionActivity.this, SelectCategoryActivity.class);
-//            startActivity(intent);
             startActivityForResult(intent, CATEGORY_REQUEST_CODE);
 
         });
-//        String selectedCategory = getIntent().getStringExtra("selected_category");
-//        Log.d("AddTransactionActivity", "Selected category: " + selectedCategory);
-//        categoryTextView.setText(selectedCategory);
 
         amountText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         amountText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -180,21 +176,13 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         dialogTitle.setText(title);
 
-        dialogOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String inputText = dialogInput.getText().toString().trim();
-                textView.setText(inputText);
-                dialog.dismiss();
-            }
+        dialogOk.setOnClickListener(v -> {
+            String inputText = dialogInput.getText().toString().trim();
+            textView.setText(inputText);
+            dialog.dismiss();
         });
 
-        dialogCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        dialogCancel.setOnClickListener(v -> dialog.dismiss());
 
         Window window = dialog.getWindow();
         if (window != null) {

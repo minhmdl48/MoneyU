@@ -3,13 +3,10 @@ package com.example.moneyu.Transaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.moneyu.Adapter.CategoryAdapter;
 import com.example.moneyu.Models.Category;
 import com.example.moneyu.R;
@@ -19,10 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectCategoryActivity extends AppCompatActivity {
-
     private RecyclerView parentRecyclerView;
     private List<Category> categories;
-    private int[] circleColors;
     private ImageView backIcon;
     private String selectedTab;
 
@@ -32,30 +27,14 @@ public class SelectCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_category);
 
         backIcon = findViewById(R.id.back_icon);
-
         TabLayout tabLayout = findViewById(R.id.tab_layout);
-        RecyclerView recyclerView = findViewById(R.id.parentRecyclerView);
-
-
         parentRecyclerView = findViewById(R.id.parentRecyclerView);
         parentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        circleColors = getResources().getIntArray(R.array.circle_colors);
-
 
         selectedTab = "Income";
         loadIncomeData(); // Load income data initially
 
-
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // đóng activity và trở về màn hình trước đó
-                finish();
-            }
-        });
-
+        backIcon.setOnClickListener(v -> finish());
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -99,7 +78,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         categories.add(new Category("Ăn uống", "ic_food"));
         categories.add(new Category("Di chuyển", "ic_transportation"));
         categories.add(new Category("Giáo dục", "ic_education"));
-        categories.add(new Category("Sức khoẻ", "ic_health"));
+        categories.add(new Category("Sức khoẻ", "ic_healthcare"));
         categories.add(new Category("Hóa đơn", "ic_bill"));
         categories.add(new Category("Bảo hiểm", "ic_insurance"));
         categories.add(new Category("Mua sắm", "ic_shopping"));
@@ -114,21 +93,15 @@ public class SelectCategoryActivity extends AppCompatActivity {
         CategoryAdapter categoryAdapter = new CategoryAdapter(this, categories);
         parentRecyclerView.setAdapter(categoryAdapter);
 
+        categoryAdapter.setOnItemClickListener(position -> {
+            Category clickedCategory = categories.get(position);
 
-        categoryAdapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-
-                Category clickedCategory = categories.get(position);
-
-
-                String selectedCategory = clickedCategory.getCategoryName();
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("selected_category", selectedCategory);
-                resultIntent.putExtra("selected_tab", selectedTab);
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-            }
+            String selectedCategory = clickedCategory.getCategoryName();
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("selected_category", selectedCategory);
+            resultIntent.putExtra("selected_tab", selectedTab);
+            setResult(Activity.RESULT_OK, resultIntent);
+            finish();
         });
     }
 }

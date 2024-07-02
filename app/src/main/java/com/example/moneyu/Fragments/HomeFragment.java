@@ -51,16 +51,16 @@ public class HomeFragment extends Fragment {
 
         adapter = new HomeAdapter(getContext(), transactionList);
         recyclerView.setAdapter(adapter);
-        txtViewSeeAll.setOnClickListener(v -> {
-            RecordFragment recordFragment = new RecordFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            if (fragmentManager != null) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.drawer_layout, recordFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
+//        txtViewSeeAll.setOnClickListener(v -> {
+//            RecordFragment recordFragment = new RecordFragment();
+//            FragmentManager fragmentManager = getFragmentManager();
+//            if (fragmentManager != null) {
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.drawer_layout, recordFragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//            }
+//        });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user != null ? user.getUid() : null;
 

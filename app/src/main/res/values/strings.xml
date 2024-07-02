@@ -15,8 +15,9 @@
     <string name="see_all">Xem tất cả</string>
     <string name="expense_rp">Khoản chi</string>
     <string name="income_rp">Khoản thu</string>
-    <string name="income_expense_rp">Báo cáo chi tiêu</string>
+    <string name="income_expense_rp">Báo cáo thu chi</string>
     <string name="date_picker">Chọn khoảng thời gian</string>
     <string name="select_month">Nhập tháng</string>
     <string name="select_year">Nhập năm</string>
+    <string name="detail_report">Báo cáo chi tiết</string>
 </resources>

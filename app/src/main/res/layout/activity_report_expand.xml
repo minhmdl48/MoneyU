@@ -38,7 +38,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Categories Summary"
+                    android:text="@string/detail_report"
                     android:textSize="20dp"
                     android:textColor="@android:color/white"
                     android:layout_gravity="center_vertical|start"/>
@@ -50,7 +50,7 @@
             android:id="@+id/empty_view3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/empty_view2"
+            android:layout_below="@+id/top_app_bar_layout"
             android:gravity="center">
 
             <com.github.mikephil.charting.charts.PieChart

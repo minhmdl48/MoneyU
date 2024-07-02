@@ -2,8 +2,6 @@ package com.example.moneyu.Fragments;
 
 import static android.content.ContentValues.TAG;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,9 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,19 +16,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.moneyu.Models.DailyBalance;
-import com.example.moneyu.Models.DailyTotals;
 import com.example.moneyu.Models.Transaction;
 import com.example.moneyu.R;
 import com.example.moneyu.Report.ReportExpandData;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,823 +38,269 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class ReportsFragment extends Fragment {
-    private PieChart incomesPieChart,expensesPieChart;
-    private BarChart incomesExpensiveBarChart;
-    private ImageView btnDatePicker;
-    private TextView expenseReport, incomesReport,txtMonth, txtYear;
+    private PieChart incomesPieChart, expensesPieChart;
+    private BarChart barChart;
+    private TextView expenseReport, incomesReport;
     private FirebaseFirestore db;
-    private List<Transaction> transactionList ;
-    private List<DailyTotals> dailyTotalsList = new ArrayList<>();
-    private Map<String, Integer> categoryColorMap;
-    private List<DailyBalance> dailyBalances;
-    private Context context;
-    private String totalAmountText="",currentDate;
+    private String currentMonth = "";
+    private String currentYear = "";
 
     public ReportsFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        transactionsLineChart = view.findViewById(R.id.transactions_lineChart);
-//        balanceLineChart = view.findViewById(R.id.balance_lineChart);
-        txtMonth = view.findViewById(R.id.txtMonth);
-        txtYear = view.findViewById(R.id.txtYear);
-        btnDatePicker = view.findViewById(R.id.btnDatePicker);
         incomesPieChart = view.findViewById(R.id.incomesPieChart);
         expensesPieChart = view.findViewById(R.id.expensesPieChart);
         expenseReport = view.findViewById(R.id.expenseReport_textview);
         incomesReport = view.findViewById(R.id.incomesReport_textview);
-        incomesExpensiveBarChart = view.findViewById(R.id.income_expense_barChart);
+        barChart = view.findViewById(R.id.income_expense_barChart);
 
-
-        btnDatePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle date picker button click
-                // Implement date picker functionality here
-                showDateDialog(txtMonth, txtYear);
-
-            }
-        });
-        // Initialize context
-        context = getContext();
-
-        // Initialize Firestore
         db = FirebaseFirestore.getInstance();
-
-//        // Retrieve current date from HomeActivity
-//        currentDate = getCurrentDate();
-//        Log.d("Debug", "Current Date: " + currentDate); // Debug line
-currentDate="06-2024";
-
-        // Retrieve authenticated user ID
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user != null ? user.getUid() : null;
-        Log.d("Debug", "User ID: " + userId); // Debug line
+        Calendar calendar = Calendar.getInstance();
 
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
 
-        // Call retrieveTran with the current date and user ID
+        currentMonth = String.format("%02d", month);
+        currentYear = String.valueOf(year);
+
         if (userId != null) {
-//            // Extracting currentMonth
-//            String currentMonth = currentDate.substring(0, 2);
-//            Log.d("Debug", "Current Month: " + currentMonth); // Debug line
-//
-//            // Extracting currentYear
-//            String currentYear = currentDate.substring(3);
-//            Log.d("Debug", "Current Year: " + currentYear); // Debug line
-
-            // Call retrieveTransactions first
-//            retrieveTransactions(currentMonth, currentYear, userId);
-
-            String currentMonth = "06";
-            String currentYear = "2024";
-
-            // Then call retrieve Balance
             retrieveBalance(currentMonth, currentYear, userId);
         } else {
-            // Handle the case where the user is not authenticated
             Log.d("Debug", "User ID is null");
         }
-
-//        setupLineChartTransactions();
-//        setupLineChartBalance();
     }
 
-    private void showDateDialog(final TextView txtMonth, final TextView txtYear) {
-        final Dialog dialog = new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_date_picker);
-
-        EditText dialogMonthInput = dialog.findViewById(R.id.dialog_month_input);
-        EditText dialogYearInput = dialog.findViewById(R.id.dialog_year_input);
-        TextView dialogOk = dialog.findViewById(R.id.dialog_ok);
-        TextView dialogCancel = dialog.findViewById(R.id.dialog_cancel);
-
-        dialogOk.setOnClickListener(v -> {
-            String inputText1 = dialogMonthInput.getText().toString().trim();
-            txtMonth.setText(inputText1);
-            String inputText2 = dialogYearInput.getText().toString().trim();
-            txtYear.setText(inputText2);
-            dialog.dismiss();
-        });
-
-        dialogCancel.setOnClickListener(v -> dialog.dismiss());
-
-        Window window = dialog.getWindow();
-        if (window != null) {
-            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-
-        dialog.show();
-    }
-
-
-    // Inside your retrieveTransactions method
     private void retrieveBalance(String currentMonth, String currentYear, String userId) {
-        // Call calculateTotalAmount with a callback
-        calculateTotalAmount(currentMonth, currentYear, userId, new TotalAmountCallback() {
-            @Override
-            public void onTotalAmountCalculated(double totalAmount) {
-                double dailyBalance = totalAmount;
-                db.collection("transactions")
-                        .whereEqualTo("userId", userId)
-                        .get()
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                List<Transaction> transactions = new ArrayList<>();
-                                QuerySnapshot querySnapshot = task.getResult();
-                                if (querySnapshot != null) {
-                                    // Initialize daily balance with the total starting balance
-
-                                    for (QueryDocumentSnapshot document : querySnapshot) {
-                                        Transaction transaction = document.toObject(Transaction.class);
-                                        // Assuming date format is dd-MM-yyyy
-                                        String[] dateParts = transaction.getDate().split("-");
-                                        if (dateParts.length == 3) {
-                                            String day = dateParts[0];
-                                            String month = dateParts[1];
-                                            String year = dateParts[2];
-
-                                            if (month.equals(currentMonth) && year.equals(currentYear)) {
-                                                transactions.add(transaction);
-                                            }
-                                        }
-                                    }
-                                }
-                                // Process the transactions list as needed
-                                // Calculate daily balances
-                                List<DailyBalance> dailyBalances = calculateDailyBalances(transactions, dailyBalance, currentMonth, currentYear);
-                                // Process the daily balances as needed
-                                processDailyBalances(dailyBalances);
-                                //Do the Incomes & Expenses PieChart
-                                processPieCharts(transactions);
-                            } else {
-                                // Handle the error
-                                System.out.println("Error getting documents: " + task.getException());
-                            }
-                        });
-
-            }
-
-            private void processPieCharts(List<Transaction> transactions) {
-                if (transactions == null) {
-                    Log.e(TAG, "Transactions list is null");
-                    return;
-                }
-
-                List<Transaction> expenseTransactions = new ArrayList<>();
-                List<Transaction> incomeTransactions = new ArrayList<>();
-
-                // Map categories to colors
-                Map<String, Integer> categoryColors = new HashMap<>();
-                categoryColors.put("Lương",Color.parseColor("#114232"));
-                categoryColors.put("Bán đồ", Color.parseColor("#800000"));
-                categoryColors.put("Tiền lãi", Color.parseColor("#9E9E9E"));
-                categoryColors.put("Đồ ăn", Color.parseColor("#FFC0CB"));
-                categoryColors.put("Di chuyển", Color.parseColor("#0000FF"));
-                categoryColors.put("Ăn uống", Color.parseColor("#008000"));
-                categoryColors.put("Sức khoẻ", Color.parseColor("#FF000000"));
-                categoryColors.put("Bảo hiểm", Color.parseColor("#A52A2A"));
-                categoryColors.put("Thu nhập khác", Color.parseColor("#000000"));
-                categoryColors.put("Hóa đơn", Color.parseColor("#FF4500"));
-                categoryColors.put("Mua sắm", Color.parseColor("#FFCC33"));
-                categoryColors.put("Du lịch", Color.parseColor("#FFFF00"));
-                categoryColors.put("Chi phí khác", Color.parseColor("#000000"));
-
-                // Separate transactions based on their type
-                for (Transaction transaction : transactions) {
-                    if ("Expense".equals(transaction.getType())) {
-                        expenseTransactions.add(transaction);
-                    } else if ("Income".equals(transaction.getType())) {
-                        incomeTransactions.add(transaction);
-                    }
-                }
-
-
-                // Calculate total amount for each expense category
-                Map<String, Integer> categoryTotalExpensesMap = new HashMap<>();
-                for (Transaction expenseTransaction : expenseTransactions) {
-                    String category = expenseTransaction.getCategory();
-                    int amount = expenseTransaction.getAmount();
-                    // Add amount to the total for this category
-                    categoryTotalExpensesMap.put(category, categoryTotalExpensesMap.getOrDefault(category, 0) + amount);
-                }
-                // Calculate total amount for each income category
-                Map<String, Integer> categoryTotalIncomeMap = new HashMap<>();
-                for (Transaction incomeTransaction : incomeTransactions) {
-                    String category = incomeTransaction.getCategory();
-                    int amount = incomeTransaction.getAmount();
-                    // Add amount to the total for this category
-                    categoryTotalIncomeMap.put(category, categoryTotalIncomeMap.getOrDefault(category, 0) + amount);
-                }
-
-                // categoryTotalExpensesMap contains the total amount for each expense category
-                ArrayList<PieEntry> entriesExpense = new ArrayList<>();
-                ArrayList<Integer> colorsExpense = new ArrayList<>();
-                for (Map.Entry<String, Integer> entry : categoryTotalExpensesMap.entrySet()) {
-                    entriesExpense.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
-                    Integer color = categoryColors.get(entry.getKey());
-                    if (color != null) {
-                        colorsExpense.add(color);
-                    } else {
-                        // Provide a default color if the category color is not found
-                        colorsExpense.add(Color.parseColor("#7FFF00"));
-                    }
-                    Log.d(TAG, "Expense Category: " + entry.getKey() + ", Total Amount: " + entry.getValue());
-                }
-                // categoryTotalIncomeMap contains the total amount for each income category
-                ArrayList<PieEntry> entriesIncome = new ArrayList<>();
-                ArrayList<Integer> colorsIncome = new ArrayList<>();
-                for (Map.Entry<String, Integer> entry : categoryTotalIncomeMap.entrySet()) {
-                    entriesIncome.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
-                    Integer color = categoryColors.get(entry.getKey());
-                    if (color != null) {
-                        colorsIncome.add(color);
-                    } else {
-                        // Provide a default color if the category color is not found
-                        colorsIncome.add(Color.parseColor("#7FFF00"));
-                    }
-                    Log.d(TAG, "Income Category: " + entry.getKey() + ", Total Amount: " + entry.getValue());
-                }
-                setupPieChart(expensesPieChart, entriesExpense, colorsExpense);
-                setupPieChart(incomesPieChart, entriesIncome, colorsIncome);
-
-                // Set OnClickListener for expenseReport_textview
-                expenseReport.setOnClickListener(v -> {
-                    // Start new activity with categoryTotalExpensesMap for expenses
-                    startNewActivity(categoryTotalExpensesMap, currentDate);
-                });
-
-                // Set OnClickListener for incomesReport_textview
-                incomesReport.setOnClickListener(v -> {
-                    // Start new activity with categoryTotalIncomeMap for incomes
-                    startNewActivity(categoryTotalIncomeMap, currentDate);
-                });
-            }
-            private void startNewActivity(Map<String, Integer> categoryTotalMap, String currentDate) {
-                // Check if the categoryTotalMap and currentDate are not null
-                if (categoryTotalMap != null && !categoryTotalMap.isEmpty() && currentDate != null && !currentDate.isEmpty()) {
-                    // Log the contents of categoryTotalMap
-                    for (Map.Entry<String, Integer> entry : categoryTotalMap.entrySet()) {
-                        Log.d(TAG, "Category: " + entry.getKey() + ", Total: " + entry.getValue());
-                    }
-
-                    // Create the intent
-                    Intent intent = new Intent(getActivity(), ReportExpandData.class);
-                    intent.putExtra("categoryTotalMap", (Serializable) categoryTotalMap);
-                    intent.putExtra("currentDate", currentDate);
-                    startActivity(intent);
-                } else {
-                    // Handle the case where data is invalid
-                    Toast.makeText(getActivity(), "No data to show.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-
-            private void setupPieChart(final PieChart pieChart, ArrayList<PieEntry> entries, ArrayList<Integer> colors) {
-                if (entries == null || entries.isEmpty() || colors == null || colors.isEmpty()) {
-                    pieChart.clear(); // Clear any existing data
-                    pieChart.setNoDataText("No data available"); // Set message for no data
-                    pieChart.invalidate(); // Refresh the chart
-                    return;
-                }
-
-                PieDataSet dataSet = new PieDataSet(entries, "");
-                dataSet.setDrawValues(false); // disable value labels
-
-                // Retrieve colors & Null check for colors
-                if (colors != null && !colors.isEmpty()) {
-                    dataSet.setColors(colors);  // Retrieve colors
-                } else {
-                    // Provide a default color set if colors is null or empty
-                    dataSet.setColors(Color.parseColor("#7FFF00"));
-                }
-
-                dataSet.setSliceSpace(3f); // Space between slices
-                dataSet.setSelectionShift(5f); // Shift distance for selected slice
-
-                PieData data = new PieData(dataSet); // Create PieData
-                pieChart.setData(data); // Set data to PieChart
-                pieChart.getDescription().setEnabled(false); // Remove description label
-                pieChart.getLegend().setEnabled(false); // Remove legend
-                pieChart.setDrawEntryLabels(false); // Disable the display of category names (labels)
-                pieChart.setRotationEnabled(false);
-                pieChart.invalidate(); // Refresh the chart
-
-                pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-                    @Override
-                    public void onValueSelected(Entry e, Highlight h) {
-                        if (e == null)
-                            return;
-                        PieEntry entry = (PieEntry) e;
-                        float value = entry.getValue();
-                        String label = entry.getLabel();
-                        pieChart.setCenterText(label + ": " + value + "VNĐ"); // Display label and value in the center of the chart
-                        pieChart.invalidate(); // Refresh the chart
-                    }
-
-                    @Override
-                    public void onNothingSelected() {
-                        pieChart.setCenterText(""); // Display nothing in the center of the chart
-                    }
-                });
-            }
-
-            private List<DailyBalance> calculateDailyBalances(List<Transaction> transactions, double oldBalance, String currentMonth, String currentYear) {
-                Map<String, List<Transaction>> transactionsByDay = new HashMap<>();
-
-                for (Transaction transaction : transactions) {
-                    String day = transaction.getDate().split("-")[0]; // Extract the day part
-                    transactionsByDay
-                            .computeIfAbsent(day, k -> new ArrayList<>())
-                            .add(transaction);
-                }
-
-                List<DailyBalance> dailyBalances = new ArrayList<>();
-                double balance = oldBalance;
-
-                for (int i = 1; i <= 31; i++) {
-                    String day = String.format("%02d", i);
-                    List<Transaction> dayTransactions = transactionsByDay.getOrDefault(day, new ArrayList<>());
-
-                    for (Transaction transaction : dayTransactions) {
-                        int amount = transaction.getAmount();
-                        if ("Income".equalsIgnoreCase(transaction.getType())) {
-                            balance += amount;
-                        } else if ("Expense".equalsIgnoreCase(transaction.getType())) {
-                            balance -= amount;
-                        }
-                    }
-
-                    dailyBalances.add(new DailyBalance(day + "-" + currentMonth + "-" + currentYear, balance));
-                }
-
-                return dailyBalances;
-            }
-
-            private void processDailyBalances(List<DailyBalance> dailyBalances) {
-                // Implement this method to process the list of daily balances
-//                setLineChartBalance(dailyBalances);
-
-                for (DailyBalance dailyBalance : dailyBalances) {
-                    Log.d(TAG, "Day: " + dailyBalance.getDay() + " - Balance: " + dailyBalance.getBalance());
-                }
-            }
-
-
-        });
-    }
-
-    // Method to start a new activity with the categoryTotalIncomeMap
-    private void calculateTotalAmount(String currentMonth, String currentYear, String userId, TotalAmountCallback callback) {
-        Log.d("Debug", "Calculating total amount..."); // Debug line
-        Log.d("Debug", "Current month: " + currentMonth); // Debug line
-        Log.d("Debug", "Current year: " + currentYear); // Debug line
-        Log.d("Debug", "User ID: " + userId); // Debug line
-
-        // Get current date
-        Calendar calendar = Calendar.getInstance();
-        int currentMonthInt = Integer.parseInt(currentMonth); // Assuming currentMonth is in the format "MM"
-        int currentYearInt = Integer.parseInt(currentYear); // Assuming currentYear is in the format "YYYY"
-        calendar.set(Calendar.MONTH, currentMonthInt - 1); // Subtracting 1 because Calendar.MONTH is zero-based
-        calendar.set(Calendar.YEAR, currentYearInt);
-        calendar.set(Calendar.DAY_OF_MONTH, 1); // Set day to 1st of the month
-
-        // Calculate the first day of the current month
-        Date firstDayOfMonth = calendar.getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String firstDayOfMonthString = dateFormat.format(firstDayOfMonth);
-
-        Log.d("Debug", "First day of month: " + firstDayOfMonthString); // Debug line
-
-        // Execute Firestore query to calculate total amount
         db.collection("transactions")
                 .whereEqualTo("userId", userId)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        long totalExpense = 0;
-                        long totalIncome = 0;
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            try {
-                                Long amountStr = document.getLong("amount"); // Assuming "amount" field is a string
-                                String type = document.getString("type"); // Assuming "type" field indicates Expense or Income
-                                String dateString = document.getString("date"); // Assuming "date" field stores the transaction date
+                        List<Transaction> transactions = new ArrayList<>();
+                        QuerySnapshot querySnapshot = task.getResult();
+                        if (querySnapshot != null) {
+                            for (QueryDocumentSnapshot document : querySnapshot) {
+                                Transaction transaction = document.toObject(Transaction.class);
+                                String[] dateParts = transaction.getDate().split("-");
+                                if (dateParts.length == 3) {
+                                    String month = dateParts[1];
+                                    String year = dateParts[2];
 
-                                // Parse the transaction date
-                                Date transactionDate = dateFormat.parse(dateString);
-
-                                if (amountStr != null && type != null && dateString != null && transactionDate != null) {
-                                    // Compare transaction date with the first day of the current month
-                                    if (transactionDate.before(firstDayOfMonth) && !dateString.startsWith("01-" + currentMonth + "-" + currentYear)) {
-//                                        Long amount = Float.parseFloat(amountStr);
-                                        if (type.equals("Expense")) {
-                                            totalExpense -= amountStr;
-                                        } else if (type.equals("Income")) {
-                                            totalIncome += amountStr;
-                                        }
+                                    if (month.equals(currentMonth) && year.equals(currentYear)) {
+                                        transactions.add(transaction);
                                     }
                                 }
-                            } catch (NumberFormatException | ParseException e) {
-                                Log.e("Error", "Error parsing amount: " + e.getMessage()); // Debug line
-                                // Handle the case where parsing fails or the amount is not a valid number
                             }
                         }
-                        float totalAmount = totalIncome + totalExpense;
 
-                        Log.d("TAG", "Balance before current month: "+totalAmount);
-                        // Once total amount is calculated, invoke the callback
-                        callback.onTotalAmountCalculated(Double.parseDouble(String.valueOf(totalAmount)));
+                        processPieCharts(transactions);
+                        setupBarChart(transactions);
                     } else {
-                        // Handle failure
+                        // Handle the error
+                        System.out.println("Error getting documents: " + task.getException());
                     }
                 });
-    }
-    interface TotalAmountCallback {
-        void onTotalAmountCalculated(double totalAmount);
+
     }
 
+    private void processPieCharts(List<Transaction> transactions) {
+        if (transactions == null) {
+            Log.e(TAG, "Transactions list is null");
+            return;
+        }
+
+        List<Transaction> expenseTransactions = new ArrayList<>();
+        List<Transaction> incomeTransactions = new ArrayList<>();
+
+        // Map categories to colors
+        Map<String, Integer> categoryColors = new HashMap<>();
+        categoryColors.put("Lương", Color.parseColor("#114232"));
+        categoryColors.put("Bán đồ", Color.parseColor("#800000"));
+        categoryColors.put("Tiền lãi", Color.parseColor("#9E9E9E"));
+        categoryColors.put("Đồ ăn", Color.parseColor("#FFC0CB"));
+        categoryColors.put("Di chuyển", Color.parseColor("#0000FF"));
+        categoryColors.put("Ăn uống", Color.parseColor("#008000"));
+        categoryColors.put("Sức khoẻ", Color.parseColor("#FF000000"));
+        categoryColors.put("Bảo hiểm", Color.parseColor("#A52A2A"));
+        categoryColors.put("Thu nhập khác", Color.parseColor("#000000"));
+        categoryColors.put("Hóa đơn", Color.parseColor("#FF4500"));
+        categoryColors.put("Mua sắm", Color.parseColor("#FFCC33"));
+        categoryColors.put("Du lịch", Color.parseColor("#FFFF00"));
+        categoryColors.put("Chi phí khác", Color.parseColor("#000000"));
+
+        // Separate transactions based on their type
+        for (Transaction transaction : transactions) {
+            if ("Expense".equals(transaction.getType())) {
+                expenseTransactions.add(transaction);
+            } else if ("Income".equals(transaction.getType())) {
+                incomeTransactions.add(transaction);
+            }
+        }
+
+        // Calculate total amount for each expense category
+        Map<String, Integer> categoryTotalExpensesMap = new HashMap<>();
+        for (Transaction expenseTransaction : expenseTransactions) {
+            String category = expenseTransaction.getCategory();
+            int amount = expenseTransaction.getAmount();
+            categoryTotalExpensesMap.put(category, categoryTotalExpensesMap.getOrDefault(category, 0) + amount);
+        }
+
+        Map<String, Integer> categoryTotalIncomeMap = new HashMap<>();
+        for (Transaction incomeTransaction : incomeTransactions) {
+            String category = incomeTransaction.getCategory();
+            int amount = incomeTransaction.getAmount();
+            categoryTotalIncomeMap.put(category, categoryTotalIncomeMap.getOrDefault(category, 0) + amount);
+        }
+
+        // categoryTotalExpensesMap contains the total amount for each expense category
+        ArrayList<PieEntry> entriesExpense = new ArrayList<>();
+        ArrayList<Integer> colorsExpense = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : categoryTotalExpensesMap.entrySet()) {
+            entriesExpense.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
+            Integer color = categoryColors.get(entry.getKey());
+            if (color != null) {
+                colorsExpense.add(color);
+            } else {
+                colorsExpense.add(Color.parseColor("#7FFF00"));
+            }
+            Log.d(TAG, "Expense Category: " + entry.getKey() + ", Total Amount: " + entry.getValue());
+        }
+        // categoryTotalIncomeMap contains the total amount for each income category
+        ArrayList<PieEntry> entriesIncome = new ArrayList<>();
+        ArrayList<Integer> colorsIncome = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : categoryTotalIncomeMap.entrySet()) {
+            entriesIncome.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
+            Integer color = categoryColors.get(entry.getKey());
+            if (color != null) {
+                colorsIncome.add(color);
+            } else {
+                colorsIncome.add(Color.parseColor("#7FFF00"));
+            }
+            Log.d(TAG, "Income Category: " + entry.getKey() + ", Total Amount: " + entry.getValue());
+        }
+        setupPieChart(expensesPieChart, entriesExpense, colorsExpense);
+        setupPieChart(incomesPieChart, entriesIncome, colorsIncome);
+
+        expenseReport.setOnClickListener(v -> startNewActivity(categoryTotalExpensesMap));
+
+        incomesReport.setOnClickListener(v -> startNewActivity(categoryTotalIncomeMap));
+    }
+
+    private void startNewActivity(Map<String, Integer> categoryTotalMap) {
+        if (categoryTotalMap != null && !categoryTotalMap.isEmpty()) {
+            for (Map.Entry<String, Integer> entry : categoryTotalMap.entrySet()) {
+                Log.d(TAG, "Category: " + entry.getKey() + ", Total: " + entry.getValue());
+            }
+
+            Intent intent = new Intent(getActivity(), ReportExpandData.class);
+            intent.putExtra("categoryTotalMap", (Serializable) categoryTotalMap);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getActivity(), "No data to show.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
-//    private void retrieveTransactions(String currentMonth, String currentYear, String userId) {
-//        // Get today's date at the start of the day
-//        Calendar todayCal = Calendar.getInstance();
-//        todayCal.set(Calendar.HOUR_OF_DAY, 0);
-//        todayCal.set(Calendar.MINUTE, 0);
-//        todayCal.set(Calendar.SECOND, 0);
-//        todayCal.set(Calendar.MILLISECOND, 0);
-//        Date todayDate = todayCal.getTime();
-//
-//        // Query the "transactions" collection in the database for transactions with the specified userId
-//        db.collection("transactions")
-//                .whereEqualTo("userId", userId)
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            // Initialize a map to store totals for each day
-//                            Map<String, DailyTotals> dailyTotalsMap = new HashMap<>();
-//
-//                            // Iterate over each document in the query result
-//                            for (DocumentSnapshot document : task.getResult()) {
-//                                // Convert the document into a Transaction object
-//                                Transaction transaction = document.toObject(Transaction.class);
-//                                // Get the date of the transaction
-//                                String transactionDate = transaction.getDate();
-//
-//                                // Parse the transaction date
-//                                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-//                                try {
-//                                    Date date = dateFormat.parse(transactionDate);
-//                                    // Compare transaction date with today's date
-//                                    if (!date.after(todayDate)) { // Ignore transactions after today
-//                                        // Get the month and year of the transaction
-//                                        Calendar cal = Calendar.getInstance();
-//                                        cal.setTime(date);
-//                                        String transactionMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1); // Adding 1 because Calendar.MONTH is zero-based
-//                                        String transactionYear = String.valueOf(cal.get(Calendar.YEAR));
-//
-//                                        // Check if the transaction's month and year match the current month and year
-//                                        if (transactionMonth.equals(currentMonth) && transactionYear.equals(currentYear)) {
-//                                            // If the transaction matches, process it for daily totals
-//                                            String day = String.format("%02d", cal.get(Calendar.DAY_OF_MONTH));
-//                                            String key = day + "-" + currentMonth + "-" + currentYear;
-//
-//                                            // Initialize the daily total if not already present
-//                                            dailyTotalsMap.putIfAbsent(key, new DailyTotals());
-//                                            DailyTotals totals = dailyTotalsMap.get(key);
-//
-//                                            // Set the date field
-//                                            totals.setDate(key);
-//
-//                                            // Update the daily totals based on the transaction type
-//                                            if ("Income".equals(transaction.getType())) {
-//                                                totals.setIncome(totals.getIncome() + Double.parseDouble(String.valueOf(transaction.getAmount())));
-//                                            } else if ("Expense".equals(transaction.getType())) {
-//                                                totals.setExpense(totals.getExpense() + Double.parseDouble(String.valueOf(transaction.getAmount())));
-//                                            }
-//                                        }
-//                                    }
-//                                } catch (ParseException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//
-//                            // Update the class-level dailyTotalsList with the new data
-//                            dailyTotalsList = new ArrayList<>(dailyTotalsMap.values());
-//
-//                            // Log the daily totals
-////                            for (DailyTotals totals : dailyTotalsList) {
-////                                Log.d("DailyTotals", "Date: " + totals.getDate() + ", Income: " + totals.getIncome() + ", Expense: " + totals.getExpense());
-////                            }
-////
-////                            // Call setLineChartTransactionsData after dailyTotalsList is populated
-////                            setLineChartTransactionsData(dailyTotalsList);
-//                        } else {
-//                            // Handle errors
-//                        }
-//                    }
-//                });
-//    }
+    private void setupPieChart(final PieChart pieChart, ArrayList<PieEntry> entries, ArrayList<Integer> colors) {
+        if (entries == null || entries.isEmpty() || colors == null || colors.isEmpty()) {
+            pieChart.clear();
+            pieChart.setNoDataText("No data available");
+            pieChart.invalidate();
+            return;
+        }
 
-//    private String getCurrentDate() {
-//        if (getActivity() instanceof HomeActivity) {
-//            return ((HomeActivity) getActivity()).getCurrentDate();
-//        } else {
-//            return ""; // Return default value or handle error
-//        }
-//    }
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setDrawValues(false);
 
-//    private void setupLineChartTransactions() {
-//        // Disable touch gestures (e.g., tap and swipe)
-//        transactionsLineChart.setTouchEnabled(false);
-//
-//        // Hide the background grid
-//        transactionsLineChart.setDrawGridBackground(true);
-//
-//        // Set borders
-//        transactionsLineChart.setDrawBorders(true); // Enable drawing borders
-//        transactionsLineChart.setBorderColor(R.color.darkest_gray); // Set border color
-//
-//        // Customize X axis
-//        XAxis xAxis = transactionsLineChart.getXAxis();
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // Set position of X axis
-//        xAxis.setTextColor(Color.BLACK); // Set color of X axis labels
-//        xAxis.setTextSize(12f); // Set size of X axis labels text
-//
-//        // Customize left Y axis
-//        YAxis leftAxis = transactionsLineChart.getAxisLeft();
-//        leftAxis.setTextColor(Color.BLACK); // Set color of left Y axis labels
-//        leftAxis.setTextSize(12f); // Set size of left Y axis labels text
-//        leftAxis.setValueFormatter(new EuroValueFormatter());
-//
-//        // Customize right Y axis
-//        YAxis rightAxis = transactionsLineChart.getAxisRight();
-//        rightAxis.setEnabled(false); // Disable right Y axis
-//
-//        // Customize chart legend
-//        Legend legend = transactionsLineChart.getLegend();
-//        legend.setTextColor(Color.BLACK); // Set color of legend labels
-//        legend.setTextSize(12f); // Set size of legend labels text
-//
-//        transactionsLineChart.setDescription(null);
-//    }
+        if (!colors.isEmpty()) {
+            dataSet.setColors(colors);
+        } else {
+            dataSet.setColors(Color.parseColor("#7FFF00"));
+        }
 
-//    private void setLineChartTransactionsData(List<DailyTotals> dailyTotals) {
-//        if (!isAdded()) {
-//            // Fragment is not attached to the activity, cannot proceed
-//            return;
-//        }
-//        List<Entry> expenseEntries = new ArrayList<>();
-//        List<Entry> incomeEntries = new ArrayList<>();
-//
-//        // Determine the number of days in the month based on the DailyTotals
-//        int numDaysInMonth = 0;
-//        if (!dailyTotals.isEmpty()) {
-//            // Parse the date from the first DailyTotals to get the month
-//            String firstDate = dailyTotals.get(0).getDate();
-//            try {
-//                // Parse the date string to get the month
-//                Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(firstDate);
-//                Calendar cal = Calendar.getInstance();
-//                cal.setTime(date);
-//                // Get the actual maximum number of days in the month
-//                numDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        // Create entries for expenses and incomes
-//        for (int i = 1; i <= numDaysInMonth; i++) {
-//            // Initialize expense and income to 0 for the current day
-//            float expense = 0;
-//            float income = 0;
-//
-//            // Find corresponding DailyTotals for the current day, if available
-//            for (DailyTotals dailyTotal : dailyTotals) {
-//                try {
-//                    // Parse the date to get the day of the month
-//                    Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(dailyTotal.getDate());
-//                    Calendar cal = Calendar.getInstance();
-//                    cal.setTime(date);
-//                    int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-//
-//                    // If the DailyTotals corresponds to the current day, update expense and income
-//                    if (dayOfMonth == i) {
-//                        expense = (float) dailyTotal.getExpense();
-//                        income = (float) dailyTotal.getIncome();
-//                        break;
-//                    }
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            // Add entries for expenses and incomes
-//            expenseEntries.add(new Entry(i, expense));
-//            incomeEntries.add(new Entry(i, income));
-//        }
-//
-//        // Check if both expenseEntries and incomeEntries are empty
-//        if (expenseEntries.isEmpty() && incomeEntries.isEmpty()) {
-//            // Clear any existing data
-//            transactionsLineChart.clear();
-//            // Customize the message when there is no data
-////            transactionsLineChart.setNoDataText("No data available for this month");
-//            transactionsLineChart.invalidate(); // Refresh the chart
-//            return;
-//        }
-//
-//        LineDataSet expenseDataSet = new LineDataSet(expenseEntries, "Expenses");
-//        expenseDataSet.setColor(ContextCompat.getColor(requireContext(), R.color.light_red));
-//        expenseDataSet.setValueTextColor(ContextCompat.getColor(requireContext(), R.color.maroon));
-//
-//        LineDataSet incomeDataSet = new LineDataSet(incomeEntries, "Incomes");
-//        incomeDataSet.setColor(ContextCompat.getColor(requireContext(), R.color.green5));
-//        incomeDataSet.setValueTextColor(ContextCompat.getColor(requireContext(), R.color.green1));
-//
-//        // Customize circle appearance
-//        expenseDataSet.setDrawCircles(true);
-//        expenseDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.light_red));
-//        expenseDataSet.setCircleRadius(2f);
-//        expenseDataSet.setDrawCircleHole(false);
-//
-//        incomeDataSet.setDrawCircles(true);
-//        incomeDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.green5));
-//        incomeDataSet.setCircleRadius(2f);
-//        incomeDataSet.setDrawCircleHole(false);
-//
-//        // Customize line thickness
-//        expenseDataSet.setLineWidth(1.5f);
-//        incomeDataSet.setLineWidth(1.5f);
-//
-//        LineData lineData = new LineData(expenseDataSet, incomeDataSet);
-//        transactionsLineChart.setData(lineData);
-//
-//        // Ensure the no data message is cleared if there is data
-//        transactionsLineChart.setNoDataText("");
-//        transactionsLineChart.invalidate(); // Refresh the chart
-//    }
-//
-//    private void setupLineChartBalance() {
-//        // Disable touch gestures (e.g., tap and swipe)
-//        balanceLineChart.setTouchEnabled(false);
-//
-//        // Hide the background grid
-//        balanceLineChart.setDrawGridBackground(true);
-//
-//        // Set borders
-//        balanceLineChart.setDrawBorders(true); // Enable drawing borders
-//        balanceLineChart.setBorderColor(R.color.darkest_gray); // Set border color
-//
-//        // Customize X axis
-//        XAxis xAxis = balanceLineChart.getXAxis();
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // Set position of X axis
-//        xAxis.setTextColor(Color.BLACK); // Set color of X axis labels
-//        xAxis.setTextSize(12f); // Set size of X axis labels text
-//
-//        // Customize left Y axis
-//        YAxis leftAxis = balanceLineChart.getAxisLeft();
-//        leftAxis.setTextColor(Color.BLACK); // Set color of left Y axis labels
-//        leftAxis.setTextSize(12f); // Set size of left Y axis labels text
-//        leftAxis.setValueFormatter(new EuroValueFormatter());
-//
-//        // Customize right Y axis
-//        YAxis rightAxis = balanceLineChart.getAxisRight();
-//        rightAxis.setEnabled(false); // Disable right Y axis
-//
-//        // Customize chart legend
-//        Legend legend = balanceLineChart.getLegend();
-//        legend.setTextColor(Color.BLACK); // Set color of legend labels
-//        legend.setTextSize(12f); // Set size of legend labels text
-//
-//        balanceLineChart.setDescription(null);
-//    }
-//
-//    private void setLineChartBalance(List<DailyBalance> dailyBalances)  {
-//        if (!isAdded()) {
-//            // Fragment is not attached to the activity, cannot proceed
-//            return;
-//        }
-//        if (dailyBalances == null) {
-//            // If dailyBalances is null, log an error and return
-//            Log.e(TAG, "Daily balances list is null");
-//            return;
-//        }
-//        List<Entry> balanceEntries = new ArrayList<>();
-//
-//        // Determine the number of days in the month based on the DailyTotals
-//        int numDaysInMonth = 0;
-//        if (!dailyBalances.isEmpty()) {
-//            // Parse the date from the first DailyBalance to get the month
-//            String firstDate = dailyBalances.get(0).getDay();
-//            try {
-//                // Parse the date string to get the month
-//                Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(firstDate);
-//                Calendar cal = Calendar.getInstance();
-//                cal.setTime(date);
-//                // Get the actual maximum number of days in the month
-//                numDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        // Create entries for balance
-//        for (int i = 1; i <= numDaysInMonth; i++) {
-//            // Initialize balance amount to 0 for the current day
-//            float balanceAmount = 0;
-//
-//            // Find corresponding DailyBalance for the current day, if available
-//            for (DailyBalance dailyBalance : dailyBalances) {
-//                try {
-//                    // Parse the date to get the day of the month
-//                    Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(dailyBalance.getDay());
-//                    Calendar cal = Calendar.getInstance();
-//                    cal.setTime(date);
-//                    int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-//
-//                    // If the DailyBalance corresponds to the current day, update balance amount
-//                    if (dayOfMonth == i) {
-//                        balanceAmount = (float) dailyBalance.getBalance();
-//                        break;
-//                    }
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            // Add entry for balance
-//            balanceEntries.add(new Entry(i, balanceAmount));
-//        }
-//
-//        // Check if balanceEntries is empty
-//        if (balanceEntries.isEmpty()) {
-//            // Clear any existing data
-//            balanceLineChart.clear();
-//            // Customize the message when there is no data
-////        balanceLineChart.setNoDataText("No data available for this month");
-//            balanceLineChart.invalidate(); // Refresh the chart
-//            return;
-//        }
-//
-//        LineDataSet balanceDataSet = new LineDataSet(balanceEntries, "Expenses");
-//        balanceDataSet.setColor(ContextCompat.getColor(requireContext(), R.color.yellow2));
-//        balanceDataSet.setValueTextColor(ContextCompat.getColor(requireContext(), R.color.yellow1));
-//
-//        // Customize circle appearance
-//        balanceDataSet.setDrawCircles(true);
-//        balanceDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.yellow2));
-//        balanceDataSet.setCircleRadius(2f);
-//        balanceDataSet.setDrawCircleHole(false);
-//
-//        // Customize line thickness
-//        balanceDataSet.setLineWidth(1.5f);
-//
-//        LineData lineData = new LineData(balanceDataSet);
-//        balanceLineChart.setData(lineData);
-//
-//        // Ensure the no data message is cleared if there is data
-//        balanceLineChart.setNoDataText("");
-//        balanceLineChart.invalidate(); // Refresh the chart
-//    }
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
 
+        PieData data = new PieData(dataSet);
+        pieChart.setData(data);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setDrawEntryLabels(false);
+        pieChart.setRotationEnabled(false);
+        pieChart.invalidate();
+
+        pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                if (e == null)
+                    return;
+                PieEntry entry = (PieEntry) e;
+                float value = entry.getValue();
+                String label = entry.getLabel();
+                pieChart.setCenterText(label + ": " + value + "VND");
+                pieChart.invalidate();
+            }
+
+            @Override
+            public void onNothingSelected() {
+                pieChart.setCenterText("");
+            }
+        });
+    }
+
+    private void setupBarChart(List<Transaction> transactions) {
+
+        List<BarEntry> incomeEntries = new ArrayList<>();
+        List<BarEntry> expenseEntries = new ArrayList<>();
+        int totalIncome = 0;
+        int totalExpense = 0;
+
+        for (Transaction transaction : transactions) {
+            if ("Income".equals(transaction.getType())) {
+                totalIncome += transaction.getAmount();
+            } else if ("Expense".equals(transaction.getType())) {
+                totalExpense += transaction.getAmount();
+            }
+        }
+        incomeEntries.add(new BarEntry(0, totalIncome));
+        expenseEntries.add(new BarEntry(1, totalExpense));
+
+        // Create BarDataSet for income and expense
+        BarDataSet incomeDataSet = new BarDataSet(incomeEntries, "Khoản thu");
+        incomeDataSet.setColor(Color.parseColor("#009AA6"));
+        BarDataSet expenseDataSet = new BarDataSet(expenseEntries, "Khoản chi");
+        expenseDataSet.setColor(Color.parseColor("#FF4C4C"));
+
+        // Create BarData and add the BarDataSets
+        BarData barData = new BarData();
+        barData.addDataSet(incomeDataSet);
+        barData.addDataSet(expenseDataSet);
+
+        // Set the BarData to the BarChart
+        barChart.setData(barData);
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setEnabled(false);
+        barChart.getDescription().setEnabled(false);
+        barChart.invalidate();
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reports, container, false);
-    }
-
-    public class EuroValueFormatter extends ValueFormatter {
-
-        private final DecimalFormat mFormat;
-
-        public EuroValueFormatter() {
-            mFormat = new DecimalFormat("VND");
-        }
-
-        @Override
-        public String getAxisLabel(float value, AxisBase axis) {
-            return mFormat.format(value);
-        }
     }
 
 }

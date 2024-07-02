@@ -5,8 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Fragments.RecordFragment">
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -14,26 +15,26 @@
             android:id="@+id/txtDateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tổng hợp chi tiêu từ: "
             android:layout_marginStart="16dp"
-            android:textSize="15dp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:text="Tổng hợp chi tiêu:"
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/txtDatePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chọn khoảng thời gian"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:paddingBottom="16dp"
-            android:textSize="15dp"/>
+            android:text="Chọn khoảng thời gian"
+            android:textSize="15dp" />
+
         <ImageView
             android:id="@+id/btnDatePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
-            />
+            android:src="@drawable/ic_edit" />
 
 
     </LinearLayout>

@@ -32,7 +32,6 @@ import java.util.Map;
 public class ReportExpandData extends AppCompatActivity {
     private TextView date;
     private Map<String, Integer> categoryTotalMap=null;
-    private String dateToShow;
     private ImageView backIcon;
     private PieChart pieChart;
     private RecyclerView recyclerview;
@@ -52,7 +51,6 @@ public class ReportExpandData extends AppCompatActivity {
 
         // Retrieve the categoryTotalMap and date from the intent extras
         categoryTotalMap = (Map<String, Integer>)getIntent().getSerializableExtra("categoryTotalMap") ; // Use "categoryTotalMap"
-        dateToShow = getIntent().getStringExtra("currentDate");
 
         // Populate the recyclerview
         ReportAdapter adapter = new ReportAdapter(this, new ArrayList<>(categoryTotalMap.entrySet()));
@@ -96,7 +94,11 @@ public class ReportExpandData extends AppCompatActivity {
 
                 // Add data to entries and colors lists
                 entries.add(new PieEntry(percentage, category));
-                colors.add(categoryColors.get(category));
+                Integer color = categoryColors.get(category);
+                if (color == null) {
+                    color = Color.BLACK; // default color
+                }
+                colors.add(color);
             }
 
             // After iterating through the map, set up the pie chart

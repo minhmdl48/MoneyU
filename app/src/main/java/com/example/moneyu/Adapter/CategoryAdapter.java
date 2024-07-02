@@ -20,16 +20,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private List<Category> categoryList;
     private OnItemClickListener onItemClickListener;
     private Context context;
-    private int[] circleColors; // Array of colors for circles
 
     // Constructor
     public CategoryAdapter(Context context, List<Category> categoryList) {
         this.context = context;
         this.categoryList = categoryList;
-        this.circleColors = context.getResources().getIntArray(R.array.circle_colors); // Load colors from resources
     }
 
-    // ViewHolder class
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView categoryNameTextView;
         ImageView categoryIconImageView;
@@ -58,14 +55,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         int iconResId = context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
         holder.categoryIconImageView.setImageResource(iconResId);
 
-        // Set click listener for the parent item
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int adapterPosition = holder.getAdapterPosition();
-                if (adapterPosition != RecyclerView.NO_POSITION && onItemClickListener != null) {
-                    onItemClickListener.onItemClick(adapterPosition);
-                }
+        holder.itemView.setOnClickListener(v -> {
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION && onItemClickListener != null) {
+                onItemClickListener.onItemClick(adapterPosition);
             }
         });
     }
@@ -75,12 +68,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return categoryList.size();
     }
 
-    // Interface for item click listener
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-    // Method to set item click listener
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
     }

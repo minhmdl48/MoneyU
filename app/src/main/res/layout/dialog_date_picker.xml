@@ -23,20 +23,24 @@
 
         <TextView
             android:id="@+id/select_month_textview"
-            android:layout_width="155dp"
+            android:layout_width="138dp"
             android:layout_height="wrap_content"
             android:text="@string/select_month"
             android:textSize="20sp"
             android:textStyle="bold" />
-        <EditText
-            android:id="@+id/dialog_month_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColorHint="@color/md_theme_onBackground"
-            android:textColor="@color/md_theme_onBackground"
-            android:maxLines="1"
-            android:singleLine="true"/>
+<!--        <EditText-->
+<!--            android:id="@+id/dialog_month_input"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textColorHint="@color/md_theme_onBackground"-->
+<!--            android:textColor="@color/md_theme_onBackground"-->
+<!--            android:maxLines="1"-->
+<!--            android:singleLine="true"/>-->
+        <Spinner
+            android:id="@+id/spinner_month"
+            android:layout_width="186dp"
+            android:layout_height="49dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,9 +50,9 @@
 
         <TextView
             android:id="@+id/select_year_textview"
-            android:layout_width="155dp"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
-            android:text="@string/select_month"
+            android:text="@string/select_year"
             android:textSize="20sp"
             android:textStyle="bold" />
         <EditText

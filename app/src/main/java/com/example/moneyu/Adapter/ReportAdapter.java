@@ -35,7 +35,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Map.Entry<String, Integer> categoryEntry = categoryList.get(position);
         holder.categoryTextView.setText(categoryEntry.getKey());
-        holder.amountTextView.setText(String.format("%.2f€", categoryEntry.getValue()));
+        holder.amountTextView.setText(String.format("%d VND", categoryEntry.getValue()));
     }
 
     @Override
