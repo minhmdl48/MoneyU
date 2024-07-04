@@ -30,9 +30,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
@@ -41,19 +38,17 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private BottomNavigationView bottomNavigationView;
-    private TextView datePlaceholderText, leftPlaceholderText, rightPlaceholderText;
-    private ImageView rightButton, leftButton, menuIcon;
+    private TextView leftPlaceholderText;
+    private ImageView menuIcon;
     private Fragment defaultFragment;
     private boolean isFragmentTransactionPending = false;
     private long lastClickTime = 0;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
-    private String userID, displayedFragment;
+    private String userID;
 
-    private Calendar calendar;
-    private SimpleDateFormat dateFormat;
     // Other
-    private long totalAmount = 0; // Variable to store total amount
+    private long totalAmount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +72,6 @@ public class HomeActivity extends AppCompatActivity {
         menuIcon = findViewById(R.id.menu_icon);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         leftPlaceholderText = findViewById(R.id.left_placeholder_text);
-
-        calendar = Calendar.getInstance();
-        dateFormat = new SimpleDateFormat("MM-yyyy", Locale.getDefault());
 
         bottomNavigationView.setSelectedItemId(R.id.home);
         replaceFragment(new HomeFragment());
@@ -129,21 +121,17 @@ public class HomeActivity extends AppCompatActivity {
 
         if (itemId == R.id.home) {
             fragment = new HomeFragment();
-            displayedFragment = "home";
         } else if (itemId == R.id.add_transaction) {
             Intent intent = new Intent(HomeActivity.this, AddTransactionActivity.class);
             startActivity(intent);
             return true;
         } else if (itemId == R.id.operations) {
             fragment = new RecordFragment();
-            displayedFragment = "operations";
         } else if (itemId == R.id.report) {
             fragment = new ReportsFragment();
-            displayedFragment = "reports";
         }
 
         if (fragment != null) {
-            calendar = Calendar.getInstance();
             replaceFragment(fragment);
             return true;
         }
@@ -179,11 +167,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void calculateTotalAmount() {
-        // Get today's date
-        Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String todayString = dateFormat.format(today);
-
         db.collection("transactions")
                 .whereEqualTo("userId", userID)
                 .get()
@@ -193,11 +176,10 @@ public class HomeActivity extends AppCompatActivity {
                         long totalIncome = 0;
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             try {
-
                                 String type = document.getString("type");
-
                                 Long amount1 = document.getLong("amount");
                                 if (amount1 != null) {
+                                    assert type != null;
                                     if (type.equals("Expense")) {
                                         totalExpense -= amount1;
                                     } else if (type.equals("Income")) {

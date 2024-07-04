@@ -21,6 +21,7 @@ import com.example.moneyu.R;
 import com.example.moneyu.Report.ReportExpandData;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -29,6 +30,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -237,7 +239,8 @@ public class ReportsFragment extends Fragment {
         PieData data = new PieData(dataSet);
         pieChart.setData(data);
         pieChart.getDescription().setEnabled(false);
-        pieChart.getLegend().setEnabled(false);
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(true);
         pieChart.setDrawEntryLabels(false);
         pieChart.setRotationEnabled(false);
         pieChart.invalidate();
@@ -250,7 +253,7 @@ public class ReportsFragment extends Fragment {
                 PieEntry entry = (PieEntry) e;
                 float value = entry.getValue();
                 String label = entry.getLabel();
-                pieChart.setCenterText(label + ": " + value + "VND");
+                pieChart.setCenterText(label + ": " + (int)value + "VND");
                 pieChart.invalidate();
             }
 
@@ -280,8 +283,22 @@ public class ReportsFragment extends Fragment {
 
         // Create BarDataSet for income and expense
         BarDataSet incomeDataSet = new BarDataSet(incomeEntries, "Khoản thu");
+        incomeDataSet.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getBarLabel(BarEntry barEntry) {
+                float value = barEntry.getY();
+                return (int) value + "";
+            }
+        });
         incomeDataSet.setColor(Color.parseColor("#009AA6"));
         BarDataSet expenseDataSet = new BarDataSet(expenseEntries, "Khoản chi");
+        expenseDataSet.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getBarLabel(BarEntry barEntry) {
+                float value = barEntry.getY();
+                return (int) value + "";
+            }
+        });
         expenseDataSet.setColor(Color.parseColor("#FF4C4C"));
 
         // Create BarData and add the BarDataSets

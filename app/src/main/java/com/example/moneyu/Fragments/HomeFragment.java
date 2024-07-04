@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.moneyu.Adapter.HomeAdapter;
 import com.example.moneyu.R;
 import com.example.moneyu.Models.Transaction;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private FirebaseFirestore db;
@@ -51,16 +53,16 @@ public class HomeFragment extends Fragment {
 
         adapter = new HomeAdapter(getContext(), transactionList);
         recyclerView.setAdapter(adapter);
-//        txtViewSeeAll.setOnClickListener(v -> {
-//            RecordFragment recordFragment = new RecordFragment();
-//            FragmentManager fragmentManager = getFragmentManager();
-//            if (fragmentManager != null) {
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.drawer_layout, recordFragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//            }
-//        });
+        BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation);
+        txtViewSeeAll.setOnClickListener(v -> {
+            RecordFragment recordFragment = new RecordFragment();
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, recordFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            bottomNavigationView.setSelectedItemId(R.id.operations);
+        });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user != null ? user.getUid() : null;
 

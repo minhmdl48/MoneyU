@@ -92,19 +92,16 @@ public class ReportExpandData extends AppCompatActivity {
                 // Log the category and percentage
                 Log.d(TAG, "Category: " + category + ", Percentage: " + percentage);
 
-                // Add data to entries and colors lists
                 entries.add(new PieEntry(percentage, category));
                 Integer color = categoryColors.get(category);
                 if (color == null) {
-                    color = Color.BLACK; // default color
+                    color = Color.BLACK;
                 }
                 colors.add(color);
             }
 
-            // After iterating through the map, set up the pie chart
             setupPieChart(pieChart, entries, colors);
         } else {
-            // Handle the case where categoryTotalMap is null
             Log.e(TAG, "categoryTotalMap is null");
         }
     }
@@ -124,11 +121,11 @@ public class ReportExpandData extends AppCompatActivity {
         data.setValueTextColor(Color.WHITE);
         data.setValueTypeface(Typeface.DEFAULT_BOLD); // Set label text style to bold
         pieChart.setData(data); // Set data to PieChart
-        pieChart.getDescription().setEnabled(false); // Remove description label
-        pieChart.getLegend().setEnabled(false); // Remove legend
+        pieChart.getDescription().setEnabled(false);
+        pieChart.getLegend().setEnabled(true);
         pieChart.setDrawEntryLabels(false); // Disable the display of category names (labels)
         pieChart.setRotationEnabled(false);
-        pieChart.invalidate(); // Refresh the chart
+        pieChart.invalidate();
 
         // Custom ValueFormatter to add '%' symbol
         dataSet.setValueFormatter(new ValueFormatter() {
@@ -145,19 +142,17 @@ public class ReportExpandData extends AppCompatActivity {
                     return;
                 PieEntry entry = (PieEntry) e;
                 String label = entry.getLabel();
-                float value = entry.getValue();
 
                 // Retrieve the amount for the selected category
                 int amount = categoryTotalMap.get(label);
 
-                pieChart.setCenterText(label + ": " + amount + " VND"); // Display label and amount in the center of the chart
-                pieChart.invalidate(); // Refresh the chart
+                pieChart.setCenterText(label + ": " + amount + " VND");
+                pieChart.invalidate();
             }
-
 
             @Override
             public void onNothingSelected() {
-                pieChart.setCenterText(""); // Display nothing in the center of the chart
+                pieChart.setCenterText("");
             }
         });
     }
