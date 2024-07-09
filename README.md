@@ -1,0 +1,2 @@
+#MoneyU Android app
+MoneyU is a mobile application that helps users to manage their money. It is a simple and easy-to-use app that allows users to track their expenses and income, and view reports. The app is designed to help users make better financial decisions and achieve their financial goals.
