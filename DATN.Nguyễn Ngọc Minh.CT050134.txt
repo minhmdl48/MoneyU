@@ -1,0 +1,890 @@
+BAN CO Y?U CHÍNH PH?
+H?C VI?N K? THU?T M?T MÃ
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+
+
+
+ Ð? ÁN T?T NGHI?P
+
+PHÁT HI?N MÃ Ð?C ANDROID D?A TRÊN MÔ HÌNH H?C SÂU K?T H?PNgành: Công ngh? thông tin
+Mã s?: 7.48.02.01
+
+
+
+	Sinh viên th?c hi?n:
+		Nguy?n Ng?c Minh
+		MSSV: CT050134
+                  
+
+	Ngu?i hu?ng d?n:
+		ThS. Nguy?n Ð?c Th?ng
+		Công ty TNHH NEC Vi?t Nam
+
+	
+
+
+Hà N?i, 2025
+     
+M?C L?C
+M?C L?C	i
+DANH M?C KÝ T? VI?T T?T	iii
+DANH M?C B?NG	iv
+DANH M?C HÌNH V?	v
+L?I C?M ON	vi
+L?I CAM ÐOAN	vii
+L?I NÓI Ð?U	1
+CHUONG 1: CO S? LÝ THUY?T	2
+1.1. Hi?n tr?ng	2
+1.2. M?t s? khái ni?m	4
+1.2.1. H? di?u hành Android	4
+1.2.2. Mã d?c Android	6
+1.3. Các phuong pháp phát hi?n mã d?c	11
+1.4. K?t lu?n chuong	12
+CHUONG 2: TÌM HI?U MÔ HÌNH H?C SÂU K?T H?P	13
+2.1. Ki?n th?c n?n t?ng	13
+2.1.1. T?ng quan v? h?c máy	13
+2.1.2. T?ng quan v? h?c sâu	16
+2.1.3. M?ng h?c sâu nhi?u l?p MLP	18
+2.2. Thu?t toán di truy?n	20
+2.2.1. Nguyên lý ho?t d?ng	20
+2.2.2. Uu di?m và h?n ch?	23
+2.3. Mô hình h?c sâu k?t h?p thu?t toán di truy?n	24
+2.3.1. M?c tiêu	24
+2.3.2. Mô hình GA-MLP	24
+2.4. K?t lu?n chuong	26
+CHUONG 3: TH?C NGHI?M	27
+3.1. So d? t?ng th? phân lo?i mã d?c	27
+3.2. B? d? li?u và d?c trung	27
+3.2.1. B? d? li?u	27
+3.2.2. Ð?c trung	27
+3.2.3. Phuong pháp trích xu?t d?c trung	28
+3.3. K?ch b?n th?c nghi?m	31
+3.3.1. Thi?t l?p môi tru?ng	31
+3.3.2. Các tiêu chí dánh giá	31
+3.3.3. Các k?ch b?n th? nghi?m	33
+3.4. K?t qu? và dánh giá	38
+3.4.1. K?t qu?	38
+3.4.2. Ðánh giá	50
+3.5. Chuong trình th?c nghi?m	51
+3.6. K?t lu?n chuong	54
+K?T LU?N	55
+TÀI LI?U THAM KH?O	56
+
+
+DANH M?C KÝ T? VI?T T?T
+     
+T? vi?t t?tNghia ti?ng AnhNghia ti?ng Vi?tAIArtificial IntelligenceTrí tu? nhân t?oDLDeep LearningH?c sâuLSTMLong Short Term MemoryM?ng b? nh? dài h?n-ng?n h?nMLMachine LearningH?c máyACOAnt Colony AlgorithmThu?t toán dàn ki?nGAGenetic AlgorithmThu?t toán di truy?nRNNRecurrent Neural NetworkM?ng no-ron h?i quyKNNK-nearest neighborsGi?i thu?t k hàng xóm g?n nh?tSLSupervised LearningH?c có giám sátRFRandom ForestR?ng ng?u nhiênMLPMulti-layer PerceptronPerceptron nhi?u l?pHALHardware Abstraction LayerL?p tr?u tu?ng ph?n c?ngReLURectified Linear UnitÐon v? tuy?n tính ch?nh luuCFGControl Flow GraphBi?u d? lu?ng di?u khi?nULUnsupervised LearningH?c không giám sátPUAPotentially Unwanted Application?ng d?ng không mong mu?n
+
+
+DANH M?C B?NG
+B?ng 3.1: S? lu?ng m?u các nhóm phân lo?i	27
+B?ng 3.2: C?u trúc ma tr?n nh?m l?n	33
+B?ng 3.3: Báo cáo phân lo?i mô hình GA-MLP	39
+B?ng 3.4: Báo cáo phân lo?i c?a mô hình ACO-MLP	40
+B?ng 3.5: Báo cáo phân lo?i c?a mô hình MLP	41
+B?ng 3.6: Báo cáo phân lo?i c?a các mô hình h?c máy	42
+B?ng 3.7: Báo cáo phân lo?i mô hình GA-MLP	45
+B?ng 3.8: Báo cáo phân lo?i mô hình ACO-MLP	46
+B?ng 3.9: Báo cáo phân lo?i mô hình MLP	47
+B?ng 3.10: Báo cáo phân lo?i c?a mô hình h?c máy	49
+
+
+
+DANH M?C HÌNH V?
+Hình 1.1: Th?ng kê lu?ng mã d?c và PUA qua các nam	3
+Hình 1.2: Ki?n trúc h? di?u hành Android	5
+Hình 1.3: So d? t?ng quan v? phuong pháp phát hi?n d?a trên ch? ký	11
+Hình 2.1: ?ng d?ng c?a H?c máy trong các linh v?c khác nhau	14
+Hình 2.2 M?ng no-ron nhi?u l?p MLP	19
+Hình 2.3: So d? t?ng quan thu?t toán di truy?n	22
+Hình 2.4: Ki?n trúc mô hình GA-MLP	25
+Hình 3.1: So d? t?ng quát quy trình th?c nghi?m	27
+Hình 3.2: Công c? AndroPyTool	29
+Hình 3.3: Bi?u d? ti?n hóa thích nghi	39
+Hình 3.4: Ma tr?n nh?m l?n mô hình GA-MLP	40
+Hình 3.5: Ma tr?n nh?m l?n c?a mô hình ACO-MLP	41
+Hình 3.6: Ma tr?n nh?m l?n c?a mô hình MLP	42
+Hình 3.7: Ma tr?n nh?m l?n mô hình SVM	43
+Hình 3.8: Ma tr?n nh?m l?n mô hình Random Forest	43
+Hình 3.9: Bi?u d? ti?n hóa thích nghi	45
+Hình 3.10: Ma tr?n nh?m l?n mô hình GA-MLP	46
+Hình 3.11: Ma tr?n nh?m l?n c?a mô hình ACO-MLP	47
+Hình 3.12: Ma tr?n nh?m l?n c?a mô hình MLP	48
+Hình 3.13: Ma tr?n nh?m l?n mô hình SVM	49
+Hình 3.14: Ma tr?n nh?m l?n mô hình Random Forest	50
+Hình 3.15: Màn hình ?ng d?ng lúc kh?i ch?y	52
+Hình 3.16: ?ng d?ng khi dang phân tích t?p apk	52
+Hình 3.17: ?ng d?ng hi?n th? k?t qu?	53
+Hình 3.18: ?ng d?ng hi?n th? k?t qu? (ti?p)	53
+
+
+L?I C?M ON
+     Trong quá trình th?c hi?n d? án t?t nghi?p "Phát hi?n mã d?c Android d?a trên mô hình h?c sâu k?t h?p", em dã nh?n du?c s? giúp d? t?n tình c?a cán b? hu?ng d?n là ThS. Nguy?n Ð?c Th?ng - Công ty TNHH NEC Vi?t Nam. Em xin chân thành c?m on Th?y dã h?t lòng giúp d?, hu?ng d?n, t?o di?u ki?n d? em có th? hoàn thành d? tài m?t cách t?t nh?t.
+     M?c dù dã có nhi?u c? g?ng, n? l?c; bài báo cáo v?n có nh?ng thi?u sót do th?i gian th?c hi?n và ki?n th?c em còn h?n ch?. Em r?t mong nh?n du?c s? góp ý c?a quý Th?y Cô d? ki?n th?c c?a chúng em du?c hoàn thi?n hon.
+     Em xin chân thành c?m on!
+     
+     				          Hà N?i, Ngày ... tháng ... nam 2025.
+SINH VIÊN TH?C HI?N Ð? ÁN     
+
+L?I CAM ÐOAN
+     Em xin cam doan b?n d? án này do em t? nghiên c?u du?i s? hu?ng d?n c?a th?y ThS. Nguy?n Ð?c Th?ng.
+     Ð? hoàn thành d? án này, em ch? s? d?ng nh?ng tài li?u dã ghi trong m?c tài li?u tham kh?o, ngoài ra không s? d?ng b?t c? tài li?u nào khác mà không du?c ghi.
+     N?u sai, em xin ch?u m?i hình th?c k? lu?t theo quy d?nh c?a H?c vi?n.
+     
+     Hà N?i, Ngày ... tháng ... nam 2025.
+Sinh viên th?c hi?n
+(Ký và ghi rõ h? tên)     
+
+
+
+
+
+
+
+
+
+
+
+L?I NÓI Ð?U
+     Trong nh?ng nam g?n dây, s? bùng n? c?a các thi?t b? di d?ng dã làm thay d?i m?nh m? cách con ngu?i ti?p c?n và s? d?ng công ngh?.Trong dó, Android v?i d?c di?m là m?t h? di?u hành mã ngu?n m?, d? tùy bi?n, kho ?ng d?ng phong phú và kh? nang tuong thích v?i nhi?u thi?t b? dã nhanh chóng chi?m linh ph?n l?n th? ph?n trên toàn c?u. Tuy nhiên, chính s? ph? bi?n và m? r?ng nhanh chóng c?a n?n t?ng này cung dã bi?n nó tr? thành m?c tiêu hàng d?u c?a các cu?c t?n công m?ng, v?i s? gia tang dáng k? v? s? lu?ng và m?c d? tinh vi c?a các lo?i mã d?c.
+     Các cu?c t?n công b?ng mã d?c trên thi?t b? Android không ch? de d?a d?n quy?n riêng tu cá nhân mà còn gây ?nh hu?ng nghiêm tr?ng d?n an ninh thông tin, d? li?u tài chính và th?m chí là an ninh qu?c gia. Trong b?i c?nh dó, vi?c phát hi?n và phòng ch?ng mã d?c Android dã và dang tr? thành m?t thách th?c l?n d?i v?i các nhà nghiên c?u, chuyên gia an ninh m?ng cung nhu các t? ch?c b?o m?t trên toàn th? gi?i. 
+     Hi?n nay có nhi?u phuong pháp dã du?c áp d?ng d? phát hi?n mã d?c Android, các phuong pháp truy?n th?ng nhu d?a trên ch? ký hay các m?u hành vi s?n có b?c l? nh?ng h?n ch?, d?c bi?t là tru?c s? thay d?i nhanh chóng và ph?c t?p c?a các k? thu?t che gi?u và bi?n d?i mã d?c. Trong khi dó, các mô hình h?c sâu dã du?c ch?ng minh v?i hi?u qu? vu?t tr?i trong vi?c phát hi?n các m?u ph?c t?p và không d? nh?n bi?t trong d? li?u. Tuy v?y, các mô hình h?c sâu thu?ng dòi h?i kh?i lu?ng d? li?u l?n, c?u trúc m?ng phù h?p.
+     Ð? tài "Phát hi?n mã d?c Android b?ng mô hình h?c sâu k?t h?p" du?c th?c hi?n nh?m khai thác s?c m?nh c?a m?ng h?c sâu nhi?u l?p (MLP) k?t h?p v?i thu?t toán di truy?n GA trong vi?c t?i uu hóa quá trình phát hi?n mã d?c. B?ng cách k?t h?p này, mô hình d? xu?t không ch? nâng cao d? chính xác mà còn giúp c?i thi?n hi?u su?t x? lý và kh? nang khái quát hóa.
+     N?i dung d? tài du?c chia thành ba chuong chính nhu sau:
+* Chuong 1. Co s? lý thuy?t 
+Trình bày co s? lý thuy?t và các phuong pháp phát hi?n mã d?c hi?n nay.
+* Chuong 2. Mô hình h?c sâu k?t h?p thu?t toán di truy?n
+Mô t? mô hình h?c sâu k?t h?p GA và cách áp d?ng vào bài toán.
+* Chuong 3. Th?c nghi?m 
+Trình bày quá trình th?c nghi?m, dánh giá k?t qu? và chuong trình th?c nghi?m.
+	
+chuong 1: CO S? LÝ THUY?T
+  1.1. Hi?n tr?ng
+     Xã h?i ngày càng ph? thu?c vào máy tính d? th?c hi?n các công vi?c hàng ngày, dù là ? noi làm vi?c hay trong cu?c s?ng cá nhân. Trong khi h?u h?t máy tính du?c s?n xu?t di kèm v?i ph?n m?m t? nhà s?n xu?t, chúng thu?ng du?c thi?t k? d? cho phép cài d?t các chuong trình t? bên th? ba d? m? r?ng thêm các tính nang s?n có. Phát tri?n ph?n m?m bên th? ba dã gia tang nhanh chóng trong các th?p k? g?n dây và dã t?o ra các ?ng d?ng bao ph? h?u h?t m?i m?t trong cu?c s?ng c?a chúng ta bao g?m s?c kh?e, tài chính, gia dình, qu?n lý kinh doanh.
+     Vi?c s? d?ng các thi?t b? tin h?c dã tang dáng k? cùng v?i s? phát tri?n c?a thi?t b? di d?ng. C? th? hon, s? tr?i d?y c?a di?n tho?i thông minh dã khi?n chúng tr? thành m?t v?t d?ng b? túi không th? thi?u c?a h?u h?t m?i ngu?i. Ði?n tho?i thông minh cung c?p da d?ng các d?ch v? vu?t xa kh? nang ch? liên l?c trên nh?ng thi?t b? th? h? tru?c. Ð?c bi?t, nhi?u c?m bi?n ph?n c?ng hi?n du?c bao g?m trong thi?t b? và kh? nang cài d?t ?ng d?ng bên th? ba dã m? r?ng ch?c nang c?a chúng thành m?t tr? lý cá nhân có th? ghi chú, qu?n lý tin nh?n và danh b? c?a ngu?i dùng, theo dõi v? trí và l? trình di chuy?n, cung c?p thông tin s?c kh?e và m?t s? các d?ch v? khác. Có nhi?u nhà cung c?p thi?t b? di d?ng và m?t s? h? di?u hành nh?m d?n các thi?t b? nhu v?y. Tính d?n quý I nam 2025, Android gi? v? th? là h? di?u hành di d?ng hàng d?u th? gi?i v?i th? ph?n kho?ng 71,88%.
+     Vi?c t?o ra và áp d?ng các ?ng d?ng bên th? ba dã giúp nhi?u tác v? tr? nên d? dàng hon nhung dã mang d?n m?t phuong th?c t?n công m?i cho nh?ng k? mu?n phá ho?i các quy trình thông thu?ng c?a h? vì m?c dích x?u, ch?ng h?n nhu d? ki?m l?i nhu?n ho?c gây h?i cho ngu?i dùng thi?t b?. Ð?c bi?t, do có r?t nhi?u ch?c nang trong các thi?t b? di d?ng và du?c s? d?ng trong cu?c s?ng hàng ngày, chúng là kho tàng thông tin cá nhân nh?y c?m và là b? di?u khi?n c?a vô s? các hành d?ng nh?y c?m có th? du?c th?c hi?n thay cho ngu?i dùng. Các d?ch v? du?c cung c?p b?i ?ng d?ng bên th? ba có th? gây ra thi?t h?i l?n cho ngu?i dùng n?u chúng b? k? x?u phá ho?i. Ví d?, ?ng d?ng ngân hàng có th? b? khai thác d? dánh c?p ti?n t? ngu?i dùng ho?c chi?m quy?n ki?m soát thi?t b? c?a ngu?i dùng.
+     Th?c t?, s? lu?ng mã d?c du?c phát hi?n hàng nam dã gia tang dáng k?, ph?n ánh xu hu?ng t?n công m?ng ngày càng ph? bi?n và nghiêm tr?ng. Hình sau dây minh h?a lu?ng gia tang dáng k? c?a mã d?c và ?ng d?ng không mong mu?n qua nh?ng nam g?n dây.
+
+   Hình 1.1: Th?ng kê lu?ng mã d?c và PUA qua các nam
+     Do dó, vi?c ki?m tra và th?m d?nh ph?n m?m bên th? ba tr? nên c?n thi?t d? d?m b?o r?ng chúng không ch?a l? h?ng có th? b? khai thác d? cho phép các cu?c t?n công nhu v?y. Ð?c bi?t, các ch? ?ng d?ng thúc d?y và t?o di?u ki?n thu?n l?i cho vi?c cài d?t ph?n m?m bên th? ba dang c? g?ng lo?i b? ph?n m?m d?c h?i kh?i các d?ch v? c?a h? d? duy trì tính b?o m?t cho ngu?i dùng. C?a hàng Google Play, n?n t?ng phân ph?i chính c?a các ?ng d?ng trên h? di?u hành Android, t?t c? ph?i du?c ki?m tra b?o m?t nghiêm ng?t tru?c khi xu?t hi?n trên Google Play. Google Play Protect quét 200 t? ?ng d?ng m?i ngày d? d?m b?o m?i th? d?u chính xác. Công c? này cho phép Google ph?n ?ng nhanh chóng v?i các m?i de d?a và h?n ch? s? lu?ng thi?t b? và ngu?i dùng b? ?nh hu?ng b?i chúng.
+     Trong b?i c?nh dó, các phuong pháp phát hi?n mã d?c truy?n th?ng, ch? y?u d?a vào ch? ký ho?c lu?t d?nh, dang d?n b?c l? h?n ch?, d?c bi?t là v? kh? nang phát hi?n s?m và kh? nang thích ?ng v?i các m?u t?n công m?i. Ðây là lúc các công ngh? m?i, d?c bi?t là trí tu? nhân t?o, h?c máy và h?c sâu du?c nghiên c?u và ?ng d?ng nh?m nâng cao hi?u qu? phát hi?n mã d?c.
+     M?c dù các mô hình h?c sâu cho th?y nhi?u h?a h?n trong vi?c nh?n di?n các hành vi b?t thu?ng c?a ?ng d?ng, song vi?c t?i uu hóa mô hình d? d?t hi?u qu? cao v?n là m?t thách th?c. Do dó vi?c k?t h?p h?c sâu v?i các phuong pháp t?i uu nhu thu?t toán di truy?n GA dang n?i lên nhu m?t gi?i pháp ti?m nang d? c?i thi?n hi?u qu? phân lo?i và phát hi?n mã d?c trên Andorid.
+  1.2. M?t s? khái ni?m
+    1.2.1. H? di?u hành Android
+     H? di?u hành Android là m?t h? di?u hành ngu?n m?, du?c xây d?ng d?a trên Linux du?c t?o ra dành cho nhi?u thi?t b? và ki?u dáng.
+* Nhân Linux
+     N?n t?ng c?a Android là nhân Linux. Ví d?: Android Runtime (ART) d?a vào nhân h? di?u hành Linux d? th?c hi?n các ch?c nang co b?n nhu phân lu?ng và qu?n lý b? nh? c?p th?p. Vi?c s? d?ng nhân h? di?u hành Linux cho phép Android t?n d?ng các tính nang b?o m?t chính và cho phép nhà s?n xu?t thi?t b? phát tri?n trình di?u khi?n ph?n c?ng cho m?t h? di?u hành dã du?c bi?t t?i.
+* L?p tr?u tu?ng ph?n c?ng (HAL)
+     T?ng tr?u tu?ng ph?n c?ng (HAL) cung c?p các giao di?n tiêu chu?n d? cho phép các tính nang ph?n c?ng c?a thi?t b? ti?p c?n khung API Java c?p cao hon. HAL bao g?m nhi?u mô-dun thu vi?n, m?i mô-dun trong s? dó tri?n khai m?t giao di?n cho m?t lo?i thành ph?n ph?n c?ng c? th?, ch?ng h?n nhu mô-dun camera ho?c Bluetooth. Khi khung API th?c hi?n l?nh g?i d? truy c?p vào ph?n c?ng c?a thi?t b?, h? th?ng Android s? t?i mô-dun thu vi?n cho thành ph?n ph?n c?ng dó.
+* Môi tru?ng th?i gian ch?y Android
+     Ð?i v?i các thi?t b? ch?t Android phiên b?n 5.0 (API c?p 21) tr? lên, m?i ?ng d?ng ch?y theo quy trình riêng v?i phiên b?n Android Runtime (ART) riêng. ART du?c vi?t d? ch?y nhi?u máy ?o trên các thi?t b? có b? nh? th?p b?ng cách th?c thi các t?p d?nh d?ng có th? th?c thi Dalvik (DEX), m?t d?nh d?ng mã byte du?c thi?t k? riêng cho Android du?c t?i uu hóa d? d?t du?c m?c s? d?ng b? nh? t?i thi?u. Các công c? t?o b?n d?ng, ch?ng h?n nhu d8, biên d?ch ngu?n Java thành mã byte DEX, có th? ch?y trên n?n t?ng Android.
+* Thu vi?n C/C++ g?c
+     Nhi?u thành ph?n và d?ch v? c?t lõi c?a h? th?ng Android (ch?ng h?n nhu ART và HAL) du?c xây d?ng t? mã g?c c?n có thu vi?n g?c vi?t b?ng C và C++. N?n t?ng Android cung c?p các khung API Java d? hi?n th? ch?c nang c?a m?t s? thu vi?n g?c trong s? này cho ?ng d?ng. Ví d?: ta có th? truy c?p vào OpenGL ES thông qua Java OpenGL API c?a khung Android d? thêm tính nang h? tr? v? và ch?nh s?a d? h?a 2D và 3D trong ?ng d?ng.
+
+     
+   Hình 1.2: Ki?n trúc h? di?u hành Android
+* ?ng d?ng h? th?ng
+     Android di kèm v?i m?t t?p h?p các ?ng d?ng c?t l?i dành cho email, nh?n tin SMS, l?ch, duy?t Internet, danh b? và nhi?u tính nang khác. Trong s? các ?ng d?ng mà ngu?i dùng ch?n cài d?t, các ?ng d?ng di kèm n?n t?ng s? không có tr?ng thái d?c bi?t nào. Vì v?y, ?ng d?ng bên th? ba có th? tr? thành trình duy?t web, tin nh?n SMS ho?c th?m chí là bàn phím m?c d?nh c?a ngu?i dùng. Có m?t s? tru?ng h?p ngo?i l?, ch?ng h?n nhu ?ng d?ng Cài d?t c?a h? th?ng.
+     ?ng d?ng h? th?ng v?a có ch?c nang là ?ng d?ng cho ngu?i dùng, v?a cung c?p nh?ng ch?c nang chính mà nhà phát tri?n có th? truy c?p trên ?ng d?ng c?a h?. Ví d?: n?u mu?n ?ng d?ng c?a mình g?i tin nh?n SMS, ta không c?n ph?i t? xây d?ng ch?c nang dó. Thay vào dó, có th? g?i b?t k? ?ng d?ng SMS nào dã du?c cài d?t d? g?i tin nh?n t?i ngu?i nh?n du?c ch? d?nh.
+* Khung API Java
+     Ta có th? s? d?ng toàn b? các tính nang c?a h? di?u hành Android thông qua các API du?c vi?t b?ng ngôn ng? Java. Các API này t?o thành nh?ng thành ph?n c?n thi?t d? t?o ?ng d?ng Android b?ng cách don gi?n hóa vi?c s? d?ng l?i các thành ph?n và d?ch v? c?t lõi c?a h? th?ng, theo mô-dun, bao g?m nh?ng thành ph?n sau:
+> M?t h? th?ng ch? d? xem phong phú và d? m? r?ng mà b?n có th? s? d?ng d? xây d?ng giao di?n ngu?i dùng c?a ?ng d?ng, bao g?m danh sách, lu?i, h?p van b?n, nút và th?m chí là m?t trình duy?t web có th? nhúng.
+> Trình qu?n lý tài nguyên, c?p quy?n truy c?p vào các tài nguyên không ph?i mã, ch?ng h?n nhu các chu?i dã du?c b?n d?a hóa, t?p d? h?a và t?p b? c?c.
+> Trình qu?n lý thông báo cho phép t?t c? ?ng d?ng hi?n th? c?nh báo tùy ch?nh trên thanh tr?ng thái.
+> Trình qu?n lý ho?t d?ng qu?n lý vòng d?i c?a các ?ng d?ng và cung c?p m?t ngan x?p lui di?u hu?ng thông thu?ng.
+> Trình cung c?p n?i dung cho phép ?ng d?ng truy c?p vào d? li?u t? các ?ng d?ng khác, ch?ng h?n nhu ?ng d?ng Danh b? ho?c chia s? d? li?u c?a riêng h?.
+    1.2.2. Mã d?c Android
+* Các lo?i mã d?c
+     Mã d?c nh?m vào thi?t b? Android ch? y?u hu?ng d?n vi?c khai thác các d?ch v? du?c cung c?p b?i ph?n c?ng thi?t b?, m?c dù m?t s? mã d?c (nhu mã d?c t?ng ti?n) tuong t? nhu nh?ng d?ng du?c th?y trong các h? th?ng máy tính truy?n th?ng. D? án Android Malware Genome dã th?c hi?n m?t phân tích th? công toàn di?n v? mã d?c Android, thu th?p và phân tích 1200 m?u mã d?c, phân lo?i chúng thành 49 h? mã d?c khác nhau. B? d? li?u này du?c s? d?ng r?ng rãi trong nghiên c?u v? b?o m?t Android d? dánh giá hi?u qu? c?a các công c? phát hi?n và phân tích mã d?c. M?t ví d? khác là VirusTotal bao g?m các ?ng d?ng d?c h?i dã du?c g?i và quét b?i nhi?u các công c? ch?ng virus hi?n có.
+     Sau dây là m?t s? lo?i mã d?c ph? bi?n:
+> Vi-rút: M?t vi-rút máy tính là m?t lo?i ph?n m?m d?c h?i du?c thi?t k? d? t? sao chép và lây lan. Nó có th? t? g?n vào các chuong trình ho?c t?p h?p pháp mà không b? ngu?i dùng bi?t d?n ho?c d?ng thu?n. Vi-rút máy tính là m?t d?ng th?c c?a m?i de d?a m?ng và du?c coi là có h?i cho c? ngu?i dùng cá nhân và t? ch?c.
+> Sâu (Worm): Sâu máy tính là m?t lo?i ph?n m?m d?c h?i lây lan qua h? th?ng và m?ng máy tính, thu?ng khai thác l? h?ng d? t? sao chép. Không gi?ng nhu vi-rút, sâu máy tính không c?n ph?i t? g?n vào các t?p ho?c chuong trình hi?n có d? lây lan. Chúng có th? th?c thi và lan truy?n d?c l?p, khi?n chúng d?c bi?t hi?u qu? trong vi?c phát tán nhanh chóng. Sâu là m?i de d?a v? an ninh m?ng dáng k? do kh? nang gây ra thi?t h?i nhanh chóng và lan r?ng.
+> Mã d?c t?ng ti?n (Ransomware): Mã d?c t?ng ti?n là m?t d?ng ph?n m?m d?c h?i mã hóa các t?p c?a n?n nhân ho?c khóa chúng kh?i h? th?ng c?a h?, khi?n d? li?u c?a h? không th? truy c?p du?c. Sau dó, k? t?n công yêu c?u thanh toán ti?n chu?c, thu?ng là b?ng ti?n di?n t?, d? d?i l?y vi?c cung c?p khóa gi?i mã ho?c khôi ph?c quy?n truy c?p vào d? li?u b? xâm ph?m. Các cu?c t?n công b?ng mã d?c t?ng ti?n dã tr? nên ngày càng ph? bi?n và gây gián do?n trong nh?ng nam g?n dây, ?nh hu?ng d?n cá nhân, doanh nghi?p và th?m chí c? co s? h? t?ng quan tr?ng.
+> Ph?n m?m gián di?p (Spyware): Spyware là m?t ki?u ph?n m?m d?c h?i bí m?t thu th?p thông tin t? máy tính ho?c thi?t b? c?a ngu?i dùng mà không có s? nh?n th?c ho?c d?ng thu?n c?a h?. Nó du?c thi?t k? d? theo dõi và thu th?p d? li?u v? ho?t d?ng c?a ngu?i dùng, bao g?m hành vi online, thông tin cá nhân, thói quen duy?t web... Thông tin du?c thu th?p này s? du?c g?i d?n m?t máy ch? t? xa du?c ki?m soát b?i k? t?n công.
+> Addisplay: dây là m?t d?ng ph?n m?m qu?ng cáo, chuyên hi?n th? các qu?ng cáo không mong mu?n trên thi?t b? ngu?i dùng, thu?ng là du?i d?ng pop-up, bi?u ng? ho?c chuy?n hu?ng trình duy?t d?n các trang web qu?ng cáo. Addisplay có th? du?c cài d?t cùng v?i các ph?n m?m h?p pháp ho?c thông qua ?ng d?ng gi? m?o. M?c tiêu chính c?a lo?i mã d?c này là t?o doanh thu t? qu?ng cáo cho k? t?n công ho?c nhà phát tri?n không minh b?ch. M?c dù m?t s? adware có th? ch? gây phi?n toái, nhung nhi?u tru?ng h?p l?i xâm ph?m quy?n riêng tu, gi?m hi?u nang thi?t b?, ho?c th?m chí ho?t d?ng nhu m?t backdoor d? t?i xu?ng mã d?c nguy hi?m hon.
+> Riskware (Ph?n m?m r?i ro): ch? nh?ng chuong trình h?p pháp nhung có th? b? khai thác d? gây h?i ho?c th?c hi?n hành vi trái phép. Riskware không ph?i lúc nào cung du?c t?o ra v?i m?c dích x?u nhung khi roi vào tay k? t?n công, nó có th? b? l?m d?ng d? phá v? b?o m?t h? th?ng, thu th?p d? li?u ho?c can thi?p vào các ch?c nang quan tr?ng c?a h? di?u hành. Ví d? v? lo?i ph?n m?m này bao g?m ph?n m?m di?u hành, công c? ch?p màn hình, ph?n m?m qu?n lý h? th?ng....Vi?c s? d?ng và cài d?t lo?i ph?n m?m này c?n du?c ki?m soát nghiêm ng?t, d?c bi?t trong môi tru?ng doanh nghi?p ho?c t? ch?c.
+> SPR: Ðây là thu?t ng? dùng d? ch? nh?ng ph?n m?m ho?c hành vi có th? gây ra r?i ro d?n b?o m?t ho?c quy?n riêng tu c?a ngu?i dùng, dù chúng không ph?i là mã d?c theo nghia truy?n th?ng. SPR thu?ng bao g?m các ?ng d?ng ho?c ti?n ích có hành vi nhu:
+* Thu th?p d? li?u nh?y c?m mà không có thông báo rõ ràng
+* G?i thông tin ngu?i dùng v? máy ch? bên ngoài
+* Truy c?p camera, micro, danh b? mà không có lý do chính dáng
+* T?o di?u ki?n cho bên th? ba thu th?p thông tin cá nhân
+* Các k? thu?t che gi?u mã d?c
+     Ð? né tránh s? phát hi?n c?a các h? th?ng phòng ch?ng mã d?c, các nhà phát tri?n mã d?c Android thu?ng s? d?ng nhi?u k? thu?t che gi?u nh?m làm cho mã d?c tr? nên khó b? nh?n bi?t, khó phân tích hoac khó truy v?t. Nh?ng k? thu?t này không ch? giúp mã d?c vu?t qua các h? th?ng phát hi?n truy?n th?ng mà còn làm ph?c t?p hóa quá trình phân tích c?a các nhà nghiên c?u b?o m?t. Du?i dây là m?t s? k? thu?t ph? bi?n thu?ng du?c s? d?ng trong phát tri?n mã d?c trên n?n t?ng này:
+> Mã hóa và làm r?i mã ngu?n (Code Obfuscation)
+     Ðây là k? thu?t ph? bi?n nh?t du?c s? d?ng nh?m làm cho mã ngu?n tr? nên khó hi?u ho?c không th? d?c du?c d?i v?i con ngu?i ho?c các công c? phân tích mã. Các k? thu?t obfuscation bao g?m:
+* Ð?i tên bi?n, hàm và l?p thành các chu?i vô nghia (ví d?: a.b.c() thay vì getUserLocation()).
+* Chèn mã th?a (junk code) ho?c các do?n mã không ?nh hu?ng d?n ch?c nang nhung gây nhi?u cho quá trình phân tích.
+* Làm r?i lu?ng di?u khi?n khi?n lu?ng th?c thi chuong trình tr? nên ph?c t?p.
+* S? d?ng các k? thu?t mã hóa d? li?u ho?c mã hóa chu?i d? che gi?u thông tin nh?y c?m nhu URL, s? di?n tho?i, t? khóa d?c h?i...
+> T?i và th?c thi mã d?ng
+     Mã d?c có th? không ch?a mã d?c h?i ngay trong t?p APK g?c, mà thay vào dó nó s? t?i mã d?c t? m?t máy ch? bên ngoài khi du?c cài d?t và kích ho?t. Ði?u này giúp mã d?c tránh du?c quá trình phân tích tinh vì mã th?c thi không t?n t?i ? th?i di?m quét.
+> S? d?ng k? thu?t ch?ng phân tích
+     Mã d?c Android thu?ng tích h?p các co ch? nh?m phát hi?n và tránh né môi tru?ng phân tích nhu sandbox, máy ?o ho?c trình gi? l?p. M?t s? k? thu?t bao g?m:
+* Phát hi?n tên thi?t b?, IMEI, ho?c các thông tin h? th?ng thu?ng du?c gán c? d?nh trong emulator.
+* Ki?m tra d? tr? CPU, b? nh? và hành vi ngu?i dùng gi? t?o.
+* Không kích ho?t hành vi d?c h?i tr? khi ch?y trên thi?t b? th?t.
+> K? thu?t phân m?nh
+     M?t s? mã d?c chia nh? ch?c nang d?c h?i thành nhi?u ph?n và phân b? r?i rác trong mã ngu?n ho?c mô-dun ph?. Ði?u này khi?n cho vi?c phát hi?n hành vi d?c h?i tr? nên khó khan hon n?u ch? phân tích t?ng thành ph?n riêng l?.
+> S? d?ng k? thu?t native
+     Thay vì ch? s? d?ng mã Java, mã d?c có th? s? d?ng thu vi?n native (vi?t b?ng C/C++) thông qua JNI. Do mã native khó phân tích hon và ít b? các công c? phát hi?n tinh ki?m tra, dây là m?t k? thu?t ph? bi?n d? th?c hi?n các hành vi nhu keylogging, dánh c?p d? li?u.
+> K? thu?t thay d?i hành vi theo th?i gian
+     Mã d?c có th? ch? kích ho?t sau m?t kho?ng th?i gian nh?t d?nh k? t? khi cài d?t, ho?c vào các th?i di?m c? th?, làm cho vi?c phát hi?n hành vi d?c h?i trong giai do?n d?u tr? nên khó khan.
+     Vi?c n?m b?t du?c d?c di?m và co ch? ho?t d?ng c?a các k? thu?t che gi?u là bu?c chu?n b? quan tr?ng d? xây d?ng các mô hình phát hi?n mã d?c có tính khái quát và chính xác cao.
+* Các phuong pháp phân tích
+     Phân tích mã d?c bao g?m quá trình phân tích và hi?u ph?n m?m d?c h?i dó d? xác d?nh ch?c nang, hành vi và tác d?ng ti?m ?n c?a nó. Phân tích ph?n m?m d?c h?i cung c?p góc nhìn rõ ràng v? ph?n m?m d?c h?i trong mã và ý nghia c?a chu?i byte du?c k? t?n công s? d?ng d? dánh c?p thông tin ho?c thay d?i mã g?c. Trong quá trình phân tích, các d?c trung chính khác nhau c?a mã du?c trích xu?t cung c?p thông tin và ch?c nang c?a các hành d?ng c?a mã d?c vào h? th?ng.
+> Phân tích tinh
+     Phân tích tinh là phuong th?c ki?m tra mã mà không c?n th?c thi chuong trình và t?o ra k?t qu? b?ng cách ki?m tra c?u trúc mã, trình t? các câu l?nh và cách các bi?n du?c x? lý trong các l?nh g?i hàm khác nhau. 
+     Uu di?m chính c?a phân tích tinh là toàn b? mã d?u du?c phân tích. M?t quy trình phân tích tinh b?t d?u b?ng cách bi?u di?n mã ?ng d?ng dã phân tích cho m?t s? mô hình tr?u tu?ng (ví d?: bi?u d? lu?ng di?u khi?n ho?c so d? l?p UML) d?a trên m?c dích d? phân tích. Các mô hình tr?u tu?ng dó th?c s? cung c?p m?t giao di?n don gi?n hóa d? h? tr? các phân tích máy khách c?p cao hon nhu phân tích v?t (taint analysis). M?t ví d? khác ch?ng h?n nhu giá tr? c?a các bi?n (ví d?: du?c truy?n t? các giá tr? h?ng s?) t?i các câu l?nh khác nhau c?a CFG cung có th? du?c thu th?p d? cho phép phân tích tinh h? tr? xác minh chuyên sâu hon, ví d?: thông qua phân tích lu?ng d? li?u.
+     Nhu?c di?m chính c?a phân tích tinh là s? dánh d?i gi?a tính không chính xác và hi?u su?t, vì m?t s? thông tin ch? có th? du?c bi?t chính xác khi ch?y chuong trình. Hon n?a, vi?c mô hình hóa vi?c th?c thi ?ng d?ng v?i d? chính xác cao dòi h?i nhi?u tài nguyên. S? dánh d?i gi?a hi?u su?t, d? chính xác và tính hoàn ch?nh ph?i th?c hi?n s? ph? thu?c vào m?c tiêu cu?i cùng và các ràng bu?c v?n hành c?a nó.
+> Phân tích d?ng
+     Khi ch?y ?ng d?ng Android ? môi tru?ng th?c t? hay môi tru?ng ?o ch?ng h?n nhu sandbox, các tính nang hành vi th?i gian ch?y du?c g?i là d?c trung d?ng, phuong pháp phân tích tuong ?ng là phân tích d?ng. Ð?c bi?t, d?i v?i ?ng d?ng Android, d?i tu?ng c?a phân tích d?ng bao g?m l?i g?i h? th?ng, l?i g?i API, luu lu?ng m?ng và d? li?u CPU. Vì công c? phân tích d?ng có th? truy c?p vào thông tin th?i gian ch?y t? vi?c th?c thi ?ng d?ng, do v?y nó thu?ng chính xác hon phân tích tinh. Nó phân tích các ch? th? và du?ng d?n du?c bi?t là có th? th?c thi và truy c?p trong ?ng d?ng. Ví d? nhu trên h? di?u hành Android, k? thu?t fuzzing du?c s? d?ng d? tìm ki?m l? h?ng ph?n m?m giúp c?i thi?n m?c bao ph? ki?m th?, ít l?i b?o m?t và ch?t lu?ng mã cao hon.
+     Ði?m y?u chính c?a phân tích d?ng là ch? có mã dã du?c th?c thi m?i có th? du?c phân tích. Vi?c có th? t? d?ng khám phá toàn b? mã trong ?ng d?ng có th? khó khan. Mã chua du?c khám phá có th? d?n t?i k?t qu? False Negative, khi phân tích b? sót hành vi ho?c hành d?ng do ?ng d?ng th?c hi?n và có th? nh?n du?c k?t qu? không d?y d?. Hon n?a, các k? thu?t che gi?u mã d?c nhu mã hóa, nén ho?c t?i mã d?ng có th? khi?n hành vi d?c h?i không du?c kích ho?t trong quá trình phân tích, làm gi?m hi?u qu? c?a phuong pháp này. Do dó d? d?t hi?u qu? t?i uu, phân tích d?ng thu?ng du?c k?t h?p v?i phân tích tinh trong các h? th?ng phát hi?n mã d?c hi?n d?i.
+> Phuong pháp phân tích k?t h?p
+     Phân tích k?t h?p là phuong pháp t?n d?ng di?m m?nh c?a c? phân tích tinh và phân tích d?ng d? c?i thi?n d? chính xác và kh? nang phát hi?n hành vi d?c h?i c?a mã. Trong phuong pháp này, phân tích tinh du?c s? d?ng d? quét và trích xu?t thông tin t? toàn b? mã ngu?n ho?c mã bytecode mà không c?n th?c thi, t? dó xác d?nh các di?m nghi ng? hoac khu v?c mã có th? ch?a hành vi nguy hi?m. Sau dó, phân tích d?ng s? du?c tri?n khai nh?m vào các di?m này trong môi tru?ng giám sát th?i gian th?c d? xác nh?n hành vi và dánh giá tác d?ng th?c t?.
+     Vi?c k?t h?p này không ch? giúp phát hi?n du?c các hành vi d?c h?i ti?m ?n mà còn gi?m thi?u nguy co b? sót do mã chua du?c th?c thi ho?c b? che gi?u thông qua k? thu?t tr?n tránh phân tích. Các h? th?ng phát hi?n mã d?c tiên ti?n hi?n nay thu?ng áp d?ng mô hình phân tích k?t h?p d? cân b?ng gi?a d? ph?, d? chính xác và hi?u su?t. Ngoài ra, vi?c tích h?p h?c máy vào phân tích k?t h?p còn giúp t? dông hóa quá trình nh?n di?n m?u mã d?c m?i, t? dó nâng cao kh? nang phát hi?n s?m các m?i de d?a chua t?ng du?c bi?t d?n.
+  1.3. Các phuong pháp phát hi?n mã d?c
+     Có nhi?u phuong pháp du?c phát tri?n d? phát hi?n mã d?c trên Android, m?i phuong pháp có uu nhu?c di?m riêng và có th? du?c chia thành các nhóm nhu sau:
+* Phát hi?n d?a trên ch? ký (Signature-based Detection)
+     Phuong pháp này d?a trên vi?c so sánh các do?n mã trong ?ng d?ng v?i co s? d? li?u ch?a các ch? ký mã d?c dã bi?t. Ðây là k? thu?t truy?n th?ng và du?c s? d?ng ph? bi?n trong các ph?n m?m di?t vi-rút. N?u có s? trùng kh?p, ?ng d?ng s? b? dánh d?u là d?c h?i. Ví d?, so sánh kh?p mã SHA-256 c?a t?p APK v?i danh sách den, tìm ki?m chu?i l?nh hoac API d?c h?i nhu sendTextMessage, exec("su").
+> Uu di?m: Nhanh, hi?u qu? cao d?i v?i các mã d?c dã du?c nh?n bi?t.
+> H?n ch?: Không phát hi?n du?c mã d?c m?i (zero-day), mã d?c bi?n th?.
+
+   Hình 1.3: So d? t?ng quan v? phuong pháp phát hi?n d?a trên ch? ký
+* Phát hi?n d?a trên hành vi (Behavior-based Detection)
+   Phuong pháp này theo dõi hành vi th?i gian th?c ho?c mô ph?ng c?a ?ng d?ng khi ch?y trên thi?t b? ho?c môi tru?ng gi? l?p (sandbox) d? phát hi?n hành vi dáng ng?, nguy hi?m. Phân tích hành vi có th? du?c th?c hi?n trên thi?t b? th?t ho?c trong môi tru?ng ?o sandbox.
+   Các hành vi thu?ng du?c giám sát nhu:
+> Truy c?p vào danh b? tin nh?n, d?nh v? mà không có s? d?ng ý c?a ngu?i dùng.
+> G?i tin nh?n SMS t?i d?u s? tính phí cao.
+> T?i và cài d?t mã d?c t? máy ch? bên ngoài.
+> C? g?ng chi?m quy?n ki?m soát c?a h? th?ng.
+Uu di?m: Có kh? nang phát hi?n các m?i de d?a chua du?c bi?t t?i.
+H?n ch?: Có th? b? mã d?c qua m?t n?u hành vi b? ?n, chi phí tính toán cao, yêu c?u tài nguyên l?n.
+* Phát  hi?n d?a trên h?c máy (Machine Learning-based Detection)
+   Phát hi?n mã d?c b?ng h?c máy là hu?ng ti?p c?n hi?n d?i và dang ngày càng ph? bi?n. Phuong pháp này ho?t d?ng theo quy trình sau dây:
+> Thu th?p d? li?u t? các ?ng d?ng
+> Trích xu?t d?c trung t? mã (ch?ng h?n nhu l?i g?i API, quy?n truy c?p,...)
+> Hu?n luy?n mô hình h?c máy
+> S? d?ng mô hình du?c hu?n luy?n d? phân lo?i, phát hi?n mã d?c
+   Uu di?m: T? d?ng phát hi?n c? mã d?c m?i và bi?n th?, kh? nang t?ng quát hóa t?t.
+   H?n ch?: Ph? thu?c vào ch?t lu?ng d? li?u hu?n luy?n, nh?y c?m v?i d? li?u nhi?u.
+     M?i phuong pháp phát hi?n mã d?c d?u có vai trò và ph?m vi ?ng d?ng khác nhau. Trong b?i c?nh mã d?c ngày càng tinh vi, d?c bi?t là v?i các k? thu?t che gi?u và bi?n th? liên t?c, vi?c k?t h?p, l?a ch?n phuong pháp phù h?p ngày càng quan tr?ng. Ð?c bi?t, h?c máy dang tr? thành công c? trung tâm, có kh? nang t? d?ng hóa và t?ng quát t?t, giúp tang cu?ng d? chính xác và kh? nang thích ?ng trong vi?c phát hi?n mã d?c Android hi?n d?i.
+  1.4.  K?t lu?n chuong
+     Chuong 1 dã trình bày t?ng quan v? các ki?n th?c n?n t?ng liên qua d?n d? tài g?m h? di?u hành Android, các khái ni?m co b?n v? mã d?c Android. T? dó chuong dã phân tích d?c di?m, cách th?c lây nhi?m và hành vi nguy hi?m c?a mã d?c trên Android, t?o n?n t?ng d? hi?u rõ hon v? các k? thu?t phát hi?n ngày nay. Các phuong pháp phát hi?n mã d?c nhu d?a trên ch? ký, hành vi, h?c máy cung dã du?c trình bày. M?i phuong pháp d?u có nh?ng uu di?m và h?n ch? riêng, trong dó phuong pháp d?a trên h?c máy dang n?i lên nhu m?t hu?ng ti?p c?n hi?u qu? nh? kh? nang h?c t? d?ng và t?ng quát hóa t?t. Chuong ti?p theo s? trình bày các ki?n th?c liên quan d?n h?c máy và d? xu?t mô hình phát hi?n mã d?c phù h?p.
+     
+     
+     
+
+
+
+
+chuong 2: TÌM HI?U MÔ HÌNH H?C SÂU K?T H?P
+  2.1. Ki?n th?c n?n t?ng
+    2.1.1. T?ng quan v? h?c máy
+     H?c máy là m?t nhánh c?a trí tu? nhân t?o, du?c d?nh nghia r?ng rãi là kh? nang c?a máy tính có th? nh?n di?n các m?u và c?i thi?n hi?u su?t c?a chúng theo th?i gian mà không c?n ph?i du?c l?p trình cho m?i tình hu?ng x?y ra. Thay vì tuân theo các quy t?c c?ng nh?c, h? th?ng h?c máy s? phân tích d? li?u, dua ra d? doán và di?u ch?nh cách ti?p c?n c?a chúng d?a vào quá trình h?c. Nh? dó, máy tính có th? th?c hi?n các tác v? mà tru?c dây dòi h?i tr?c giác c?a con ngu?i, nhu nh?n di?n d?i tu?ng trong ?nh, hi?u ngôn ng? nói ho?c phát hi?n giao d?ch gian l?n. Vào nam 1959, Arthur Samuel, m?t trong nh?ng ngu?i tiên phong trong ngành khoa h?c máy tính dã d?nh nghia h?c máy là "linh v?c nghiên c?u cung c?p cho máy tính kh? nang h?c mà không c?n du?c l?p trình rõ ràng". Ý tu?ng này sau dó du?c c?ng c? b?i Herbert Simon, ngu?i du?c coi là cha d? c?a trí tu? nhân t?o, gi?i thích r?ng h?c máy v? co b?n là c?i thi?n hi?u su?t thông qua kinh nghi?m, gi?ng nhu con ngu?i tr? nên gi?i hon trong các nhi?m v? thông qua luy?n t?p.
+     H?c máy b?t d?u v?i d? li?u - ch? s?, ?nh, ho?c van b?n, ví d? nhu giao d?ch ngân hàng, ?nh ngu?i, d? li?u chu?i th?i gian t? c?m bi?n ho?c báo cáo bán hàng. D? li?u du?c thu th?p và chu?n b? d? s? dung làm d? li?u dào t?o ho?c thông tin mà mô hình h?c máy s? du?c dào t?o. Càng nhi?u d? li?u, chuong trình càng t?t. T? dây, ngu?i l?p trình s? ch?n mô hình h?c máy d? s? d?ng, cung c?p d? li?u và d? mô hình máy tính t? hu?n luy?n d? tìm ra các m?u ho?c dua ra d? doán. Theo th?i gian, ngu?i l?p trình cung có th? di?u ch?nh mô hình, bao g?m thay d?i các tham s? c?a nó, d? giúp dua ra k?t qu? chính xác hon. M?t s? d? li?u du?c gi? l?i t? d? li?u hu?n luy?n d? s? d?ng làm d? li?u dánh giá, ki?m tra d? chính xác c?a mô hình h?c máy khi g?p d? li?u m?i. K?t qu? là m?t mô hình có th? du?c s? d?ng trong tuong lai v?i các t?p d? li?u khác nhau.
+     Sau khi mô hình du?c hu?n luy?n, nó có th? du?c áp d?ng vào các tình hu?ng th?c t? nh?m dua ra d? doán ho?c quy?t d?nh t? dông. Nh? tính linh ho?t, h?c máy dã và dang du?c ?ng d?ng r?ng rãi trong nhi?u linh v?c khác nhau nhu y t?, tài chính, thuong m?i di?n t?, giao thông,...Vi?c khai thác kh? nang phân tích và d? doán t? d? li?u t?i uu hóa quy trình, gi?m chi phí và nâng cao hi?u qu? ho?t d?ng trong h?u h?t các ngành công nghi?p hi?n d?i.
+     
+     
+   Hình 2.1: ?ng d?ng c?a H?c máy trong các linh v?c khác nhau
+     Tùy theo cách d? li?u du?c cung c?p và m?c tiêu h?c, h?c máy du?c chia thành ba nhóm chính bao g?m:
+* Mô hình h?c máy có giám sát (Supervised Learning) du?c dào t?o b?ng cách các t?p d? li?u du?c g?n nhãn, cho phép mô hình h?c và phát tri?n chính xác hon theo th?i gian. Ví d?, m?t thu?t toán s? du?c dào t?o b?ng hình ?nh v? mèo và các th? khác, t?t c? d?u du?c g?n nhãn b?i con ngu?i, và máy s? t? h?c cách nh?n d?ng hình ?nh mèo. H?c máy có giám sát là lo?i ph? bi?n nh?t du?c s? d?ng hi?n nay.
+* Trong h?c máy không giám sát (Unsupervised Learning), m?t chuong trình tìm ki?m các m?u trong d? li?u không du?c g?n nhãn. H?c máy không giám  sát có th? tìm th?y các m?u ho?c xu hu?ng mà m?i ngu?i không tìm ki?m m?t cách rõ ràng. Ví d?, m?t chuong trình h?c máy không giám sát có th? xem qua d? li?u bán hàng tr?c tuy?n và xác d?nh các lo?i khách hàng khác nhau th?c hi?n mua hàng.
+* H?c máy tang cu?ng (Reinforcement Learning) là ki?u h?c d?a trên th? và sai. Thay vì h?c trên m?t t?p d? li?u c? d?nh, nh?n ph?n h?i thông qua co ch? thu?ng và ph?t. Theo th?i gian, nó tinh ch?nh các chi?n lu?c c?a mình d? t?i da hóa các k?t qu? tích c?c. M?t chi?c xe t? lái là m?t ví d? di?n hình. Nó không có m?t b? hu?ng d?n t? tru?c cho m?i tình hu?ng có th? x?y ra trên du?ng. Thay vào dó, nó h?c b?ng cách th? các hành d?ng khác nhau, ch?ng h?n nhu tang t?c, phanh ho?c r? và quan sát k?t qu?. Khi m?t hành d?ng dua nó g?n hon v?i vi?c lái xe an toàn và hi?u qu?, nó du?c c?ng c? nhu m?t l?a ch?n t?t. H?c tang cu?ng du?c s? d?ng r?ng rãi trong ngành robot, d? doán th? tru?ng ch?ng khoán và t?i uu hóa logistics.
+* M?t s? thu?t toán ph? bi?n trong linh v?c h?c máy nhu:
+> K-nearest neighbors (KNN): Thu?t toán KNN d?a trên kho?ng cách gi?a các di?m d? li?u d? phân lo?i ho?c h?i quy. M?t di?m d? li?u m?i du?c gán nhãn d?a trên da s? nhãn c?a các di?m g?n nh?t trong t?p luy?n.
+> Cây quy?t d?nh (DT) và R?ng ng?u nhiên (RF): Cây quy?t d?nh là mô hình don gi?n, tr?c quan giúp phân lo?i d? li?u b?ng cách d?t ra các câu h?i nh? phân theo d?c trung. R?ng ng?u nhiên là t? h?p nhi?u Cây quy?t d?nh d? tang d? chính xác và gi?m hi?n tu?ng overfitting.
+> SVM (Support Vector Machine): Ðây là m?t trong nh?ng thu?t toán phân lo?i m?nh m?, ho?t d?ng hi?u qu? trong không gian da chi?u. Mô hình tìm siêu ph?ng (hyperplane) t?i uu d? phân tách các l?p d? li?u sao cho kho?ng cách t?i các di?m g?n nh?t c?a hai l?p là l?n nh?t. SVM cung có th? s? d?ng kernel d? x? lý các bài toán phi tuy?n.
+> H?i quy tuy?n tính (Linear Regression): H?i quy tuy?n tính là thu?t toán don gi?n nhung hi?u qu?, dùng d? d? doán m?t giá tr? liên t?c d?a trên m?i quan h? tuy?n tính gi?a các bi?n d?u vào và d?u ra. Ðây là n?n t?ng cho nhi?u mô hình h?i quy khác ph?c t?p hon.
+> H?i quy logistic (Logistic Regression): Khác v?i h?i quy tuy?n tính, h?i quy logistic dùng d? gi?i quy?t các bài toán phân lo?i nh? phân. Mô hình s? d?ng hàm sigmoid d? ánh x? d?u ra thành xác su?t thu?c v? m?t l?p c? th?.
+* ?ng d?ng c?a h?c máy trong linh v?c an ninh m?ng
+     Trong b?i c?nh các m?i de d?a an ninh m?ng ngày càng gia tang v? c? s? lu?ng l?n m?c d? tinh vi, các phuong pháp truy?n th?ng nhu s? d?ng ch? ký (signature-based) hay quy t?c th? công (rule-based) không còn d? hi?u qu? d? phát hi?n các cu?c t?n công m?i, chua t?ng bi?t d?n (zero-day attacks). Chính vì v?y, h?c máy ngày càng dóng vai trò quan tr?ng trong vi?c xây d?ng các h? th?ng phát hi?n và phòng ch?ng t?n công m?ng hi?n d?i. M?t trong nh?ng ?ng d?ng n?i b?t c?a h?c máy trong linh v?c này là phân lo?i mã d?c. D?a trên vi?c h?c t? d? li?u hành vi ho?c d?c trung c?a các ?ng d?ng, các mô hình h?c máy có th? phát hi?n ph?n m?m d?c h?i v?i d? chính xác cao, k? c? khi chua t?ng th?y các m?u tru?c dó. Bên c?nh dó h?c máy còn du?c ?ng d?ng trong nhi?u linh v?c khác c?a an ninh m?ng nhu:
+> Phát hi?n xâm nh?p (Intrusion Detection Systems -IDS): s? d?ng mô hình h?c máy d? nh?n bi?t hành vi b?t thu?ng trong luu lu?ng m?ng.
+> Phát hi?n t?n công t? ch?i d?ch v? (DDoS): giúp phân bi?t các m?u luu lu?ng h?p l? và t?n công.
+> Phân lo?i email spam/phishing: mô hình h?c máy du?c s? d?ng d? phân tích n?i dung và phát hi?n thu rác ho?c gi? m?o.
+    2.1.2. T?ng quan v? h?c sâu
+* Khái ni?m
+     H?c sâu (Deep Learning) du?c xem là m?t nhánh m? r?ng c?a h?c máy, s? d?ng m?ng no-ron nhi?u l?p, du?c g?i là m?ng no-ron sâu (deep neural networks), d? mô ph?ng s?c m?nh ra quy?t d?nh ph?c t?p c?a b? não con ngu?i. D?a trên m?ng no-ron nhân t?o, h?c sâu cho phép các h? th?ng máy h?c có th? t? d?ng trích xu?t d?c trung và h?c t? d? li?u ? m?c d? tr?u tu?ng cao, d?c bi?t hi?u qu? trong các bài toán nhu nh?n di?n hình ?nh, x? lý ngôn ng? t? nhiên hay nh?n d?ng gi?ng nói. 
+     B? não c?a con ngu?i truy?n c?m h?ng cho m?ng no-ron nhân t?o. Chúng có th? gi?i quy?t nhi?u v?n d? b?ng các k? thu?t nhu x? lý ngôn ng? t? nhiên, nh?n d?ng hình ?nh và nh?n d?ng gi?ng nói.
+* S? bùng n? c?a h?c sâu
+     Trong vòng m?t th?p niên tr? l?i dây, h?c sâu dã tr?i qua m?t s? phát tri?n bùng n? và tr? thành công ngh? c?t lõi trong nhi?u ?ng d?ng trí tu? nhân t?o hi?n d?i. S? kh?i d?u c?a làn sóng này có th? du?c dánh d?u b?ng chi?n th?ng c?a mô hình m?ng no-ron tích ch?p AlexNet t?i cu?c thi ImageNet nam 2012 - noi m?ng h?c sâu vu?t tr?i so v?i các phuong pháp h?c máy truy?n th?ng trong nhi?m v? nh?n di?n hình ?nh quy mô l?n. S? bùng n? c?a h?c sâu trong th?p k? qua du?c thúc d?y b?i ba y?u t? chính: (1) s? gia tang nhanh chóng c?a d? li?u l?n, cung c?p ngu?n thông tin d?i dào d? hu?n luy?n các mô hình ph?c t?p; (2) ti?n b? vu?t b?c v? ph?n c?ng, d?c bi?t là GPU và TPU, v?i kh? nang x? lý song song vu?t tr?i, giúp rút ng?n th?i gian hu?n luy?n; và (3) nh?ng c?i ti?n v? thu?t toán, bao g?m các k? thu?t t?i uu hóa hi?n d?i nhu Adam, RMSprop và ki?n trúc m?ng tiên ti?n nhu ResNet hay Transformer. 
+* M?t s? thu?t ng? liên quan
+> Hàm kích ho?t
+     Hàm kích ho?t là thành ph?n không th? thi?u trong m?ng no-ron nhân t?o, giúp mô hình h?c du?c các quan h? phi tuy?n ph?c t?p. M?t s? hàm kích ho?t ph? bi?n nhu: 
+* Sigmoid: 
+s(z)=  1/(1+e^(-z) )   (1)
+Hàm có d?u ra n?m trong (0, 1), dùng cho phân lo?i nh? phân.
+
+* Tanh:
+tanh?(z)=  (e^z-e^(-z))/(e^z+e^(-z) )    (2)
+		Hàm có d?u ra n?m trong (-1, 1)
+* ReLU:
+ReLU(z)=max?(0, z)  (3)
+	Hàm don gi?n, hi?u qu?, r?t ph? bi?n.
+* Softmax:
+softmax(z_i )=  e^(z_i )/(?_j¦e^(z_j ) )     (4)
+	Dùng ? l?p d?u ra trong các bài toán phân lo?i da l?p.
+> Backpropagation
+     Ðây là thu?t toán h?c có giám sát quan tr?ng nh?t du?c s? d?ng d? hu?n luy?n m?ng no-ron. M?c tiêu c?a quá trình này là t?i uu tr?ng s? và bias trong m?ng sao cho sai s? gi?a d? doán và nhãn th?c t? là nh? nh?t.
+Co ch? ho?t d?ng:
+* Lan truy?n xuôi (forward pass): D? li?u du?c truy?n t? l?p d?u vào qua các l?p ?n d?n l?p d?u ra d? tính d? doán.
+* Tính toán l?i: So sánh d?u ra d? doán v?i nhãn th?t b?ng m?t hàm m?t mát.
+* Lan truy?n ngu?c (backward pass): Tính toán d?o hàm c?a l?i theo t?ng tr?ng s?, áp d?ng quy t?c chu?i d? phân b? ngu?c t? l?p cu?i cùng v? d?u vào.
+* C?p nh?t tr?ng s?: Dùng các thu?t toán t?i uu (SGD, Adam) d? di?u ch?nh tr?ng s? theo hu?ng gi?m l?i.
+> Dropout
+     Ðây là m?t k? thu?t regularization m?nh m? giúp m?ng no-ron tránh b? quá kh?p (overfitting), giúp mô hình t?ng quát hon trên d? li?u m?i.
+Nguyên lý:
+* Trong m?i l?n hu?n luy?n, m?t t? l? ng?u nhiên các no-ron trong m?i l?p (thu?ng t? 20% d?n 50%) s? b? t?m th?i "t?t" 
+* Ði?u này bu?c m?ng ph?i h?c các bi?u di?n phân tán và d?c l?p, tránh vi?c ph? thu?c vào m?t nhóm no-ron c? th?.
+* Các mô hình h?c sâu ph? bi?n
+> M?ng no-ron da l?p MLP: là d?ng co b?n nh?t c?a m?ng no-ron, bao g?m các l?p d?u vào, ?n và d?u ra, du?c k?t n?i d?y d? v?i nhau.
+> M?ng no-ron tích ch?p CNN: du?c thi?t k? d?c bi?t d? x? lý d? li?u có c?u trúc lu?i nhu hình ?nh, v?i các l?p tích ch?p giúp phát hi?n các d?c trung không gian.
+> M?ng no-ron h?i ti?p RNN: phù h?p v?i d? li?u chu?i nhu van b?n ho?c tín hi?u th?i gian, v?i kh? nang luu tr? thông tin theo th?i gian.
+     Ngoài ra, các ki?n trúc hi?n d?i nhu Transformer v?i co ch? attention dang ngày càng tr? nên ph? bi?n, d?c bi?t trong các tác v? x? lý ngôn ng? t? nhiên và th? giác máy tính.
+* Uu di?m và ?ng d?ng
+H?c sâu dã ch?ng minh hi?u qu? vu?t tr?i trong nhi?u linh v?c nhu:
+> Nh?n di?n hình ?nh và video: Phân lo?i d?i tu?ng, nh?n di?n khuôn m?t, phân do?n hình ?nh.
+> X? lý ngôn ng? t? nhiên: D?ch thu?t, phân tích c?m xúc, chatbot
+> Y t?: Phát hi?n b?nh t? hình ?nh y khoa, phân tích gen
+> Tài chính: D? doán xu hu?ng th? tru?ng, phát hi?n giao d?ch gian l?n
+> Giao thông và t? d?ng hóa: Xe t? lái, t?i uu hóa l? trình
+     Nh? vào kh? nang h?c d?c trung t? d?ng và x? lý d? li?u quy mô l?n, h?c sâu dã tr? thành công ngh? n?n t?ng trong nhi?u h? th?ng trí tu? nhân t?o hi?n d?i, và ti?p t?c là linh v?c nghiên c?u sôi d?ng trong th?i gian t?i.
+    2.1.3. M?ng h?c sâu nhi?u l?p MLP
+     M?i don v? no-ron trong m?ng có th? du?c bi?u di?n b?i công th?c sau:
+     a= ?(?_j¦?w_j x_j+b?)  (5)
+     Trong dó:
+* xj là d?u vào th? j
+*  wj là tr?ng s? liên k?t t? d?u vào xj
+* b là bias (h? s? d?ch)
+* ?? là hàm kích ho?t phi tuy?n
+* a là d?u ra (kích ho?t) c?a no-ron.
+     M?t vài ví d? v? các don v? x? lý này là:
+> H?i quy tuy?n tính s? d?ng mô hình tuy?n tính, do dó ??(z) = z
+> Trong phân lo?i nh? phân tuy?n tính, ?? là m?t ngu?ng c?ng t?i 0.
+> H?i quy logistic, ?? là m?t hàm logistic ??(z) = 1/(1+ e^(-z))
+     Vi?c x?p ch?ng nhi?u l?p no-ron có ch?c nang phi tuy?n giúp MLP h?c du?c các ánh x? phi tuy?n gi?a d?u vào và d?u ra. N?u không có hàm kích ho?t phi tuy?n ? gi?a các l?p, m?ng s? ch? tuong duong m?t phép bi?n d?i tuy?n tính don gi?n, b?t k? có bao nhiêu l?p. M?i don v? th?c hi?n ch?c nang r?t don gi?n và r?p khuôn, nhung khi k?t h?p l?i, chúng có th? th?c hi?n m?t s? phép tính r?t h?u ích. M?ng no-ron truy?n th?ng (FNN) trong dó các don v? du?c s?p x?p thành m?t d? th? mà không có b?t k? chu k? nào, do dó, t?t c? các phép tính có th? th?c hi?n tu?n t?. Ði?u này trái ngu?c v?i m?ng no-ron h?i quy (RNN), trong dó d? th? có th? có các chu k?, do dó quá trình x? lý có th? t? truy?n vào chính nó. 
+     M?ng Perceptron nhi?u l?p MLP là m?t lo?i m?ng no-ron nhân t?o thu?c nhóm m?ng truy?n th?ng FNN. Ðây là m?t trong nh?ng mô hình h?c sâu co b?n nh?t, bao g?m nhi?u l?p tuy?n tính k?t h?p v?i hàm kích ho?t phi tuy?n gi?a các l?p, cho phép m?ng h?c du?c các ánh x? phi tuy?n ph?c t?p gi?a d?u vào và d?u ra. 
+
+   Hình 2.2 M?ng no-ron nhi?u l?p MLP
+     ? dây, các no-ron du?c s?p x?p thành m?t t?p h?p các l?p, m?i l?p ch?a m?t s? lu?ng nh?t d?nh các don v? no-ron. M?i don v? trong m?t l?p du?c k?t n?i v?i m?i don v? trong l?p ti?p theo; ta nói r?ng m?ng du?c k?t n?i d?y d?. L?p d?u tiên là l?p d?u vào và các don v? c?a nó l?y các giá tr? c?a d?c trung d?u vào. L?p cu?i cùng là l?p d?u ra và nó có m?t don v? d?i v?i cho m?i giá tr? t?i d?u ra c?a m?ng no-ron ( t?c là k don v? trong tru?ng h?p phân lo?i k l?p). T?t c? các l?p ? gi?a nh?ng l?p này du?c g?i là l?p ?n, vì chúng ta không bi?t tru?c nh?ng don v? này tính toán nh?ng gì và di?u này c?n du?c khám phá trong quá trình h?c. Các don v? trong các l?p nêu trên l?n lu?t du?c g?i là don v? d?u vào, don v? d?u ra và don v? ?n. Chi?u sâu (depth) c?a m?ng là s? lu?ng các l?p, trong khi chi?u r?ng (width) là s? lu?ng no-ron trong m?i l?p. "H?c sâu" d? c?p d?n kh? nang hu?n luy?n các mô hình v?i nhi?u l?p ?n - di?u t?ng là thách th?c trong quá kh? do h?n ch? v? d? li?u và tính toán.
+  2.2. Thu?t toán di truy?n
+    2.2.1. Nguyên lý ho?t d?ng
+     Thu?t toán di truy?n (Genetic Algorithm - GA) là m?t lo?i thu?t toán t?i uu hóa, nghia là chúng du?c s? d?ng d? tìm ra gi?i pháp t?i uu cho m?t bài toán nh?t d?nh, t?i da hóa ho?c t?i thi?u hóa m?t hàm c? th?. Thu?t toán di truy?n d?i di?n cho m?t nhánh c?a linh v?c nghiên c?u g?i là tính toán ti?n hóa (evolutionary computation), trong dó chúng mô ph?ng các quá trình sinh h?c c?a quá trình sinh s?n và ch?n l?c t? nhiên d? gi?i quy?t các gi?i pháp phù h?p nh?t. Gi?ng nhu trong quá trình ti?n hóa, nhi?u quy trình c?a thu?t toán di truy?n là ng?u nhiên, tuy nhiên k? thu?t t?i uu hóa này cho phép ngu?i ta thi?t l?p m?c d? ng?u nhiên và m?c d? ki?m soát. Thu?t toán này m?nh m? và hi?u qu? hon nhi?u so v?i các thu?t toán tìm ki?m ng?u nhiên và tìm ki?m d?y d?, nhung không yêu c?u thông tin b? sung v? bài toán dã cho. Tính nang này cho phép tìm ki?m gi?i pháp cho các bài toán mà các phuong pháp t?i uu hóa khác không th? x? lý do tính thi?u liên t?c, d?o hàm ho?c không xác d?nh rõ c?u trúc toán h?c.
+     Vì thu?t toán di truy?n du?c thi?t k? d? mô ph?ng quá trình t? nhiên do dó h?u h?t các thu?t ng? du?c mu?n t? ngành sinh h?c. C?u trúc và thành ph?n chính c?a thu?t toán di truy?n là:
+* Hàm thích nghi (fitness function)
+* Nhi?m s?c th? (chromosome)
+* Qu?n th? (population)
+* Toán t? l?a ch?n (selection operator)
+* Lai ghép (crossover)
+* Ð?t bi?n (Mutation)
+     Hàm thích nghi là hàm mà thu?t toán dang c? t?i uu hóa. T? "thích nghi" du?c l?y t? thuy?t ti?n hóa. Nó du?c s? d?ng ? dây vì hàm thích nghi ki?m tra và d?nh lu?ng m?c d? phù h?p c?a t?ng gi?i pháp ti?m nang. Hàm thích nghi là m?t trong nh?ng thành ph?n quan tr?ng nh?t c?a thu?t toán.
+     Thu?t ng? nhi?m s?c th? dùng d? ch? bi?u di?n (mã hóa) c?a m?t cá th?, t?c là m?t gi?i pháp ti?m nang cho m?t v?n d? mà thu?t toán di truy?n dang c? g?ng gi?i quy?t. M?i gi?i pháp ti?m nang du?c mã hóa du?i d?ng m?t m?ng các giá tr? tham s?, m?t quá trình cung du?c tìm th?y trong các thu?t toán t?i uu khác. N?u m?t v?n d? có Npar chi?u, thì thông thu?ng m?i nhi?m s?c th? du?c mã hóa du?i d?ng m?t m?ng Npar ph?n t?	
+     chromosome = [p_1, p_2, ..., p_(N_par ) ]        (6)
+     trong dó m?i pi  là m?t giá tr? c? th? c?a tham s? th? i. Ngu?i t?o ra thu?t toán di truy?n ph?i dua ra cách d?ch không gian m?u c?a các gi?i pháp ti?m nang thành nhi?m s?c th?. M?t cách ti?p c?n là chuy?n d?i t?ng giá tr? tham s? thành m?t chu?i bit ( chu?i 0 và 1), sau dó n?i các tham s? d?u cu?i gi?ng nhu các gen trong m?t chu?i DNA d? t?o ra nhi?m s?c th?. Theo truy?n th?ng, nhi?m s?c th? thu?ng du?c mã hóa theo cách này, và nó v?n là m?t phuong pháp phù h?p cho các không gian gi?i pháp r?i r?c.
+     Thu?t toán di truy?n kh?i d?u b?ng m?t nhóm nhi?m s?c th? du?c ch?n ng?u nhiên, dóng vai trò là th? h? d?u tiên (qu?n th? ban d?u). Sau dó, m?i cá th? trong qu?n th? du?c dánh giá b?ng hàm thích nghi d? ki?m tra m?c d? gi?i quy?t v?n d? tru?c m?t c?a nó.
+     Bây gi?, toán t? l?a ch?n s? ch?n m?t vài nhi?m s?c th? d? sinh s?n d?a trên phân ph?i xác su?t do ngu?i dùng xác d?nh. Cá th? càng phù h?p thì càng có kh? nang du?c l?a ch?n. Ví d?, n?u f là m?t hàm thích nghi không âm, xác su?t nhi?m s?c th? C53 du?c ch?n d? sinh s?n có th? là
+     P(C_53 )= |f(C_53 )/(?_(i=1)^(N_pop)¦f(C_i ) )|        (7)
+     Chú ý r?ng toán t? l?a ch?n có th? ch?n nh?ng nhi?m s?c th? có s? thay th?, do dó cùng m?t nhi?m s?c th? có th? du?c ch?n nhi?u l?n. Toán t? lai ghép gi?ng v?i s? lai ghép sinh h?c và tái t? h?p nhi?m s?c th? trong gi?m phân t? bào. Toán t? này hoán d?i m?t chu?i con c?a hai nhi?m s?c th? dã ch?n d? t?o ra hai th? h? con. Ví d?, n?u nhi?m s?c th? cha m? là [11010111001000] và [01011101010010] du?c trao d?i chéo sau bit th? tu thì [01010111001000] và [11011101010010] s? là con c?a chúng. Toán t? d?t bi?n ng?u nhiên d?o ngu?c t?ng bit riêng l? trong nhi?m s?c th? m?i (bi?n 0 thành 1 và ngu?c l?i). Thông thu?ng, d?t bi?n x?y ra v?i xác su?t r?t th?p, ch?ng h?n nhu 0.001. M?t s? thu?t toán tri?n khai toán t? d?t bi?n tru?c các toán t? ch?n l?c và toán t? lai ghép. Tho?t nhìn, toán t? d?t bi?n có v? không c?n thi?t. Trên th?c t?, nó dóng vai trò quan tr?ng, ngay c? khi nó là th? y?u so v?i vai trò c?a ch?n l?c và lai ghép. Ch?n l?c và lai ghép duy trì thông tin di truy?n c?a nhi?m s?c th? thích nghi hon, nhung các nhi?m s?c th? này ch? thích nghi hon so v?i th? h? hi?n t?i. Nói cách khác, thu?t toán có th? b? k?t ? m?c t?i uu c?c b? tru?c khi tìm ra m?c t?i uu toàn c?c. Toán t? d?t bi?n giúp b?o v? ch?ng l?i v?n d? này b?ng cách duy trì tính da d?ng trong qu?n th?, nhung nó cung có th? khi?n thu?t toán h?i t? ch?m hon.
+     Thông thu?ng, quá trình ch?n l?c, lai ghép và d?t bi?n s? ti?p t?c cho d?n khi s? lu?ng con cháu b?ng v?i qu?n th? ban d?u, do dó th? h? th? hai du?c t?o thành hoàn toàn t? con cháu m?i và th? h? d?u ti?n du?c thay th? hoàn toàn. Bây gi?, th? h? th? hai s? du?c ki?m tra b?i hàm thích nghi, và chu k? l?p l?i. M?t th?c hành ph? bi?n là ghi l?i cá th? có d? thích nghi cao nh?t  (cùng v?i giá tr? d? thích nghi c?a nó) t? m?i th? h? ho?c cá th? "t?t nh?t hi?n t?i".
+     Thu?t toán di truy?n du?c l?p l?i cho d?n khi giá tr? d? phù h?p c?a cá th? "t?t nh?t hi?n t?i" ?n d?nh và không thay d?i trong nhi?u th? h?. Ði?u này có nghia là thu?t toán dã h?i t? d?n m?t ho?c nhi?u gi?i pháp. Toàn b? quá trình l?p l?i du?c g?i là m?t l?n ch?t. Vào cu?i m?i l?n ch?y, thu?ng có ít nh?t m?t cá th? có d? thích nghi cao v?i bài toán. Tùy thu?c vào thu?t toán du?c tri?n khai, cá th? du?c ch?n làm nghi?m cu?i cùng có th? là cá th? t?t nh?t trong toàn b? quá trình ch?y ho?c ch? là cá th? t?t nh?t ? th? h? cu?i cùng.
+     
+   Hình 2.3: So d? t?ng quan thu?t toán di truy?n
+     Hi?u su?t c?a thu?t toán di truy?n ph? thu?c r?t nhi?u vào phuong pháp du?c s? d?ng d? mã hóa các gi?i pháp ti?m nang thành nhi?m s?c th? và "tiêu chí c? th? d? thành công", ho?c hàm thích nghi th?c s? dang do lu?ng di?u gì. Các chi ti?t quan tr?ng khác là xác su?t lai ghép, d?t bi?n, kích thu?c qu?n th? và s? l?n l?p l?i. Nh?ng giá tr? này có th? du?c di?u ch?nh sau khi dánh giá hi?u su?t c?a thu?t toán trong m?t vài l?n ch?y th?.
+     
+    2.2.2. Uu di?m và h?n ch?
+* Uu di?m
+     Thu?t toán di truy?n có nhi?u uu di?m hon so v?i các phuong th?c truy?n th?ng. Không gi?ng nhu các phuong pháp tìm ki?m don nghi?m d?a nhu leo d?i (hill-climbing), thu?t toán di truy?n ti?n hóa t? m?t qu?n th? các cá th? gi?i pháp thay vì m?t giá tr? duy nh?t. Ði?u này làm gi?m dáng k? kh? nang tìm th?y m?t gi?i pháp t?i uu c?c b? thay vì t?i uu toàn c?c. Thu?t toán di truy?n không yêu c?u thông tin d?o hàm hay liên t?c c?a hàm m?c tiêu. GA ch? c?n giá tr? hàm thích nghi d? dánh giá m?c d? t?t c?a m?i cá th?, do dó nó có th? áp d?ng cho các bài toán không tron, phi tuy?n, không kh? vi ho?c có không gian tìm ki?m b? nhi?u.
+     Ngoài ra, GA còn có các l?i ích n?i b?t sau:
+* Tính linh ho?t cao: d? dàng áp d?ng cho các bài toán t?i uu r?i r?c ho?c liên t?c, bài toán nhi?u m?c tiêu, ràng bu?c ph?c t?p.
+* Kh? nang song song hóa: do các cá th? trong qu?n th? có th? du?c dánh giá d?c l?p, GA phù h?p v?i môi tru?ng x? lý song song.
+* Kh? nang m? r?ng và k?t h?p: thu?t toán có th? tích h?p v?i các k? thu?t khác nhu h?c sâu, fuzzy logic ho?c tìm ki?m c?c b? (local search) d? nâng cao hi?u su?t.
+* H?n ch?
+     Tuy nhiên, thu?t toán di truy?n cung t?n t?i m?t s? h?n ch? nh?t d?nh:
+* Chi phí tính toán cao: d?i v?i các bài toán ph?c t?p, vi?c dánh giá hàm thích nghi có th? r?t t?n kém v? th?i gian và tài nguyên, d?c bi?t khi ph?i mô ph?ng các gi?i pháp. Ði?u này khi?n GA không phù h?p cho các ?ng d?ng yêu c?u th?i gian th?c ho?c tài nguyên h?n ch?.
+* H?i t? ch?m và d? m?c vào h?i t? s?m: GA có th? c?n nhi?u th? h? d? h?i t? và dôi khi h?i t? vào các nghi?m c?c b? không t?i uu n?u không du?c thi?t l?p dúng (ví d?: xác su?t d?t bi?n quá th?p, da d?ng qu?n th? gi?m di).
+* Ph? thu?c vào tham s?: hi?u su?t GA ph? thu?c nhi?u vào cách ch?n các tham s? nhu kích thu?c qu?n th?, xác su?t lai ghép, xác su?t d?t bi?n, s? vòng l?p...Vi?c l?a ch?n này yêu c?u ki?n th?c chuyên môn và th? nghi?m th?c t?.
+* Khó khan trong thi?t k? hàm thích nghi: l?a ch?n dúng hàm thích nghi ?nh hu?ng tr?c ti?p d?n hi?u qu? tìm ki?m. M?t hàm thi?t k? không t?t có th? d?n t?i hu?ng tìm ki?m sai l?ch ho?c không có kh? nang phân bi?t gi?a các cá th?.
+  2.3. Mô hình h?c sâu k?t h?p thu?t toán di truy?n
+    2.3.1. M?c tiêu
+     H?c sâu dã ch?ng minh hi?u qu? vu?t tr?i trong nhi?u bài toán phân lo?i. Mô hình MLP là m?t trong nh?ng mô hình co b?n nhung có ti?m nang m?nh m? khi du?c hu?n luy?n v?i t?p d? li?u d? l?n và c?u hình mô hình h?p lý. Tuy don gi?n v? c?u trúc, nhung hi?u nang c?a MLP ph? thu?c r?t l?n vào c?u trúc m?ng và các siêu tham s?, bao g?m s? l?p ?n, s? lu?ng no-ron m?i l?p, t? l? dropout, t?c d? h?c...Vi?c tinh ch?nh các tham s? này thông qua th? nghi?m th? công là quá trình t?n th?i gian, d? b? sai l?ch do tr?c giác ho?c thi?u kinh nghi?m, và không d?m b?o tìm ra du?c mô hình có hi?u qu? t?t.
+     Do dó, m?c tiêu chính d? xu?t trong d? tài này là d? xu?t m?t mô hình GA-MLP, trong dó thu?t toán di truy?n du?c tích h?p d? t? d?ng hóa vi?c t?i uu c?u trúc và siêu tham s? c?a m?ng MLP. GA s? tìm ki?m trong không gian siêu tham s? các c?u hình có d? chính xác phân lo?i cao nh?t thông qua quá trình ti?n hóa. 
+     C? th?, nghiên c?u này hu?ng d?n các m?c tiêu sau:
+* T? d?ng hóa quá trình thi?t k? và di?u ch?nh m?ng MLP.
+* T?i uu hóa các siêu tham s? quan tr?ng nh?m d?t d? chính xác phân lo?i cao trên t?p d? li?u mã d?c Android.
+* C?i thi?n kh? nang khái quát hóa c?a mô hình, tránh overfitting.
+* Khai thác tính linh ho?t và m?nh m? c?a GA trong vi?c tìm ki?m không gian tham s? l?n và phi tuy?n tính.
+     B?ng cách k?t h?p mô hình h?c sâu MLP v?i thu?t toán di truy?n, nghiên c?u k? v?ng xây d?ng du?c m?t mô hình phát hi?n mã d?c có d? chính xác cao, ?n d?nh và có kh? nang m? r?ng sang các bài toán tuong t? trong các linh v?c khác.
+    2.3.2.  Mô hình GA-MLP
+     Mô hình GA-MLP du?c xây d?ng nh?m t?i uu hóa hi?u qu? h?c c?a m?ng MLP b?ng cách t? d?ng di?u ch?nh các siêu tham s?. Quá trình này không nh?ng giúp c?i thi?n d? chính xác c?a mô hình, mà còn gi?m thi?u th?i gian th? sai khi l?a chon th? công các tham s? m?ng.
+     Mô hình ho?t d?ng theo co ch? hai t?ng: t?ng t?i uu và t?ng hu?n luy?n. ? t?ng t?i uu, thu?t toán di truy?n th?c hi?n tìm ki?m các t? h?p siêu tham s? phù h?p nh?t thông qua quá trình ti?n hóa. T?ng hu?n luy?n ch?u trách nhi?m xây d?ng và dánh giá các mô hình tuong ?ng v?i t?ng cá th? trong qu?n th? hi?n t?i.
+     C?u trúc t?ng quan c?a quá trình này du?c minh h?a trong hình sau dây:
+     
+     
+
+
+
+   Hình 2.4: Ki?n trúc mô hình GA-MLP
+     Các thành ph?n chính trong ki?n trúc bao g?m:
+* T?p d? li?u d?u vào: 
+D? li?u tinh hu?n luy?n du?c chu?n hóa và gán nhãn g?m các d?c trung tinh du?c trích xu?t t? ?ng d?ng Android. T?p d? li?u du?c chia thành hai ph?n chính: t?p hu?n luy?n, xác th?c và ki?m tra, trong dó t?p xác th?c dóng vai trò quan tr?ng d? dánh giá d? khái quát hóa và ki?m soát overfitting trong quá trình ti?n hóa.
+* Thu?t toán di truy?n: 
+GA kh?i t?o m?t qu?n th? các cá th? ng?u nhiên. M?i cá th? du?c mã hóa thành m?t nhi?m s?c th? ch?a các siêu tham s?:
+* S? l?p ?n (num_layers)
+* S? lu?ng no-ron ? m?i l?p (neurons)
+* T? l? dropout c?a t?ng l?p (dropout_rates)
+* T?c d? h?c (learning_rate)
+* Kích thu?c batch (batch_size)
+* Xây d?ng và hu?n luy?n MLP:
+T? m?i cá th?, m?t m?ng MLP du?c kh?i t?o tuong ?ng và hu?n luy?n trên t?p hu?n luy?n. Ð? chính xác trên t?p xác th?c du?c s? d?ng làm giá tr? d? thích nghi (fitness value) d? dánh giá cá th?.
+* Ch?n l?c - Lai ghép - Ð?t bi?n:
+GA ch?n l?c các cá th? có d? thích nghi cao d? t?o th? h? sau. Quá trình lai ghép và d?t bi?n du?c áp d?ng d? t?o ra các nhi?m s?c th? con, nh?m d?m b?o s? da d?ng và kh? nang khám phá c?a thu?t toán.
+* T?o th? h? m?i và l?p l?i:
+Chu trình ti?n hóa du?c l?p l?i cho d?n khi d?t s? th? h? t?i da ho?c giá tr? thích nghi không c?i thi?n dáng k?. Cá th? có d? thích nghi cao nh?t trong toàn b? quá trình s? du?c ch?n làm mô hình cu?i cùng.
+  2.4. K?t lu?n chuong
+     Trong chuong này, các ki?n th?c n?n t?ng ph?c v? cho vi?c xây d?ng mô hình h?c sâu k?t h?p thu?t toán di truy?n dã du?c trình bày m?t cách h? th?ng. Tru?c tiên, chuong dã di?m qua các khái ni?m v? h?c máy và h?c sâu, d?t n?n móng cho vi?c l?a ch?n mô hình m?ng no-ron nhi?u l?p (MLP) làm công c? chính trong bài toán phân lo?i. Ti?p theo, thu?t toán di truy?n, m?t phuong pháp t?i uu hóa d?a trên co ch? ch?n l?c t? nhiên trong ti?n hóa sinh h?c, dã du?c phân tích chi ti?t. Các bu?c chính nhu kh?i t?o, ch?n l?c, lai ghép và d?t bi?n du?c trình bày rõ ràng, cùng v?i nh?ng uu di?m nhu kh? nang khám phá không gian tham s? r?ng và tránh m?c k?t t?i các c?c tr? c?c b?. 
+     Ph?n cu?i c?a chuong gi?i thi?u mô hình h?c sâu k?t h?p v?i thu?t toán di truy?n. C? th?, mô hình s? d?ng m?ng no-ron nhi?u l?p (MLP) d? phân lo?i, trong khi thu?t toán di truy?n du?c áp d?ng d? t?i uu ki?n trúc m?ng và các siêu tham s? c?a m?ng h?c sâu. Vi?c tích h?p này không ch? giúp nâng cao hi?u su?t phân lo?i mà còn t? d?ng hóa quá trình thi?t k? mô hình - m?t quá trình thu?ng dòi h?i nhi?u công s?c và kinh nghi?m chuyên môn. 
+
+
+
+
+
+
+
+
+
+
+
+
+chuong 3: TH?C NGHI?M
+  3.1. So d? t?ng th? phân lo?i mã d?c
+
+     
+   Hình 3.1: So d? t?ng quát quy trình th?c nghi?m
+  3.2. B? d? li?u và d?c trung
+    3.2.1. B? d? li?u
+     Ð? tài thu th?p và s? d?ng b? d? li?u g?m các ?ng d?ng du?c phân lo?i thành các nhóm: Addisplay, Riskware, Benign, Spr. M?i nhóm ch?a m?t s? lu?ng m?u nh?t d?nh, c? th? nhu b?ng du?i dây.
+NhómS? lu?ng m?uBenign6000Addisplay3500Riskware3500Spr3500   B?ng 3.1: S? lu?ng m?u các nhóm phân lo?i
+    3.2.2. Ð?c trung
+     Ð?c trung là nh?ng thu?c tính quan tr?ng dùng d? mô t? và phân bi?t các m?u trong b? d? li?u. Trong nghiên c?u này, các d?c trung du?c trích xu?t t? mã tinh c?a ?ng d?ng Android, ch? y?u thu?c các nhóm sau:
+* Permissions: Là các quy?n mà ?ng d?ng yêu c?u d? truy c?p vào các ch?c nang h? th?ng Android, ch?ng h?n nhu quy?n truy c?p m?ng, d?c/ghi b? nh? ngoài, d?c bi?t là các hành vi xâm ph?m quy?n riêng tu ho?c gây h?i cho h? th?ng.
+* Intents: Là co ch? cho phép ?ng d?ng tuong tác v?i h? di?u hành ho?c các ?ng d?ng khác. Các hành d?ng nhu android.intent.action.MAIN ho?c android.intent.action.CREATE_SHORTCUT có th? ti?t l? m?c dích và cách th?c ho?t d?ng c?a ?ng d?ng.
+* Services: Là các thành ph?n ch?y ng?m trong h? th?ng Android, thu?ng du?c s? d?ng d? th?c hi?n các tác v? n?n nhu k?t n?i m?ng, g?i d? li?u, ho?c t?i v? n?i dung. Các d?ch v? có th? b? l?i d?ng d? duy trì ho?t d?ng liên t?c ho?c cài d?t mã d?c b? sung mà không c?n tuong tác t? ngu?i dùng.
+* API Calls: ?ng d?ng Android s? d?ng API d? tuong tác v?i h? th?ng. M?t s? API có th? là d?u hi?u cho các hành vi nguy hi?m, nhu d?c danh b?, g?i tin nh?n, ho?c truy xu?t thông tin d?nh v?. Do dó, t?n su?t và lo?i API du?c g?i có th? ph?n ánh rõ m?c d? nguy hi?m c?a ?ng d?ng.
+* Receivers: Là các thành ph?n giúp ?ng d?ng t? d?ng ph?n ?ng v?i các s? ki?n h? th?ng, nhu BOOT_COMPLETED (?ng d?ng t? ch?y khi kh?i d?ng thi?t b?), SMS_RECEIVED (nghe lén ho?c dánh c?p tin nh?n), CONNECTIVITY_CHANGE (phát hi?n khi có k?t n?i Internet d? truy?n d? li?u). Vi?c ?ng d?ng dang ký nh?n các broadcast này có th? là d?u hi?u c?a hành vi d?c h?i.
+     Các d?c trung trên giúp mô hình h?c sâu phân bi?t gi?a ?ng d?ng bình thu?ng và ?ng d?ng d?c h?i d?a trên hành vi ti?m ?n, là co s? quan tr?ng trong giai do?n hu?n luy?n và dánh giá mô hình.
+    3.2.3. Phuong pháp trích xu?t d?c trung
+     Quá trình trích xu?t d?c trung t? b? d? li?u bao g?m các bu?c sau:
+a) Ti?n x? lý:
+     Trong quá trình này, các d?c trung c?a ?ng d?ng Android s? du?c trích xu?t b?ng cách s? d?ng công c? AndroidPyTool. Ðây là m?t công c? m?nh m? dùng d? trích xu?t t? d?ng các d?c trung tinh và d?ng c?a ?ng d?ng Android. Nó tích h?p m?t s? công c? phân tích ?ng d?ng n?i ti?ng nhu DroidBox, FlowDroid, Strace và VirusTotal. 
+     Trong nghiên c?u này, phiên b?n v?i Docker c?a AndroidPyTool du?c s? d?ng. Sau khi cài d?t Docker, công c? du?c t?i t? Docker Hub b?ng l?nh:
+     docker pull alexmyg/andropytool
+     Ð? trích xu?t các d?c trung tinh, th?c hi?n l?nh sau:
+    docker run --volume=<PATH>:/apks alexmyg/andropytool -s /apks -f -fw 
+   Trong dó, <PATH> là du?ng d?n ch?a các t?p apk s? du?c phân tích. K?t qu? du?c luu vào thu m?c Features_files du?i d?ng các t?p JSON, m?i t?p ch?a m?t thông tin d?c trung c?a m?t nhóm ?ng d?ng.
+
+
+   Hình 3.2: Công c? AndroPyTool
+b) Phân tích các t?p JSON
+     Các t?p JSON ch?a thông tin d?c trung du?c d?c và x? lý l?n lu?t. M?i t?p JSON d?i di?n cho m?t nhóm ?ng d?ng. Ð? xác d?nh nhóm c?a t?ng ?ng d?ng, tên c?a t?p JSON du?c s? d?ng d? phân lo?i ?ng d?ng vào các nhóm tuong ?ng.
+T? m?i t?p JSON, các d?c trung tinh du?c trích xu?t bao g?m: Permissions, Intents, API Calls, Services, Receivers.
+c) L?c các d?c trung ph? bi?n
+     Sau khi t?ng h?p t?t c? các d?c trung t? các ?ng d?ng, top 500 ph? bi?n nh?t t? m?i nhóm d?c trung (d?a trên t?n su?t xu?t hi?n) du?c l?a ch?n d? d?m b?o tính d?i di?n và gi?m chi?u d? li?u d?u vào.
+d) Gán nhãn ?ng d?ng
+     M?i ?ng d?ng du?c ánh x? vào m?t nhãn s? ph?c v? cho bài toán phân lo?i b?n l?p. C? th?: 
+* Addisplay: nhãn 0
+* Benign: nhãn 1
+* Riskware: nhãn 2
+* Spr: nhãn 3
+e) Chu?n hóa d?c trung
+     Sau khi xác d?nh các d?c trung ph? bi?n nh?t, m?i ?ng d?ng s? du?c bi?u di?n du?i d?ng các d?c trung nh? phân. M?i d?c trung s? t?o thành m?t côt trong b?ng d? li?u: N?u d?c trung xu?t hi?n trong ?ng d?ng s? du?c gán giá tr? 1, còn không xu?t hi?n s? gán giá tr? 0. 
+     Tên c?t du?c d?t theo quy u?c nhu sau:
+* perm_<permission_name> 
+* action_<action_name>
+* service_<service_name>
+* api_<api_name>
+* receiver_<receiver_name>.
+     Ví d?, n?u m?t ?ng d?ng có quy?n INTERNET, c?t tuong ?ng trong b?ng d? li?u s? là perm_INTERNET. N?u ?ng d?ng không yêu c?u quy?n này, giá tr? trong c?t s? là 0, ngu?c l?i n?u có thì giá tr? s? là 1.
+     Vi?c chu?n hóa tên các d?c trung theo cách này không ch? giúp qu?n lý d? li?u d? dàng hon mà còn d?m b?o tính nh?t quán và thu?n ti?n khi s? d?ng trong các mô hình h?c máy ho?c các công c? phân tích.
+f) K?t qu? và xu?t d? li?u
+     Sau khi trích xu?t và chu?n hóa d?c trung, d? li?u cu?i cùng du?c t? ch?c thành m?t b?ng g?m:
+* app_id: Mã d?nh danh ?ng d?ng
+* category: nhóm ?ng d?ng
+* label: nhãn s? c?a nhóm ?ng d?ng
+* các d?c trung nh? phân: m?i d?c trung (permission, intent, api call, service, receiver) du?c bi?u di?n du?i d?ng các c?t nh? phân, th? hi?n s? hi?n di?n hay v?ng m?t c?a d?c trung trong ?ng d?ng.
+     B?ng d? li?u sau dó du?c luu du?i d?ng t?p CSV, s? d?ng cho vi?c hu?n luy?n mô hình h?c sâu.
+  3.3. K?ch b?n th?c nghi?m
+    3.3.1. Thi?t l?p môi tru?ng
+     Các mô hình du?c s? d?ng trong k?ch b?n th? nghi?m du?c hu?n luy?n và dánh giá trong môi tru?ng th?c nghi?m nhu sau:
+* N?n t?ng: Google Colab
+* GPU s? d?ng: NVIDIA A100 40GB
+* H? di?u hành: Linux (Ubuntu-based, m?c d?nh c?a Colab)
+* Ngôn ng? l?p trình: Python 3.10
+* Thu vi?n chính: 
+* H?c máy & h?c sâu: Scikit-learn, TensorFlow, Keras
+* X? lý d? li?u: NumPy, Pandas
+* Tr?c quan hóa: Matplotlib, Seaborn
+* T?i uu hóa ti?n hóa: PyGad
+    3.3.2. Các tiêu chí dánh giá
+     Hi?u su?t c?a các mô hình phân lo?i du?c dánh giá theo các tiêu chí sau:
+a) Ð? chính xác (accuracy): 
+     Ð? chính xác là t? l? gi?a s? lu?ng m?u du?c phân lo?i dúng và t?ng s? m?u trong t?p ki?m tra. Ð? chính xác du?c tính theo công th?c:
+¦(Accuracy= (TP+TN)/(TP+TN+FP+FN)*100%   (8)#)
+	Trong dó:
+* TP (True Positive): S? m?u d? doán dúng thu?c l?p duong.
+* TN (True Negative): S? m?u d? doán dúng thu?c l?p âm.
+* FP (False Positive): M?u th?c t? không thu?c l?p c?n d? doán nhung mô hình l?i d? doán sai là thu?c l?p dó.
+* FN (False Negative): M?u th?c t? thu?c l?p c?n phát hi?n, nhung mô hình l?i d? doán sai là không thu?c l?p dó.
+b) Báo cáo phân lo?i (Classification Report): 
+     Ðây là m?t báo cáo t?ng quan v? hi?u su?t c?a mô hình phân lo?i, thu?ng du?c s? d?ng d? dánh giá chi ti?t các ch? s? nhu d? chính xác (precision), d? ph? (recall), di?m f1 (f1-score) c?a mô hình trên t?ng l?p trong bài toán phân lo?i. Nó giúp ngu?i dùng có cái nhìn sâu s?c v? cách mô hình ho?t d?ng d?i v?i t?ng l?p trong d? li?u, thay vì ch? d?a vào m?t ch? s? t?ng quát nhu d? chính xác (accuracy). C? th? nhu sau:
+> Ð? chính xác (Precision): 
+     Ch? s? này phàn ánh t? l? d? doán dúng trong s? các d? doán thu?c l?p dó, giúp hi?u du?c d? tin c?y c?a mô hình khi d? doán m?t l?p nh?t d?nh.
+
+
+Công th?c:
+¦(Precision= TP/(TP+FP)  (9)#)     	Trong dó:
+* TP (True Positive): S? lu?ng m?u th?c s? thu?c v? l?p và du?c mô hình d? doán là l?p dó.
+* FP (False Positive): S? lu?ng m?u không thu?c l?p nhung l?i du?c mô hình phân lo?i sai thành l?p dó.
+> Ð? ph? (Recall):
+     Cho bi?t mô hình có kh? nang phát hi?n du?c bao nhiêu m?u c?a l?p dó. M?t d? ph? cao nghia là mô hình ít b? sót các m?u thu?c l?p dó.
+     Công th?c:
+¦(Recall= TP/(TP+FN)  (10)#)     > Ði?m f1 (f1-score):
+     Là trung bình di?u hòa c?a d? chính xác và d? ph?, giúp cân b?ng gi?a chúng khi mu?n t?i uu hóa c? d? chính xác và d? ph?. Ði?m f1 d?c bi?t h?u ích trong tru?ng h?p m?t cân b?ng gi?a các l?p.
+Công th?c:
+¦(F1= (2 X Precision X Recall)/(Precision+Recall)  (11)#)
+c) Ma tr?n nh?m l?n (Confusion Matrix) 
+     Ðây là m?t công c? quan tr?ng trong vi?c dánh giá hi?u su?t c?a các mô hình phân lo?i, d?c bi?t là trong các bài toán phân lo?i nhi?u l?p. Nó cung c?p cái nhìn chi ti?t v? các l?i mà mô hình có th? g?p ph?i khi phân lo?i các m?u vào các l?p khác nhau. Ma tr?n th? hi?n s? lu?ng các m?u mà mô hình phân lo?i dúng và sai cho t?ng l?p c? th?, giúp phân tích và hi?u rõ hon v? các lo?i l?i mà mô hình g?p ph?i.
+     Ví d?, ma tr?n nh?m l?n cho mô hình v?i bài toán phân lo?i b?n l?p v?i các nhãn tuong ?ng:
+* Addisplay: nhãn 0
+* Benign: nhãn 1
+* Riskware: nhãn 2
+* Spr: nhãn 3
+Predicted 0Predicted 1Predicted 2Predicted 3Actual 0505102Actual 136084Actual 226705Actual 314380   B?ng 3.2: C?u trúc ma tr?n nh?m l?n
+    3.3.3. Các k?ch b?n th? nghi?m
+a) K?ch b?n 1: Phát hi?n mã d?c
+     Trong k?ch b?n phát hi?n mã d?c, các mô hình nhu SVM, RF, MLP, GA-MLP du?c s? d?ng nh?m so sánh d? hi?u qu? và chính xác trong vi?c phát hi?n mã d?c.
+     B? d? li?u: T?ng s? m?u: 12000 ?ng d?ng
+* Addisplay: 2000
+* Bengin: 6000
+* Riskware: 2000
+* Spr: 2000
+     Ti?n x? lý nhãn:
+* Benign: nhãn 0
+* Malware (g?p t? Addisplay, Riskware, Spr): nhãn 1
+* K?ch b?n 1.1: Mô hình GA-MLP
+> Không gian tìm ki?m c?a b? mã hóa (chromosome):
+M?i cá th? trong qu?n th? du?c mã hóa du?i d?ng m?t nhi?m s?c th? (chromosome) ch?a các gene d?i di?n cho các siêu tham s? c?a m?ng MLP. Không gian tìm ki?m c? th? nhu sau:
+* S? l?p ?n: t? 1 d?n 4
+* S? lu?ng no-ron m?i l?p: ch?n t? [16, 32, 64, 128, 256]
+* T? l? dropout m?i l?p: trong kho?ng 0.1, 0.5
+* Learning rate: ch?n t? [0.0005, 0.001, 0.005]
+* Batch size: ch?n t? [16, 32, 64, 128]
+     Ví d? v? m?t c?u trúc m?t cá th? nhu sau:
+     {
+     	'num_layers': 3,
+     	'neurons': [64, 128, 64],
+     	'dropout_rates': [0.3, 0.3, 0.2],
+     	'learning_rate': 0.001,
+     	'batch_size': 64
+     }
+> C?u hình thu?t toán di truy?n:
+* Kích thu?c qu?n th?: 20 cá th?
+* S? th? h?: 15
+* T? l? d?t bi?n: 0.3
+* Elitism: gi? l?i 3 cá th? t?t nh?t qua m?i th? h?
+* Chi?n lu?c ch?n l?c: Tournament Selection (ch?n ng?u nhiên m?t nhóm nh? và l?y cá th? t?t nh?t)
+* Lai ghép: các tham s? c?u trúc du?c lai gi?a hai cá th? cha m?
+* Ð?t bi?n: m?t s? gene (tham s?) có th? thay d?i ng?u nhiên theo xác su?t
+> Co ch? dánh giá:
+* M?i cá th? (tuong ?ng m?t ki?n trúc MLP c? th?) du?c hu?n luy?n trên t?p hu?n luy?n và du?c theo dõi quá trình h?c thông qua t?p xác th?c riêng bi?t.
+* Giá tr? d? chính xác trên t?p xác th?c du?c dùng làm giá tr? d? thích nghi này cho thu?t toán di truy?n.
+* Early stopping du?c s? d?ng trong quá trình hu?n luy?n nh?m tránh overfitting.
+* Sau khi thu?t toán di truy?n k?t thúc, mô hình t?t nh?t du?c dánh giá trên t?p ki?m th? d? tính toán d? chính xác th?c t? c?a mô hình.
+* K?ch b?n 1.2: Mô hình ACO-MLP
+Mô hình MLP k?t h?p thu?t toán dàn ki?n có c?u hình nhu sau:
+> C?u hình thu?t toán t?i uu:
+* S? lu?ng ki?n (n_ants): 10
+* S? vòng l?p (n_iterations): 10
+* evaporation_rate: 0.3
+* Thông s? ?nh hu?ng pheromone ??: 1.0
+* Thông s? ?nh hu?ng pheromone ??: 2.0
+> Không gian tìm ki?m c?u hình m?ng MLP:
+* S? l?p ?n (num_layers): ch?n t? [1, 2, 3, 4]
+* S? lu?ng no-ron m?i l?p: ch?n t? [16, 32, 64, 128, 256]
+* T? l? dropout: ch?n t? [0.1, 0.15, ..., 0.5] v?i bu?c 0.05
+* Learning rate: ch?n t? [0.0005, 0.001, 0.005, 0.01]
+* Batch size: ch?n t? [16, 32, 64, 128]
+> C?u hình hu?n luy?n:
+* Hàm m?t mát: binary_crossentropy
+* Hàm kích ho?t l?p d?u ra: sigmoid
+* Thu?t toán t?i uu: Adam
+* S? epoch t?i da:15
+* Early stopping: d?ng s?m khi val_loss không c?i thi?n sau 3 epoch
+* K?ch b?n 1.3: MLP
+> Mô hình du?c thi?t k? v?i c?u trúc nhu sau:
+* Layer 1: Dense 128 no-ron, ReLU, Batch Normalization, t? l? dropout 0.3
+* Layer 2: Dense 64 no-ron, ReLU, Batch Normalization, t? l? dropout 0.2
+* Layer 3: Dense 32 no-ron, ReLU, t? l? dropout 0.2
+* Output Layer: 1 no-ron, sigmoid
+> C?u hình hu?n luy?n:
+* Hàm m?t mát: binary_crossentropy
+* Thu?t toán t?i uu: Adam, learning rate 0.001
+* Batch size: 32
+* Epochs: 45
+* Early stopping: theo dõi val_loss, d?ng n?u không c?i thi?n sau 5 epoch liên ti?p.
+* K?ch b?n 1.4: Mô hình h?c máy
+? k?ch b?n th? nghi?m này, có 2 mô hình h?c máy du?c s? d?ng là SVM và Random Forest.
+> Mô hình SVM du?c s? d?ng v?i c?u hình nhu sau:
+* Kernel: rbf
+* C (Regularization parameter): 1.0 - tham s? di?u ch?nh d? chinh xác hu?n luy?n và d? khái quát
+* Gamma: scale
+* probability: true
+* random_state: 42
+> Mô hình Random Forest du?c s? d?ng v?i c?u hình sau:
+* n_estimators: 100
+* max_depth: 10
+* random_state: 42
+b) K?ch b?n 2: Phân lo?i mã d?c
+     Trong k?ch b?n phân lo?i mã d?c, các mô hình h?c máy và h?c sâu du?c tri?n khai nh?m so sánh hi?u qu? và d? chính xác trong vi?c phân lo?i các m?u vào b?n nhóm c? th?: Addisplay, Benign, Riskware và Spr.
+     B? d? li?u g?m các t?p apk du?c phân b? d?u theo t?ng nhóm:
+* Addisplay: 3500 
+* Benign: 3500
+* Riskware: 3500
+* Spr: 3500
+     Các nhãn du?c ánh x? nhu sau:
+* Addisplay: nhãn 0
+* Benign: nhãn 1
+* Riskware: nhãn 2
+* Spr: nhãn 3
+* K?ch b?n 2.1: Mô hình GA-MLP
+> Không gian tìm ki?m c?a cá th?:
+* S? l?p ?n: ch?n ng?u nhiên t? 3 d?n 6
+* S? lu?ng no-ron m?i l?p: ch?n t? t?p giá tr? [64, 128, 256, 512, 1024]
+* T? l? dropout ? m?i l?p: ch?n trong kho?ng [0.2, 0.6]
+* Learning rate: ch?n t?  [0.0001, 0.0005, 0.001, 0.005, 0.01]
+* Batch size: ch?n t? [32, 64, 128, 256]
+L?p d?u ra g?m 4 no-ron (tuong ?ng 4 l?p), s? d?ng hàm kích ho?t softmax. Các l?p ?n s? d?ng ReLU, có thêm BatchNormalization và Dropout.
+> C?u hình thu?t toán di truy?n
+* Kích thu?c qu?n th?: 20 cá th?
+* S? th? h?: 15
+* T? l? d?t bi?n: 0.3
+* Elitism: gi? nguyên 4 cá th? t?t nh?t t? th? h? tru?c
+* Co ch? ch?n l?c: Tournament Selection v?i 3 cá th?/tournament
+* Lai ghép: ch?n ng?u nhiên t?ng gene t? hai cá th? cha m?
+* Ð?t bi?n: m?t tham s? (gene) có th? thay d?i ng?u nhiên n?u roi vào xác su?t d?t bi?n
+> Co ch? dánh giá:
+* M?i cá th? (tuong ?ng m?t ki?n trúc MLP c? th?) du?c hu?n luy?n trên t?p hu?n luy?n và du?c theo dõi quá trình h?c thông qua t?p xác th?c riêng bi?t.
+* Giá tr? d? chính xác trên t?p xác th?c du?c dùng làm giá tr? d? thích nghi này cho thu?t toán di truy?n.
+* Early stopping du?c s? d?ng trong quá trình hu?n luy?n nh?m tránh overfitting.
+* Sau khi thu?t toán di truy?n k?t thúc, mô hình t?t nh?t du?c dánh giá trên t?p ki?m th? d? tính toán d? chính xác th?c t? c?a mô hình.
+* K?ch b?n 2.2: Mô hình ACO-MLP
+Mô hình k?t h?p MLP v?i thu?t toán dàn ki?n có c?u hình nhu sau:
+> C?u hình tìm ki?m:
+* S? lu?ng ki?n (ants): 10
+* S? vòng l?p (iterations): 10
+* evaporation_rate: 0.3
+* Thông s? pheromone ??: 1.0
+* Thông s? heuristic ??: 2.0
+> Không gian tìm ki?m ki?n trúc:
+* S? l?p ?n: ch?n t? [2, 3, 4, 5]
+* S? no-ron m?i l?p: ch?n t? [32, 64, 128, 256, 512]
+* T? l? dropout: ch?n t? [0.2, 0.3, 0.4, 0.5, 0.6]
+* Learning rate: ch?n t? [0.0001, 0.0005, 0.001, 0.005]
+* Batch size: ch?n t? [32, 64, 128, 256]
+> C?u hình hu?n luy?n
+* Hàm m?t mát: categorical_crossentropy
+* Thu?t toán t?i uu: Adam
+* S? epoch: 15
+* L?p d?u ra: Dense 4 no-ron, softmax
+* K?ch b?n 2.3: Mô hình MLP
+> Mô hình du?c thi?t k? v?i c?u trúc các l?p nhu sau:
+* Layer 1: Dense 128 no-ron, ReLU, Batch Normalization, t? l? dropout 0.3
+* Layer 2: Dense 64 no-ron, ReLU, Batch Normalization, t? l? dropout 0.2
+* Layer 3: Dense 32 no-ron, ReLU, t? l? dropout 0.2
+* Output Layer: Dense 4 no-ron, softmax
+> C?u hình hu?n luy?n:
+* Hàm m?t mát: categorical_crossentropy
+* Thu?t toán t?i uu: Adam
+* Learning rate: 0.001
+* Batch size: 32
+* Epochs: 45
+* Early stopping: theo dõi val_loss, d?ng n?u không c?i thi?n sau 5 epoch liên ti?p
+* K?ch b?n 2.4: Mô hình h?c máy
+Hai mô hình h?c máy SVM và Random Forest s? du?c áp d?ng ? k?ch b?n này.
+> Mô hình SVM có c?u hình nhu sau:
+* Kernel: rbf
+* C (Regularization parameter): 10.0
+* Gamma: auto
+* Probability: True
+* class_weight: 'balanced'
+* random_state: 42
+> Mô hình Random Forest
+* n_estimators: 100
+* max_depth: 10
+* random_state: 42
+  3.4. K?t qu? và dánh giá
+    3.4.1. K?t qu?
+ Sau khi ti?n hành th?c nghi?m các k?ch b?n khác nhau, k?t qu? thu du?c nhu sau:
+a) K?ch b?n 1: Phát hi?n mã d?c
+* K?ch b?n 1.1: Mô hình GA-MLP
+> Quá trình c?i thi?n d? thích nghi qua các th? h?
+* ? d?u quá trình (th? h? d?u), d? thích nghi có xu hu?ng tang lên ho?c duy trì ? m?c cao.
+* Giá tr? d? thích nghi cao nh?t qua các th? h? dao d?ng quanh kho?ng 0.94 - 0.9458.
+* S? c?i thi?n tuy không l?n nhung cho th?y thu?t toán dã ?n d?nh và tìm du?c c?u hình t?i uu g?n c?c tr? toàn c?c.
+> Xu hu?ng tham s? c?a các cá th? t?t
+* S? l?p: H?u h?t cá th? t?t ch? s? d?ng 1 l?p, s? l?p nhi?u hon (3 l?p) không c?i thi?n dáng k? ho?c th?m chí th?p hon.
+* S? no-ron: Các c?u hình no-ron ph? bi?n ? cá th? t?t là t?p h?p g?m các giá tr? nhu 32, 16, 256 nhung da ph?n no-ron t?p trung vào các con s? nh? và trung bình, ít dùng no-ron quá l?n cho các l?p chính.
+* T? l? dropout: Thu?ng n?m trong kho?ng t? 0.13 d?n 0.43, ph? bi?n nh?t là ~0.2-0.3, có th? th?y dropout d?u du?c dùng d? tránh overfitting nhung không quá cao.
+* Learning rate: H?u hêt du?c gi? c? d?nh ? 0.0005, có th? do GA không tìm th?y learning rate khác hi?u qu? hon ho?c gi?i h?n trong ph?m vi này.
+* Batch_size: Ch? y?u là 32, m?t s? ít cá th? batch size 128, nhung cá th? t?t nh?t d?u dùng batch size 32.
+> S? da d?ng và khám phá
+* M?c dù có nhi?u cá th? v?i các c?u hình khác nhau, tuy nhiên s? da d?ng tham s? trong các cá th? t?t có xu hu?ng khá h?n ch?.
+* S? l?p l?i các cá th? v?i các tham s? no-ron và dropout tuong t? nhau (ví d? nhi?u cá th? có no-ron [32, 32, 16, 32]) cho th?y GA có th? b? h?i t? s?m, t?p trung vào khu v?c tham s? nh?t d?nh.
+* Learning rate và batch size ít da d?ng trong các cá th? t?t, cho th?y ph?m vi khám phá các tham s? này có th? b? gi?i h?n ho?c không d? m? r?ng.
+> K?t qu? cu?i cùng
+     Thu?t toán GA hoàn thành quá trình t?i uu ki?n trúc MLP v?i mô hình t?t nh?t tìm th?y sau 15 th? h? có d? chính xác là 94.46%. C?u hình t?t nh?t g?m 1 l?p ?n v?i s? lu?ng no-ron l?n lu?t là 32, 32, 16 và 32 trên các l?p. T? l? dropout ? các l?p l?n lu?t x?p x? 0.135, 0.304, 0.203, 0.330. Learning rate c? d?nh ? m?c 0.0005 và batch size là 32.
+     Mô hình d?t d? chính xác 94.46% trên t?ng s? 2400 m?u là k?t qu? r?t ?n tu?ng, ch?ng t? mô hình có kh? nang phân bi?t hi?u qu? gi?a ?ng d?ng bình thu?ng và ?ng d?ng d?c h?i.
+     Ch? s? Precision và Recall gi?a hai l?p du?c duy trì ? m?c tuong duong, di?u này ph?n ánh s? cân b?ng t?t c?a mô hình.
+     S? d?ng d?u gi?a Macro average và Weighted average cho th?y mô hình không ch? hi?u qu? trong t?ng th? mà còn duy trì hi?u su?t cân b?ng gi?a các l?p.
+
+   Hình 3.3: Bi?u d? ti?n hóa thích nghi
+PrecisionRecallF1-scoreSupportBenign0.950.940.941200Malware0.940.950.941200Accuracy0.942400Macro avg0.940.940.942400Weighted  avg0.940.940.942400   B?ng 3.3: Báo cáo phân lo?i mô hình GA-MLP
+     
+   Hình 3.4: Ma tr?n nh?m l?n mô hình GA-MLP
+* K?ch b?n 1.2: Mô hình ACO-MLP
+Nh?n xét: Mô hình cung cho ra d? chính xác cao 94%, hi?u nang t?t trong bài toán phát hi?n mã d?c.
+PrecisionRecallF1-scoreSupportBenign0.950.930.941200Malware0.930.950.941200Accuracy0.942400Macro avg0.940.940.942400Weighted  avg0.940.940.942400   B?ng 3.4: Báo cáo phân lo?i c?a mô hình ACO-MLP
+     
+     
+   Hình 3.5: Ma tr?n nh?m l?n c?a mô hình ACO-MLP
+* K?ch b?n 1.3: Mô hình MLP
+Nh?n xét: Mô hình này cho ra d? chính xác cao 94.5%, cho th?y kh? nang phân lo?i d? li?u r?t t?t và g?n nhu tuong duong v?i hi?u su?t c?a mô hình GA-MLP dã du?c t?i uu.
+PrecisionRecallF1-scoreSupportBenign0.930.960.951200Malware0.960.930.941200Accuracy0.942400Macro avg0.950.950.942400Weighted  avg0.950.940.942400   B?ng 3.5: Báo cáo phân lo?i c?a mô hình MLP
+     
+     
+     
+   Hình 3.6: Ma tr?n nh?m l?n c?a mô hình MLP
+* K?ch b?n 1.4: Mô hình h?c máy
+Nh?n xét:
+* Mô hình SVM d?t d? chính xác cao 93.54%, ?n d?nh, g?n nhu tuong duong v?i các mô hình h?c sâu
+* RF d?t hi?u qu? t?t 89.88%, kém hon SVM và các mô hình h?c sâu
+PrecisionRecallF1-scoreSupportSVMBenign0.930.940.941200Malware0.940.930.941200Accuracy0.942400Macro avg0.940.940.942400Weighted  avg0.940.940.942400RFBenign0.880.920.901200Malware0.920.870.901200Accuracy0.902400Macro avg0.900.900.902400Weighted  avg0.900.900.902400   B?ng 3.6: Báo cáo phân lo?i c?a các mô hình h?c máy
+     
+   Hình 3.7: Ma tr?n nh?m l?n mô hình SVM
+     
+   Hình 3.8: Ma tr?n nh?m l?n mô hình Random Forest
+b) K?ch b?n 2: Phân lo?i mã d?c
+* K?ch b?n 2.1: Mô hình GA-MLP
+> Quá trình c?i thi?n d? thích nghi qua các th? h?
+* Có s? c?i thi?n rõ r?t t? th? h? d?u d?n th? h? cu?i.
+> Xu hu?ng tham s? c?a các cá th? t?t
+* S? l?p t?t nh?t thu?ng là 3 l?p (có m?t s? cá th? 4 ho?c 6 l?p nhung ít du?c ch?n).
+* T? l? dropout thu?ng dao d?ng t? 0.3 d?n 0.55, cho th?y dropout trung bình khá cao du?c uu tiên d? tránh overfitting.
+* Learning rate c? d?nh ? 0.0005 và batch size thu?ng là 256
+> S? da d?ng và khám phá
+* Thu?t toán v?n gi? da d?ng tham s? nhu s? l?p, s? no-ron, dropout cho phép khám phá không gian tham s? r?ng
+* Qua t?ng th? h?, các cá th? có s? thay d?i nh? ? dropout ho?c no-ron.
+> K?t qu? cu?i cùng
+Thu?t toán GA hoàn thành v?i d? chính xác t?t nh?t d?t 88.71%, v?i c?u hình t?i uu du?c tìm th?y sau 15 th? h?. 
+C?u hình t?t nh?t du?c tìm th?y nhu sau:
+* 3 l?p ?n
+* S? lu?ng no-ron l?n lu?t là 512, 128, 512, 1024, 128 và 64 no-ron trên các l?p.
+* T? l? dropout ? các l?p dao d?ng l?n lu?t x?p x? 0.477, 0.341, 0.394, 0.326, 0.368, 0.425 
+* Learning rate: 0.0005
+* Batch size: 256.
+> Nh?n xét:
+* Ð? chính xác d?t 88.71% trên t?p ki?m tra g?m 2800 m?u, là m?t k?t qu? t?t cho bài toán phân lo?i 4 l?p.
+* Marco và Weighted avg cho Precision, Recall, F1-score d?u ? m?c 0.89 cho th?y mô hình có hi?u nang d?ng d?u trên các l?p, có kh? nang t?ng quát hóa t?t v?i phân ph?i d? li?u khá cân b?ng.
+* Riskware là l?p y?u nh?t, v?i Precision th?p nh?t (0.82). Có th? do d?c trung gi?a Riskware và các nhóm khác không rõ ràng, c?n xem l?i d?c trung ho?c b? sung thêm d?c trung phân bi?t t?t hon.
+* Recall th?p hon Precision ? l?p Spr, có th? do mô hình b? sót m?t s? m?u Spr. Do dó c?n cân nh?c x? lý m?t cân b?ng d? li?u hoac di?u ch?nh hàm m?t mát phù h?p hon.
+
+   Hình 3.9: Bi?u d? ti?n hóa thích nghi
+PrecisionRecallF1-scoreSupportAddisplay0.910.900.91700Benign0.910.900.91700Riskware0.820.890.85700Spr0.920.860.89700Accuracy0.892800Macro avg0.890.890.892800Weighted  avg0.890.890.892800   B?ng 3.7: Báo cáo phân lo?i mô hình GA-MLP
+
+   Hình 3.10: Ma tr?n nh?m l?n mô hình GA-MLP
+* K?ch b?n 2.2: Mô hình ACO-MLP
+Nh?n xét: Mô hình d?t d? chính xác 88.68%, là m?c tuong d?i cao. Các ch? s? d?u d?t 0.89 ? m?c macro average và weighted average cho th?y mô hình ho?t d?ng ?n d?nh và nh?t quán gi?a các l?p.
+PrecisionRecallF1-scoreSupportAddisplay0.920.900.91700Benign0.890.910.90700Riskware0.820.890.86700Spr0.920.850.88700Accuracy0.892800Macro avg0.890.890.892800Weighted  avg0.890.890.892800   B?ng 3.8: Báo cáo phân lo?i mô hình ACO-MLP
+
+   Hình 3.11: Ma tr?n nh?m l?n c?a mô hình ACO-MLP
+* K?ch b?n 2.3: Mô hình MLP
+Nh?n xét: Ð? chính xác c?a mô hình d?t 87.93%
+PrecisionRecallF1-scoreSupportAddisplay0.900.910.90700Benign0.880.900.89700Riskware0.820.880.85700Spr0.920.830.87700Accuracy0.882800Macro avg0.880.880.882800Weighted  avg0.880.880.882800   B?ng 3.9: Báo cáo phân lo?i mô hình MLP
+
+   Hình 3.12: Ma tr?n nh?m l?n c?a mô hình MLP
+* K?ch b?n 2.4: Mô hình h?c máy
+Nh?n xét: 
+* Mô hình SVM d?t d? chính xác 87.57%, RF d?t 82.32%. 
+* SVM th? hi?n s? cân b?ng gi?a các l?p, hi?u su?t cao và ?n d?nh gi?a các l?p, hi?u su?t cao.
+* RF cho th?y d? chính xác kém hon, d?c bi?t là m?t cân b?ng precision, recall gi?a các l?p, d? gây l?i nghiêm tr?ng trong ?ng d?ng th?c t? n?u không di?u ch?nh t?t.
+PrecisionRecallF1-scoreSupportSVMAddisplay0.910.910.91700Benign0.880.890.88700Riskware0.820.860.84700Spr0.900.850.88700Accuracy0.882800Macro avg0.880.880.882800Weighted  avg0.880.880.882800RFAddisplay0.870.830.85700Benign0.780.930.85700Riskware0.770.780.77700Spr0.910.760.82700Accuracy0.822400Macro avg0.830.820.822400Weighted  avg0.830.820.822400   B?ng 3.10: Báo cáo phân lo?i c?a mô hình h?c máy
+
+   Hình 3.13: Ma tr?n nh?m l?n mô hình SVM
+
+   Hình 3.14: Ma tr?n nh?m l?n mô hình Random Forest
+    3.4.2. Ðánh giá
+     D?a trên k?t qu? th?c nghi?m du?c trình bày ? trên, có th? dua ra m?t s? nh?n xét và dánh giá t?ng quan v? hi?u qu? c?a các mô hình trong các k?ch b?n th? nghi?m khác nhau nhu sau:
+> Ð?i v?i bài toán phát hi?n mã d?c:
+* ? k?ch b?n này, c? ba mô hình h?c sâu (GA-MLP, ACO-MLP và MLP) d?u d?t d? chính xác r?t cao, dao d?ng quanh m?c 94%. C? th?, mô hình MLP d?t d? chính xác cao nh?t là 94.5%, nh?nh hon GA-MLP (94.46%) và ACO-MLP (94%). GA-MLP ch? th?p hon MLP m?t chút, cho th?y thu?t toán di truy?n dã tìm du?c c?u hình g?n t?i uu. Tuy nhiên, s? chênh l?ch gi?a các mô hình này là không dáng k?, cho th?y c? ba d?u có kh? nang nh?n di?n t?t gi?a hai l?p Benign và Malware.
+* So v?i các mô hình h?c máy truy?n th?ng nhu SVM và Random Forest, các mô hình h?c sâu d?u cho kh? nang vu?t tr?i hon. SVM d?t d? chính xác 93.54%, trong khi Random Forest ch? d?t 89.88%. Ði?u này cho th?y vi?c s? d?ng các mô hình h?c sâu, d?c bi?t là khi k?t h?p v?i thu?t toán t?i uu nhu GA ho?c ACO, có th? mang l?i hi?u qu? t?t hon trong vi?c phát hi?n mã d?c.
+> V?i bài toán phân lo?i mã d?c:
+* Ð?i v?i bài toán phân lo?i chi ti?t các lo?i mã d?c, d? chính xác c?a các mô hình nhìn chung gi?m so v?i bài toán phát hi?n, do d? ph?c t?p và s? l?p phân lo?i tang lên. Trong các mô hình h?c sâu, GA-MLP d?t k?t qu? t?t nh?t v?i d? chính xác là 88.71%, mô hình này cung th? hi?n hi?u nang ?n d?nh hon v?i các ch? s? precision, recall và f1-score tuong d?i cân b?ng ? c? b?n l?p.
+* Các mô hình h?c sâu khác nhu ACO-MLP và MLP d?t d? chính xác l?n lu?t là 88.68% và 87.93% cung cho th?y hi?u nang ?n d?nh và d?ng d?u.
+* Các mô hình h?c máy truy?n th?ng m?t l?n n?a cho k?t qu? th?p hon, trong dó SVM d?t d? chính xác 87.57%, còn Random Forest ch? d?t 82.32%. Ð?c bi?t, Random Forest cho th?y s? m?t cân b?ng rõ r?t gi?a các l?p, th? hi?n qua các ch? s? precision và recall không d?ng d?u, d?c bi?t d?i v?i l?p Benign và Spr.
+     Nh?ng k?t qu? trên cho th?y mô hình MLP co b?n dã d?t hi?u qu? khá t?t trong c? hai bài toán. Tuy nhiên, vi?c tích h?p các thu?t toán t?i uu nhu GA hay ACO giúp c?i thi?n hi?u su?t t?ng th? c?a h? th?ng, d?c bi?t trong vi?c tang cu?ng kh? nang tìm ki?m và t? d?ng t?i uu tr?ng s? trong quá trình hu?n luy?n m?ng h?c sâu.
+	Mô hình GA-MLP n?i b?t hon khi d?t k?t qu? cao và ?n d?nh ? c? hai k?ch b?n phát hi?n và phân lo?i mã d?c. Ði?u này kh?ng d?nh r?ng vi?c s? d?ng thu?t toán di truy?n d? t?i uu hóa tham s? cho m?ng h?c sâu là hu?ng di hi?u qu? trong các bài toán phân tích và phát hi?n mã d?c trên n?n t?ng Android.
+  3.5. Chuong trình th?c nghi?m
+     Sau khi du?c hu?n luy?n, mô hình GA-MLP theo k?ch b?n phân lo?i mã d?c du?c tích h?p vào m?t ?ng d?ng di d?ng don gi?n nh?m th?c hi?n phân lo?i các t?p apk. ?ng d?ng cho phép ngu?i dùng ch?n t?p apk t? thi?t b? c?n phân tích, sau dó hi?n th? k?t qu? phân lo?i d?a trên mô hình dã hu?n luy?n.
+     Quy trình s? d?ng du?c thi?t k? don gi?n và thu?n ti?n: ngu?i dùng ch?n t?p apk t? b? nh? thi?t b?, sau dó h? th?ng s? trích xu?t d?c trung tinh, dua vào mô hình GA-MLP dã du?c hu?n luy?n và hi?n th? k?t qu? phân lo?i. K?t qu? tr? v? bao g?m phân lo?i ?ng d?ng, m?c c?nh báo tuong ?ng, cùng v?i các thông tin k? thu?t liên quan nhu mã bam MD5 và SHA-256 c?a t?p.
+     Du?i dây là m?t s? hình ?nh giao di?n ?ng d?ng minh h?a quá trình ho?t d?ng:
+     
+   Hình 3.15: Màn hình ?ng d?ng lúc kh?i ch?y
+     
+   Hình 3.16: ?ng d?ng khi dang phân tích t?p apk
+     
+   Hình 3.17: ?ng d?ng hi?n th? k?t qu?
+     
+   Hình 3.18: ?ng d?ng hi?n th? k?t qu? (ti?p)
+  3.6. K?t lu?n chuong
+     Trong chuong này, các thí nghi?m dã du?c ti?n hành nh?m dánh giá hi?u qu? c?a mô hình GA-MLP. K?t qu? th?c nghi?m cho th?y mô hình này d?t d? chính xác cao và ?n d?nh, vu?t tr?i so v?i các mô hình h?c máy truy?n th?ng nhu SVM, Random Forest d?ng th?i cho hi?u nang tuong duong ho?c nh?nh hon so v?i các mô hình h?c sâu khác nhu ACO-MLP và MLP.
+     C? th?, mô hình GA-MLP không ch? d?t k?t qu? t?t trong bài toán phát hi?n mã d?c mà còn th? hi?n ? kh? nang phân lo?i da l?p v?i d? chính xác 89.32%. Vi?c tích h?p mô hình vào m?t ?ng d?ng di d?ng th?c nghi?m cung ch?ng minh tính kh? thi trong tri?n khai th?c t?.
+     M?t di?m m?nh n?i b?t c?a GA-MLP là kh? nang t? d?ng tìm ki?m c?u hình m?ng t?i uu bao g?m s? l?p ?n, s? lu?ng no-ron m?i l?p, t? l? dropout, t?c d? h?c và kích thu?c batch. GA d?m b?o s? cân b?ng gi?a vi?c khai thác các tham s? t?t hi?n t?i và khám phá không gian siêu tham s? m?i, t? dó giúp mô hình tránh hi?n tu?ng overfitting và d?t du?c d? khái quát t?t hon.
+     Ngoài ra, chuong cung dã trình bày vi?c tri?n khai mô hình vào ?ng d?ng di d?ng, cho th?y tính kh? thi c?a vi?c tích h?p mô hình h?c sâu vào môi tru?ng th?c t?, v?i kh? nang phát hi?n mã d?c tr?c ti?p t? thi?t b? c?a ngu?i dùng. K?t qu? này m? ra ti?m nang ?ng d?ng l?n trong linh v?c b?o m?t di d?ng, d?c bi?t trong b?i c?nh s? lu?ng ph?n m?m d?c h?i trên Android ngày càng gia tang và tinh vi hon.
+
+
+K?T LU?N
+	Mô hình phát hi?n mã d?c Android d?a trên mô hình h?c sâu k?t h?p v?i thu?t toán di truy?n d? t?i uu hóa c?u trúc và các siêu tham s? c?a mô hình dã du?c nghiên c?u và tri?n khai. M?c tiêu chính là xây d?ng m?t h? th?ng phát hi?n mã d?c có d? chính xác cao, kh? nang t?ng quát hóa t?t, d?ng th?i gi?m thi?u chi phí th? nghi?m th? công trong quá trình l?a ch?n ki?n trúc m?ng. 
+	Thông qua quá trình th?c nghi?m, mô hình d? xu?t dã cho th?y hi?u qu? rõ r?t trong vi?c phát hi?n mã d?c, d?c bi?t là: d? chính xác cao, t? d?ng hóa, kh? nang m? r?ng.
+	Bên c?nh nh?ng k?t qu? d?t du?c, d? án v?n còn m?t s? h?n ch? nh?t d?nh nhu: th?i gian hu?n luy?n tuong d?i dài do s? d?ng GA k?t h?p mô hình h?c sâu, mô hình m?i dang d?ng l?i ? phân tích d?c trung tinh, chua bao g?m d? li?u d?ng.
+	Trong th?i gian t?i, nghiên c?u có th? du?c m? r?ng theo các hu?ng sau:
+* Tích h?p d?c trung d?ng t? hành vi th?i gian th?c c?a ?ng d?ng d? nâng cao d? chính xác.
+* K?t h?p nhi?u thu?t toán t?i uu nhu PSO, Bayesian Optimization d? c?i thi?n hi?u su?t tìm ki?m siêu tham s?.
+* Tri?n khai mô hình trong môi tru?ng th?c t?, ví d? nhu tích h?p vào h? th?ng b?o m?t c?a Android ho?c ?ng d?ng ki?m tra APK.
+* Nghiên c?u gi?m thi?u chi phí tính toán.
+     
+
+TÀI LI?U THAM KH?O
+[1]	Sherif, A. (2025) Mobile OS Market Share Worldwide 2009-2025, Statista. Available at: https://www.statista.com/statistics/272698/global-market-share-held-by-mobile-operating-systems-since-2009 (Accessed: 11 April 2025). 
+[2]	Smith, G. (2024) +65 malware statistics for 2025, StationX. Available at: https://www.stationx.net/malware-statistics/ (Accessed: 25 May 2025).
+[3]	Play protect  |  google for developers (no date a) Google. Available at: https://developers.google.com/android/play-protect (Accessed: 25 May 2025).
+[4]	Li, L. et al. (2017) 'Static Analysis of Android Apps: A systematic literature review', Information and Software Technology, 88, pp. 67-95. doi:10.1016/j.infsof.2017.04.001.
+[5]	Martín, A., Lara-Cabrera, R., & Camacho, D. (2018). A new tool for static and dynamic Android malware analysis. In Data Science and Knowledge Engineering for Sensing Decision Support (pp. 509-516). World Scientific.
+[6]	Martín, A., Lara-Cabrera, R., & Camacho, D. (2018). Android malware detection through hybrid features fusion and ensemble classifiers: the AndroPyTool framework and the OmniDroid dataset. Information Fusion. DOI: 10.1016/j.inffus.2018.12.006
+[7]	What is machine learning? key concepts and real-world uses (2025) iSchool. Available at: https://ischool.syracuse.edu/what-is-machine-learning/ (Accessed: 25 May 2025).
+[8]	Brown, S. (2021) Machine Learning, explained, MIT Sloan. Available at: https://mitsloan.mit.edu/ideas-made-to-matter/machine-learning-explained (Accessed: 25 May 2025).
+[9]	Carr, J., 2014. An introduction to genetic algorithms. Senior Project, 1(40), p.7.
+
+     
+     
+     
+     
+     
+     
+     
+     v
+     
+     
+     
+     
+     
+     
+     1
+     
